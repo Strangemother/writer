@@ -1,0 +1,19 @@
+<section class="breadcrumb-container">
+<ul class='breadcrumbs breadcrumb-list'>
+    {% for book in object.breadcrumbs.books %}
+    <li class='breadcrumb-list-item book'>
+        <a class='waves-effect wave-light btn blue-grey' href="{% url 'book' book.pk %}">{{ book }}</a>
+    </li>
+    {% endfor %}
+
+    {% for page in object.breadcrumbs.items %}
+    <li class='breadcrumb-list-item page'>
+        <a class='waves-effect wave-light btn' href="{% url 'page' page.pk %}">{{ page }}</a>
+        </li>
+    {% endfor %}
+
+    <li class='breadcrumb-list-item self'>
+        <a class='waves-effect wave-light btn grey' href="{% url 'page' object.pk %}">{{ object }}</a>
+        </li>
+</ul>
+</section>

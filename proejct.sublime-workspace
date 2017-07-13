@@ -1,0 +1,1334 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"err",
+				"errors"
+			],
+			[
+				"scan",
+				"scandir"
+			],
+			[
+				"kw",
+				"kwargs"
+			],
+			[
+				"call_un",
+				"call_func\tstatement"
+			],
+			[
+				"Managed",
+				"ManagedPool"
+			],
+			[
+				"call",
+				"call_func"
+			],
+			[
+				"__ini",
+				"__init__"
+			],
+			[
+				"Mana",
+				"ManagedPool"
+			],
+			[
+				"thread",
+				"threadscan"
+			],
+			[
+				"_live_",
+				"_lives_dict"
+			],
+			[
+				"_inde",
+				"_index_count\tstatement"
+			],
+			[
+				"si",
+				"SIZE"
+			],
+			[
+				"wi",
+				"with_data"
+			],
+			[
+				"over",
+				"over_cpu"
+			],
+			[
+				"over_",
+				"over_cpu"
+			],
+			[
+				"total",
+				"total_size"
+			],
+			[
+				"sen",
+				"send_size_data\tfunction"
+			],
+			[
+				"totl",
+				"total_size"
+			],
+			[
+				"send_s",
+				"send_size_data"
+			],
+			[
+				"socket",
+				"socket_type"
+			],
+			[
+				"sock",
+				"socket_type"
+			],
+			[
+				"tot",
+				"total_size"
+			],
+			[
+				"iter",
+				"iterable"
+			],
+			[
+				"empty",
+				"empty_tasks"
+			],
+			[
+				"se",
+				"socket_send\tfunction"
+			],
+			[
+				"empt",
+				"empty_tasks"
+			],
+			[
+				"pr",
+				"process\tfunction"
+			],
+			[
+				"reut",
+				"return_on"
+			],
+			[
+				"tim",
+				"time_f\tfunction"
+			],
+			[
+				"recv_",
+				"recv_queue"
+			],
+			[
+				"_li",
+				"_lives_order"
+			],
+			[
+				"is",
+				"is_alive\tfunction"
+			],
+			[
+				"spawn",
+				"spawned"
+			],
+			[
+				"new_w",
+				"new_worker_process"
+			],
+			[
+				"replace",
+				"replace_process\tfunction"
+			],
+			[
+				"inde",
+				"index"
+			],
+			[
+				"sef",
+				"self"
+			],
+			[
+				"worker_",
+				"worker_func"
+			],
+			[
+				"wai",
+				"wait_condition"
+			],
+			[
+				"rele",
+				"release_condition"
+			],
+			[
+				"get",
+				"get_nowait"
+			],
+			[
+				"q",
+				"qsize"
+			],
+			[
+				"s",
+				"shared"
+			],
+			[
+				"task",
+				"task_queue"
+			],
+			[
+				"cond",
+				"Condition\tfunction"
+			],
+			[
+				"broker_",
+				"broker_data"
+			],
+			[
+				"worker",
+				"worker_args\tfunction"
+			],
+			[
+				"com_",
+				"com_q"
+			],
+			[
+				"serve",
+				"serve_forever\tfunction"
+			],
+			[
+				"male",
+				"make_pool\tfunction"
+			],
+			[
+				"Broker",
+				"BrokerPoolManager"
+			],
+			[
+				"B",
+				"BaseManager\tclass"
+			],
+			[
+				"apl",
+				"apply_func"
+			],
+			[
+				"_",
+				"__init\t __init__() Generate"
+			],
+			[
+				"retr",
+				"return\t(main.py)"
+			],
+			[
+				"apply",
+				"apply_func"
+			],
+			[
+				"appl",
+				"apply_async"
+			],
+			[
+				"cache",
+				"cache_item"
+			],
+			[
+				"re",
+				"readlines\tfunction"
+			],
+			[
+				"CA",
+				"CACHE_PATH\tstatement"
+			],
+			[
+				"CAC",
+				"CACHE_FOLDER"
+			],
+			[
+				"CACHE",
+				"CACHE_DIR"
+			],
+			[
+				"CACH",
+				"CACHE_DIR"
+			],
+			[
+				"folder",
+				"folder_data"
+			],
+			[
+				"root",
+				"root_path"
+			],
+			[
+				"displ",
+				"displayLength"
+			],
+			[
+				"res",
+				"results"
+			],
+			[
+				"getJSON",
+				"getJSONHandler"
+			],
+			[
+				"writ",
+				"writelines\tfunction"
+			],
+			[
+				"max_",
+				"max_recursive"
+			],
+			[
+				"match",
+				"matcher"
+			],
+			[
+				"recurs",
+				"recursive"
+			],
+			[
+				"file",
+				"file_match\tstatement"
+			],
+			[
+				"sca",
+				"scan_yield\tfunction"
+			],
+			[
+				"if",
+				"ifmain\tif __name__ == '__main__'"
+			],
+			[
+				"dir",
+				"dirpath"
+			],
+			[
+				"clea",
+				"clearColor"
+			],
+			[
+				"AP",
+				"Apply\t(files.js)"
+			],
+			[
+				"consol",
+				"consoleLog"
+			],
+			[
+				"templat",
+				"template_path"
+			],
+			[
+				"temp",
+				"template_finders"
+			],
+			[
+				"render",
+				"render_result"
+			],
+			[
+				"import",
+				"importlib"
+			],
+			[
+				"url_ca",
+				"url_cans_append"
+			],
+			[
+				"cp",
+				"capture"
+			],
+			[
+				"pl",
+				"plain\t(index.py)"
+			],
+			[
+				"APP",
+				"APP_NAME"
+			],
+			[
+				"Impo",
+				"ImportError"
+			],
+			[
+				"print_",
+				"print_headers"
+			],
+			[
+				"has",
+				"has_header"
+			],
+			[
+				"get_",
+				"get_header"
+			],
+			[
+				"header",
+				"HeaderDict\timport"
+			],
+			[
+				"resolve",
+				"resolve_path"
+			],
+			[
+				"template_p",
+				"template_paths\t(routing.py)"
+			],
+			[
+				"template_",
+				"template_finders"
+			],
+			[
+				"def",
+				"default_template_maps"
+			],
+			[
+				"templ",
+				"template_path"
+			],
+			[
+				"app_",
+				"app_urls"
+			],
+			[
+				"db_",
+				"db_field"
+			],
+			[
+				"MySQL",
+				"MySQLConnection"
+			],
+			[
+				"data",
+				"database\tmodule"
+			],
+			[
+				"captu",
+				"captures"
+			],
+			[
+				"_cahin",
+				"_chain_capture"
+			],
+			[
+				"dis",
+				"discover_template\tfunction"
+			],
+			[
+				"_chi",
+				"_chain_capture"
+			],
+			[
+				"resolv",
+				"resolvers"
+			],
+			[
+				"url_",
+				"url_cans"
+			],
+			[
+				"_ch",
+				"_chain\tstatement"
+			],
+			[
+				"_ci",
+				"_chain_capture"
+			],
+			[
+				"_chain",
+				"_chain_capture"
+			],
+			[
+				"pare",
+				"parent_name"
+			],
+			[
+				"My",
+				"MySQLdb"
+			],
+			[
+				"mat",
+				"matched"
+			],
+			[
+				"lazy",
+				"lazy_reg"
+			],
+			[
+				"rege",
+				"regex_laxy_caller"
+			],
+			[
+				"reg",
+				"reg_str"
+			],
+			[
+				"regex_ma",
+				"regex_match_handler"
+			],
+			[
+				"none",
+				"None\tinstance"
+			],
+			[
+				"url_pa",
+				"url_pattern_matcher"
+			],
+			[
+				"spli",
+				"splitext\tfunction"
+			],
+			[
+				"tem",
+				"templ_finder\tforstmt"
+			],
+			[
+				"template_pat",
+				"template_path"
+			],
+			[
+				"os",
+				"os.environ"
+			],
+			[
+				"env",
+				"environ"
+			],
+			[
+				"prit",
+				"print"
+			],
+			[
+				"__",
+				"__name__"
+			],
+			[
+				"ba",
+				"bad_url"
+			],
+			[
+				"Rou",
+				"RouteClass"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 263.0,
+		"last_filter": "rremo",
+		"selected_items":
+		[
+			[
+				"rremo",
+				"Package Control: Remove Package"
+			],
+			[
+				"mov",
+				"File: Move"
+			],
+			[
+				"rename",
+				"Rename Local and Remote Files"
+			],
+			[
+				"upl",
+				"SFTP: Upload File"
+			],
+			[
+				"CAN",
+				"SFTP: Cancel Upload"
+			],
+			[
+				"brow",
+				"SFTP: Browse Remote…"
+			],
+			[
+				"canc",
+				"SFTP: Cancel Upload"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"lowe",
+				"Convert Case: Lower Case"
+			],
+			[
+				"upp",
+				"Convert Case: Upper Case"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript Next"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript Next"
+			],
+			[
+				"com",
+				"Toggle Comment"
+			],
+			[
+				"comm",
+				"Toggle Comment"
+			],
+			[
+				"commen",
+				"Toggle Comment"
+			],
+			[
+				"loer",
+				"Convert Case: Lower Case"
+			],
+			[
+				"ja",
+				"Set Syntax: JavaScript Next"
+			],
+			[
+				"can",
+				"SFTP: Cancel Upload"
+			],
+			[
+				"jina",
+				"Set Syntax: HTML (Jinja2)"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"jinja",
+				"Set Syntax: HTML (Jinja2)"
+			],
+			[
+				"LOWE",
+				"Convert Case: Lower Case"
+			],
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
+			[
+				"jav",
+				"Set Syntax: JavaScript Next"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"javascript",
+				"Set Syntax: JavaScript Next"
+			],
+			[
+				"re",
+				"File: Rename"
+			],
+			[
+				"move",
+				"File: Move"
+			],
+			[
+				"lo",
+				"Convert Case: Lower Case"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"babel",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"pytho",
+				"Set Syntax: Python"
+			],
+			[
+				"DELE",
+				"File: Delete"
+			],
+			[
+				"renam",
+				"File: Rename"
+			],
+			[
+				"cop n",
+				"File: Copy Name"
+			],
+			[
+				"mo",
+				"File: Move"
+			],
+			[
+				"removep",
+				"Package Control: Remove Package"
+			],
+			[
+				"flake",
+				"User: Jump to next Flake8 Lint error"
+			],
+			[
+				"flak",
+				"User: Python Flake8 Lint"
+			],
+			[
+				"lint",
+				"User: Python Flake8 Lint"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"rena",
+				"File: Rename"
+			],
+			[
+				"Rename",
+				"File: Rename"
+			],
+			[
+				"ren",
+				"File: Rename"
+			],
+			[
+				"mult",
+				"Set Syntax: MultiMarkdown"
+			],
+			[
+				"instl",
+				"Package Control: Install Package"
+			],
+			[
+				"spac",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"pyt",
+				"Set Syntax: Python"
+			]
+		],
+		"width": 416.0
+	},
+	"console":
+	{
+		"height": 194.0,
+		"history":
+		[
+			"view.run_command('under_caret')",
+			"view.run_command",
+			"view",
+			"os.system('cls')",
+			"os.system('clear')",
+			"import os",
+			"os.system('clear')",
+			"cls",
+			"clear",
+			"cl",
+			"clear",
+			"cls",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/jay/Documents/projects/writer"
+	],
+	"file_history":
+	[
+		"/C/Users/jay/Documents/GitHub/files/v4/worker.py",
+		"/E/backups 2016/Actionscript/FlightGame/com/strangemother/projects/FlightGame.as",
+		"/C/Users/jay/Desktop/New folder (2)/ShipThruster.as",
+		"/C/Users/jay/Documents/GitHub/files/v4/com.py",
+		"/C/Users/jay/Documents/GitHub/files/v4/broker.py",
+		"/C/Users/jay/Documents/GitHub/files/v5/files.json",
+		"/C/Users/jay/Desktop/New folder (2)/Ship.as",
+		"/E/_old_os/Documents and Settings/Jay/_Backup - Old OS/Desktop/New Folder/src/CodeSample.as",
+		"/C/Users/jay/AppData/Local/Temp/Rar$DIa0.792/00853990.doc.js",
+		"/C/Users/jay/Downloads/asteroids.p3d",
+		"/C/Users/jay/Documents/GitHub/files/v4/manager.py",
+		"/C/Users/jay/Documents/GitHub/files/env/Lib/_weakrefset.py",
+		"/C/Users/jay/Documents/GitHub/files/v3/site/assets/css/videos.css",
+		"/C/Users/jay/Documents/GitHub/files/v3/processors.py",
+		"/C/Users/jay/Documents/GitHub/files/env/Lib/site-packages/smpq.py",
+		"/C/Users/jay/Documents/GitHub/files/v3/settings.py",
+		"/C/Users/jay/Documents/GitHub/files/v3/main.py",
+		"/C/Users/jay/Documents/GitHub/files/v3/parsers.py",
+		"/C/Users/jay/Documents/GitHub/files/v3/site/index.html",
+		"/C/Users/jay/Documents/GitHub/files/v3/ODR/process.json",
+		"/C/Users/jay/Documents/GitHub/files/output/settings.py",
+		"/C/Users/jay/Documents/GitHub/files/v3/wsp.py",
+		"/C/Users/jay/Documents/GitHub/files/v3/I--Video-Movies.json",
+		"/C/Users/jay/Documents/GitHub/files/v2/db.py",
+		"/C/Users/jay/Documents/GitHub/files/v1/filesystem.py",
+		"/C/Users/jay/Documents/GitHub/files/v3/site/assets/js/main.js",
+		"/C/Users/jay/Documents/GitHub/files/v2/main.py",
+		"/C/Users/jay/Documents/projects/nim/three.nim",
+		"/C/Users/jay/Documents/projects/nim/nimcache/first.json",
+		"/C/Users/jay/Documents/projects/nim/nim-0.16.0_x64/nim-0.16.0/install.txt",
+		"/C/Users/jay/Documents/projects/nim/Nim/lib/windows/registry.nim",
+		"/C/Users/jay/Documents/projects/nim/first",
+		"/C/Users/jay/Documents/GitHub/files/v3/all.json",
+		"/C/Users/jay/Documents/GitHub/files/v3/tests/test_dir/file_a.txt",
+		"/C/Users/jay/Documents/GitHub/files/v3/tests/test_dir/a/a_1/a_1-foo.txt",
+		"/C/Users/jay/Documents/GitHub/files/v3/tests/test_dir/a/a_1/a_2/a_3/foo.txt",
+		"/C/Users/jay/Documents/GitHub/files/v3/tests/test_dir/a/a_1/a_2/a_2-foo.txt",
+		"/C/Users/jay/Documents/GitHub/files/files.sublime-project",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/BabylonInterface.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/printLogger.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/core/utils.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/PrintLogger.js",
+		"/C/Users/jay/Documents/GitHub/ftp/src/python/config/server.json",
+		"/C/Users/jay/Documents/GitHub/ftp/src/python/docs/server.md",
+		"/C/Users/jay/Documents/GitHub/ftp/src/python/server/ftp.py",
+		"/C/Users/jay/Documents/projects/pages/server/pages/inline-example.html",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/urls.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/serve.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/routing.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/database.py",
+		"/F/clients/strangemother/minisite/site/site/app/urls.py",
+		"/F/clients/strangemother/minisite/site/site/app/views.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/templates.py",
+		"/F/clients/strangemother/minisite/site/site/dbdesigner/__init__.py",
+		"/F/clients/strangemother/minisite/site/site/__init__.py",
+		"/F/clients/strangemother/minisite/site/site/dbdesigner/templates/index.html",
+		"/F/clients/strangemother/minisite/site/site/dbdesigner/views.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/templates/index.html",
+		"/F/clients/strangemother/minisite/site/httpdocs/index.py",
+		"/F/clients/strangemother/minisite/site/site/settings.py",
+		"/F/clients/strangemother/minisite/site/site/app/__init__.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/capture.py",
+		"/F/clients/strangemother/minisite/site/site_example/settings.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/utils.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/headers.py",
+		"/F/clients/mweps/site/test.cgi",
+		"/C/Users/jay/Documents/GitHub/files/env/Lib/site-packages/django/test/testcases.py",
+		"/F/clients/strangemother/minisite/site/site_example/app/__init__.py",
+		"/F/clients/strangemother/minisite/site/site_example/__init__.py",
+		"/F/clients/strangemother/minisite/site/site/dbdesigner",
+		"/C/Users/jay/Documents/GitHub/ftp/src/python/server/utils.py",
+		"/F/clients/strangemother/minisite/site/site/app/templates/database/index.html",
+		"/F/clients/strangemother/minisite/site/site/app/templates/root.html",
+		"/F/clients/strangemother/minisite/site/site/app/settings.py",
+		"/F/clients/strangemother/minisite/site/requirements.txt",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/__init__.py",
+		"/F/clients/strangemother/minisite/site/tests/test_imports.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/models.py",
+		"/F/clients/strangemother/minisite/site/__init__.py",
+		"/C/Users/jay/Documents/GitHub/ftp/src/python/env/Lib/site-packages/nose/util.py",
+		"/F/clients/strangemother/minisite/site/app/mysqlkv.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/templates/error.txt",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/views.py",
+		"/F/clients/strangemother/minisite/site/app/app/urls.py",
+		"/F/clients/strangemother/minisite/site/app/app/settings.py",
+		"/F/clients/strangemother/minisite/site/app/app/sms.py",
+		"/F/clients/strangemother/minisite/site/app/app/__init__.py",
+		"/F/clients/strangemother/minisite/site/pybin/stopgap/templates/error.html",
+		"/F/clients/strangemother/minisite/site/app/settings.py",
+		"/F/clients/strangemother/minisite/site/app/__init__.py",
+		"/F/clients/strangemother/minisite/site/app/app/hello.py",
+		"/F/clients/strangemother/minisite/site/app/app/test.py",
+		"/C/Users/jay/AppData/Local/Temp/Rar$DIa0.385/setup.py",
+		"/F/clients/strangemother/minisite/site/app/hello.py",
+		"/F/clients/strangemother/minisite/site/httpdocs/.htaccess",
+		"/F/clients/strangemother/minisite/site/pybin/bottle.py",
+		"/C/Users/jay/AppData/Local/Temp/Rar$DIa0.659/storages.py",
+		"/C/Users/jay/AppData/Local/Temp/Rar$DIa0.306/database.py",
+		"/C/Users/jay/AppData/Local/Temp/fz3temp-1/index.py",
+		"/F/clients/strangemother/minisite/site/test.py",
+		"/F/clients/strangemother/minisite/site/app/index.py",
+		"/F/clients/strangemother/minisite/site/sftp-config.json",
+		"/F/clients/strangemother/minisite/site/hello.py",
+		"/F/clients/strangemother/minisite/site/index.py",
+		"/F/clients/strangemother/minisite/site/env/Lib/site-packages/itsdangerous.py",
+		"/C/Users/jay/Downloads/test.php",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/Attribute.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/objects/BabylonMesh.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/tests/InstanceTests.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/files.js",
+		"/C/Users/jay/AppData/Local/Temp/Rar$DIa0.266/doT.min.js",
+		"/C/Users/jay/Documents/projects/babylon/index-v2.html",
+		"/C/Users/jay/Documents/projects/babylon/js/lib/objects.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/main.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/objects.mutators.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/core/BaseClass.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/tests.js",
+		"/C/Users/jay/Documents/projects/babylon/css/main.css",
+		"/C/Users/jay/Desktop/test.py",
+		"/C/Users/jay/Documents/GitHub/CottonDuck/node_modules/babel-preset-es2015/node_modules/babel-plugin-transform-regenerator/.test/tests.es6.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/Light.js",
+		"/C/Users/jay/Documents/projects/babylon/js/lib/materials.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/config.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/AppInterface.js",
+		"/C/Users/jay/Documents/projects/babylon/js/lib/GameScene.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/foo.js",
+		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/loader.js",
+		"/C/Users/jay/AppData/Local/Temp/Rar$DRa0.652/malko-l.js-bacc4ec/l.js"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			"F:\\clients\\strangemother\\minisite\\site\\pybin\\stopgap, F:\\clients\\strangemother\\minisite\\site\\site",
+			"F:\\clients\\strangemother\\minisite\\site\\pybin\\stopgap; F:\\clients\\strangemother\\minisite\\site\\site",
+			"F:\\clients\\strangemother\\minisite\\site\\pybin\\stopgap, F:\\clients\\strangemother\\minisite\\site\\site",
+			"F:\\clients\\strangemother\\minisite\\site\\pybin\\stopgap",
+			"F:\\clients\\strangemother\\minisite\\site\\pybin",
+			"F:\\clients\\strangemother\\minisite\\site\\site\\app",
+			"F:\\clients\\strangemother\\minisite\\app",
+			"F:\\clients\\strangemother\\minisite\\site\\app",
+			"F:\\clients\\strangemother\\minisite\\site\\pybin\\stopgap",
+			"F:\\clients\\strangemother\\minisite\\site\\pybin\\stopgap, F:\\clients\\strangemother\\minisite\\site\\app",
+			"F:\\clients\\strangemother\\minisite\\site\\pybin\\stopgap, F:\\clients\\strangemother\\minisite\\site\\",
+			"F:\\clients\\strangemother\\minisite\\site\\pybin\\stopgap",
+			"*.html,C:\\Users\\jay\\Documents\\projects\\pages\\server",
+			"C:\\Users\\jay\\Documents\\projects\\babylon\\js\\lib\\",
+			"C:\\Users\\jay\\Documents\\projects\\pages\\javascript\\lib",
+			"C:\\Users\\jay\\Documents\\projects\\pages\\javascript\\",
+			"C:\\Users\\jay\\Documents\\projects\\pages\\server\\js",
+			"C:\\Users\\jay\\Documents\\projects",
+			"C:\\Users\\jay\\Documents\\projects\\pages",
+			"C:\\Users\\jay\\Documents\\projects\\babylon\\js\\lib",
+			"C:\\Users\\jay\\Documents\\projects\\babylon\\js\\game",
+			"C:\\Users\\jay\\Documents\\projects\\babylon",
+			"C:\\Users\\jay\\Documents\\projects\\pages\\javascript",
+			"C:\\Users\\jay\\Documents\\projects\\babylon\\js\\lib\\",
+			"C:\\Users\\jay\\Documents\\android\\python\\files\\projects\\Remoter",
+			"C:\\Users\\jay\\Documents\\GitHub\\files\\v2",
+			"",
+			"C:\\Users\\jay\\Documents\\GitHub\\files\\env\\Lib\\site-packages\\CodernityDB",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"scan_func(",
+			"scan_func",
+			"/",
+			"READ",
+			"done",
+			"done_func",
+			"com_queue",
+			"counter",
+			")\n",
+			"id",
+			"1",
+			"time_f",
+			"add_list",
+			"broker",
+			"socketurl",
+			"ws",
+			"DONE",
+			"INIT",
+			"e",
+			"add_list",
+			"wait_ready",
+			"br.",
+			"br",
+			"wait_ready",
+			"process(",
+			"KILL",
+			"$",
+			"com_queue",
+			"(x",
+			"send",
+			"cpu",
+			"q.qsize()",
+			"return_on",
+			"l",
+			"()",
+			"under_cpu",
+			"pool_small",
+			"len(p)",
+			"self",
+			"i",
+			"data",
+			"data[0]",
+			"RECV",
+			"task_queue",
+			"shared",
+			"data",
+			"broker_data",
+			"make_processes",
+			"50",
+			"# cond",
+			"    cond",
+			"cond",
+			"broker",
+			"log",
+			"multiprocessing",
+			"print",
+			"\\",
+			"    ",
+			")\n",
+			"\\",
+			"pq",
+			"scanner_process",
+			"path",
+			"pickedb",
+			"scanner_process",
+			"a.show",
+			"isFile",
+			"...",
+			">>> ",
+			"\\",
+			"rescurse",
+			"AttributeError",
+			"max",
+			"file",
+			"folders",
+			"self.data",
+			"\\",
+			"__init__",
+			"disc",
+			"get_module_template",
+			"render_result",
+			"call_route_url",
+			"call_url",
+			"route_urls",
+			"_route_data",
+			"route_urls",
+			"url",
+			"app_name",
+			"call_route_url",
+			"call_endpoint",
+			"call_mapped_url",
+			"name",
+			"print",
+			"dbdesigner",
+			"try",
+			"None",
+			"isclass",
+			"False",
+			"DB fail",
+			"DB Fail",
+			"finalize_route",
+			"call_e",
+			"raw",
+			"FETCH",
+			"Resolvers",
+			"apture RESOLVE ob",
+			"print",
+			"RESOLVE",
+			" raw",
+			"!!",
+			"Render ",
+			"Render",
+			"!!",
+			"!!  Render",
+			"Filename Result",
+			"!! Render",
+			"finaliz",
+			"print",
+			"raw",
+			"...",
+			" raw(",
+			"ROOT",
+			"raw",
+			"call_url",
+			"call_root",
+			"Root",
+			"XX",
+			"XX  "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"rprint"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "C:\\Users\\jay\\Documents\\projects\\writer"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 92.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 197.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"utils.",
+				"python\\server\\utils.py"
+			],
+			[
+				"form",
+				"pages\\server\\pages\\forms.html"
+			],
+			[
+				"virtualjoy",
+				"babylon\\js\\babylon\\src\\Tools\\babylon.virtualJoystick.js"
+			],
+			[
+				"gamepad",
+				"babylon\\js\\babylon\\src\\Cameras\\babylon.gamepadCamera.js"
+			],
+			[
+				"bablyon/.html",
+				"babylon\\index.html"
+			],
+			[
+				"assets.json",
+				"pages\\server\\js\\uplink\\assets.json"
+			],
+			[
+				"vendor",
+				"pages\\server\\js\\vendors.json"
+			],
+			[
+				"router.",
+				"pages\\server\\pages\\router.html"
+			],
+			[
+				"delegt",
+				"pages\\javascript\\base\\Delegate.js"
+			],
+			[
+				"events.",
+				"pages\\javascript\\Events.js"
+			],
+			[
+				"editor",
+				"pages\\server\\pages\\editor.html"
+			],
+			[
+				"router.css",
+				"pages\\server\\css\\pages\\router.css"
+			],
+			[
+				"router.html",
+				"pages\\server\\pages\\router.html"
+			],
+			[
+				"video",
+				"pages\\server\\pages\\video.html"
+			],
+			[
+				"template",
+				"pages\\javascript\\view\\TemplateList.js"
+			],
+			[
+				"remote",
+				"pages\\javascript\\data\\Remote.js"
+			],
+			[
+				"action.",
+				"pages\\javascript\\view\\Action.js"
+			],
+			[
+				"editor.css",
+				"pages\\server\\css\\editor.css"
+			],
+			[
+				"editor.html",
+				"pages\\server\\pages\\editor.html"
+			],
+			[
+				"keyboard.j",
+				"pages\\javascript\\Keyboard.js"
+			],
+			[
+				"templ",
+				"pages\\javascript\\view\\Template.js"
+			],
+			[
+				"action",
+				"pages\\javascript\\view\\Action.js"
+			],
+			[
+				"templat",
+				"pages\\javascript\\view\\Template.js"
+			],
+			[
+				"mock.",
+				"pages\\server\\pages\\mock.html"
+			],
+			[
+				"files.css",
+				"pages\\server\\css\\pages\\files.css"
+			],
+			[
+				"coreclass",
+				"babylon\\js\\lib\\CoreClass.js"
+			],
+			[
+				"it.js",
+				"CottonDuck\\src\\cotton\\vendor\\it.js"
+			],
+			[
+				"storage",
+				"files\\env\\Lib\\site-packages\\CodernityDB\\storage.py"
+			],
+			[
+				"scandir",
+				"files\\env\\Lib\\site-packages\\scandir.py"
+			],
+			[
+				"vrep.",
+				"flight-vision\\vrep.py"
+			],
+			[
+				"coffee.css",
+				"coffee\\static\\css\\coffee.css"
+			],
+			[
+				"index.js",
+				"coffee\\reserved\\static\\reserved\\js\\index.js"
+			],
+			[
+				"coffee",
+				"coffee\\static\\css\\coffee.css"
+			],
+			[
+				"index.css",
+				"coffee\\static\\css\\index.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 238.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 3
+	}
+}

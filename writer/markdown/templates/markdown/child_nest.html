@@ -1,0 +1,24 @@
+<a href="{% url 'page' object.pk %}">
+    <span class="index">{{ object.pk }}</span>
+    <span class="name">{{ object.name }}</span>
+</a>
+
+{% with nest=object.children_nest %}
+<!-- <div class="name">item: {{ nest.item }}</div> -->
+<!-- <div class="name">depth: {{ nest.depth }}</div> -->
+<!-- <div class="name">keys: {{ nest.keys }}</div> -->
+    {% if nest.children_count > 0 %}
+    <ul class="collection child-nest" data-child-count='{{nest.children_count}}'>
+        {% for page in nest.children %}
+        <li class="collection-item" data-child-count='{{ page.children.count }}'>
+            {% with object=page %}
+                {% include 'markdown/child_nest.html' %}
+            {% endwith %}
+        </li>
+        {% empty %}
+        <li class='empty'></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+{% endwith %}

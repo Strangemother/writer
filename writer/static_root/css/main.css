@@ -1,0 +1,308 @@
+ul.collection.horizonal-nav {
+    display: flex;
+    overflow: visible;
+    flex-wrap: nowrap;
+}
+
+ul.collection.horizonal-nav li ul {
+    /* display: none; */
+    /* position: absolute; */
+    overflow: visible;
+    margin: 0;
+    /* left: 97%; */
+    /* width: 100%; */
+    max-height: 0em;
+    overflow: hidden;
+    transition: max-height 1s ease;
+    transition-delay: 0s;
+}
+
+ul.collection.horizonal-nav li {
+    /* border: solid 2px; */
+    padding: 0;
+    position: relative;
+}
+
+ul.collection.horizonal-nav li ul ul {
+    left: 1em;
+    top: 100%;
+    margin: 0;
+    /* text-align: left; */
+}
+
+ul.collection.horizonal-nav>li {
+    width: 100%;
+    text-align: center;
+}
+
+ul.collection.hover-nav li:hover>ul {
+    /* display: block; */
+    max-height: 26em;
+    overflow: visible;
+    transition: max-height .3s ease;
+    transition-delay: 1s;
+}
+
+ul.collection.horizonal-nav li li {
+    text-align: left;
+    padding: 0 0rem;
+}
+
+ul.collection.horizonal-nav>li>a {
+    padding: 1em 0;
+    display: inline-block;
+}
+
+ul.collection.horizonal-nav>li li a {
+    padding: 1em;
+    width: 100%;
+}
+
+ul.collection.horizonal-nav a+ul {
+}
+
+ul.collection.horizonal-nav>li a {
+    color: #999;
+}
+
+ul.collection.horizonal-nav li[data-child-count="0"] a {
+    /* color: red; */
+    font-weight: normal;
+}
+
+ul.collection.horizonal-nav li[data-child-count] a:before {
+    content: " ";
+    border: solid 1px;
+    background: transparent;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0.5rem 0.5rem 0 0.5rem;
+    border-color: #0e0e0e transparent transparent transparent;
+    margin: 0 .5em;
+    border-top-color: inherit;
+}
+
+
+ul.collection.horizonal-nav li[data-child-count="0"] a:before {
+    content: "";
+    border: none;
+}
+
+ul.collection.horizonal-nav li a {
+    display: flex;
+    align-items: center;
+}
+
+ul.collection.heavy-nav li:hover ul {
+    display: block;
+    border: none;
+    border-left: solid 2px #DDD;
+}
+
+ul.collection.heavy-nav li {
+    border-left: solid 2px #DDD;
+}
+
+ul.collection.horizonal-nav li a:hover {
+    background: #DDD;
+}
+
+ul.collection.trace-nav ul li:hover {
+    background: #DDD;
+}
+
+ul.collection.light-trace li:hover a+ul li {
+    background: #ececec;
+}
+
+li.collection-item {}
+
+ul.collection.light-trace li:hover a+ul:hover li:hover {
+    background: aliceblue;
+}
+
+ul.collection.horizonal-nav.overlay {
+    position: absolute;
+    width: 100%;
+    /* background: transparent; */
+    height: 4em;
+}
+
+ul.collection.horizonal-nav.overlay + * {
+    clear: both;
+    border: solid;
+    margin-top: 5em;
+}
+
+ul.collection.overlay li:hover a+ul:hover li:hover {
+    background: #d8edf5;
+}
+
+ul.collection.overlay ul {
+    border: none;
+}
+
+ul.breadcrumbs.breadcrumb-list {
+    display: flex;
+}
+
+.breadcrumb-list-item .btn {
+    box-shadow: none;
+    background: transparent !important;
+    color: inherit;
+}
+
+section.book-list h3 {
+    display: none;
+}
+
+section.book-list ul {
+    display: flex;
+}
+
+li.collection-item.root {
+    /* display: none; */
+}
+
+.page-info a.btn {
+    box-shadow: none;
+    background: #4db8ea;
+}
+
+.page-info span.label {
+    font-size: 1.1em;
+    min-width: 10em;
+    /* vertical-align: middle; */
+    /* align-content: center; */
+    text-transform: uppercase;
+}
+
+.page-info li.collection-item {
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px #EEE;
+}
+
+.page-info li.collection-item a {
+    margin-right: 1em;
+}
+
+ul.collection.book-list li {
+    width: 28%;
+    min-height: 200px;
+    background: #DDD;
+    margin: 2em;
+    display: flex;
+    padding: 0;
+}
+
+ul.collection.book-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.books.book-list .collection-item a {
+    margin-top: auto;
+    text-align: center;
+    width: 100%;
+    background: #455a64;
+    padding: 1em .2em;
+    color: white;
+    font-size: 1.2em;
+}
+
+section.child-list h3 {
+    display: none;
+}
+
+.child-list>ul {
+    border: solid;
+}
+
+section.child-list {
+    display: inline-block;
+    width: 18%;
+}
+
+section.page-info {
+    /* position: absolute; */
+    /* border: solid; */
+    /* background: rgba(255, 255, 255, 0.91); */
+    /* z-index: 2; */
+}
+
+section.content.container {
+    display: inline-block;
+    vertical-align: top;
+    border: solid;
+}
+
+.flex-inline {
+    display: flex;
+}
+
+section.child-list .collection-item {
+    margin: 0;
+    padding-right: 0;
+    border: none;
+    padding: 0;
+    display: block;
+}
+
+section.child-list ul {
+    padding: 0 0 0 0.7rem;
+    border: none;
+    background: #EEE;
+    margin: 0em 0 0.6em 0em;
+    border-left: solid 2px #c3c3c3;
+}
+
+.child-list a span.index {
+    background: #DDD;
+    padding: 0.6em;
+}
+
+.child-list a {
+    border-bottom: solid 2px #d4d4d4;
+    display: block;
+    background: #EEE;
+}
+
+.child-list a>span {
+    display: inline-block;
+}
+
+.child-list a:hover {
+    background: #d6d6d6;
+    color: #000;
+    border-bottom: solid 2px #999;
+}
+
+#markdown-editor {
+    width: 50%;
+    /* display: flex; */
+}
+
+textarea#markdown-input {
+    min-width: 20em;
+    min-height: 15em;
+    /* display: inline-block; */
+    padding: 0.2em 0.5rem;
+}
+
+nav .nav-wrapper a.btn {
+    margin: 0.6rem;
+    box-shadow: none;
+}
+
+div#markdown_editor {
+    width: 100%;
+    border: solid 1px black;
+    min-width: 20em;
+    min-height: 15em;
+}
+
+section.editor-container {
+    width: 60%;
+}
