@@ -40,7 +40,7 @@ class Page(models.Model):
     name = models.TextField()
 
     # Data content
-    contents = models.ManyToManyField(PageContent, null=True)
+    contents = models.ManyToManyField(PageContent, blank=True)
 
     # Decedency chain, noting ancestors and up.
     child_of = models.ForeignKey('self', null=True, blank=True)
@@ -158,6 +158,21 @@ class Page(models.Model):
             r.append(content.render(self))
         return r
 
+    def text_render(self):
+        return '\n'.join(self.text_render_items())
+
+    def text_render_items(self):
+        r = []
+        for content in self.contents.all():
+            r.append(content.text_content)
+        return r
+
+    def contents_pk_list(self):
+        r = []
+        for content in self.contents.all():
+            r.append(content.pk)
+        return r
+
     def __unicode__(self):
         return u'"{}" id({})'.format(self.name, self.pk)
 
@@ -171,7 +186,7 @@ class Book(models.Model):
     to define a collection of Page classes
     '''
     # all sub children
-    pages = models.ManyToManyField(Page, null=True, blank=True)
+    pages = models.ManyToManyField(Page, blank=True)
 
     # The initial page or the README page content.
     # This may render a different style page. (or no page)

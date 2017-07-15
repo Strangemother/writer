@@ -1,0 +1,15 @@
+{
+    object: {{object.pk}}
+    , url: "{% url 'page' object.pk %}"
+    , name: "{{ object.name }}"
+    , childCount: {{ page.children.count }}
+    , children: [
+        {% for page in object.children %}
+            {% with object=page %}
+                {% include "markdown/book_child_nest_js_item.html" %}
+            {% endwith %}
+        {% endfor %}
+    ]
+},
+
+

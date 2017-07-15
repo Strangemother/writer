@@ -23,8 +23,8 @@ div#markdown_content {
     font-size: 1.1em;
     width: 100%;
     background: #FFF;
-    padding: 0.8em 1.3em;
-    box-shadow: 0px -1px 3px 0px #b7b7b7;
+    padding: 2rem 3rem;
+    /* box-shadow: 0px -1px 3px 0px #b7b7b7; */
     min-height: 28em;
     margin-bottom: 0;
     color: #333;

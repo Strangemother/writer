@@ -1,4 +1,4 @@
-<a href="{% url 'page' object.pk %}">
+<a href="{% url 'page' object.pk %}" data-pk='{{object.pk}}'>
     <span class="index">{{ object.pk }}</span>
     <span class="name">{{ object.name }}</span>
 </a>

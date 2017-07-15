@@ -1,0 +1,19 @@
+<div class="book-page-list">
+
+<a href="{% url 'page' object.pk %}">
+    <span class="index">{{ object.pk }}</span>
+    <span class="name">{{ object.name }}</span>
+</a>
+
+<ul class="collection">
+    {% for page in book.pages.all %}
+        <li class='collection-item' data-child-count='{{ page.children.count }}'>
+            <!-- <a class='' href="{% url 'page' page.pk %}">{{ page }}</a> -->
+            {% with object=page %}
+                {% include "markdown/child_nest.html" %}
+            {% endwith %}
+        </li>
+    {% endfor %}
+</ul>
+
+</div>

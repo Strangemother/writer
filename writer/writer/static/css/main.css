@@ -191,12 +191,13 @@ li.collection-item.root {
 }
 
 ul.collection.book-list li {
-    width: 28%;
+    width: 22.5%;
     min-height: 200px;
     background: #DDD;
     margin: 2em;
     display: flex;
     padding: 0;
+    /* max-width: 400px; */
 }
 
 ul.collection.book-list {
@@ -235,30 +236,36 @@ section.page-info {
 }
 
 section.content.container {
-    display: inline-block;
-    vertical-align: top;
+    display: flex;
+    /* vertical-align: top; */
     background: #f3f3f3;
     /* border: solid; */
-    padding: 2em;
-    padding-bottom: 0;
+    /* padding: 4em 3em; */
+    /* padding: 0; */
+    /* max-height: 860px; */
+    /* border: solid 1px; */
+    overflow: auto;
 }
 
 .flex-inline {
     display: flex;
     /* max-height: 100%; */
-    flex-direction: row;
+    /* flex-direction: row; */
     /* position: absolute; */
-    overflow: auto;
-    border: solid 3px #ffffff;
-    transition: min-height .35s ease;
+    /* overflow: auto; */
+    /* border: solid 3px #ff0000; */
+    /* transition: min-height .35s ease; */
+    height: 100%;
+    outline: solid 2px #2ac15b;
 }
 
 section.child-list .collection-item {
     margin: 0;
     padding-right: 0;
     border: none;
-    padding: 0;
-    display: block;
+    padding: 0em 0 0 0em;
+    display: flex;
+    align-items: center;
 }
 
 section.child-list ul {
@@ -271,7 +278,7 @@ section.child-list ul {
 
 .child-list a span.index {
     background: #DDD;
-    padding: 0.6em;
+    padding: 1em;
 }
 
 .child-list a {
@@ -309,15 +316,16 @@ nav .nav-wrapper a.btn {
 
 div#markdown_editor {
     width: 100%;
-    border: solid 1px black;
+    border: solid 1px white;
     min-width: 20em;
     min-height: 20em;
-    height: 100%;
+    height: 94%;
     /* max-width: 500px; */
 }
 
 section.editor-container {
     width: 60%;
+    overflow: auto;
 }
 
 #markdown_content td {
@@ -357,13 +365,18 @@ section#meta.hidden {
     display: none;
 }
 
-html, body {
-    /* height: 100%; */
+body.page {
+    height: 100%;
     overflow: hidden;
+    position: absolute;
+    width: 100%;
+    /* border: solid 4px red; */
+    display: flex;
+    flex-direction: column;
 }
 
 div#markdown_content {
-    height: 100%;
+    /* height: 100%; */
 }
 
 ul.collection.commands {
@@ -385,4 +398,141 @@ ul.collection.commands {
 li.collection-item.command {
     padding: 0;
     color: inherit;
+    border-bottom: none;
+}
+
+.commands .command a:hover {
+    color: #455a64;
+    background: #f3f3f3;
+}
+
+.book-editor .child-list a {
+    background: white;
+    border-bottom-color: white;
+    font-size: 1.1rem;
+    display: inline-block;
+    width: 98%;
+    border-bottom: 0;
+}
+
+.book-editor .child-list .collection-item a span.index {
+    background: inherit;
+    padding: 0.8rem 1rem;
+}
+
+.init-markdown {
+    display: none;
+}
+
+.book-page-list .active-child-list a {
+    /* background: #EEE; */
+    padding: 0.7em 0.2em;
+    color: #333;
+}
+
+ul.collection.active-child-list {
+    margin-top: 3rem;
+}
+
+.active-child-list li.collection-item.active a {
+    background: transparent;
+    color: #455a64;
+}
+
+.indicator {
+    background: #455a64;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.collection .collection-item.active {
+    background: #f3f3f3;
+}
+
+.indicator.active {
+    background: #14c714;
+}
+
+.indicator.loading {
+    background: #FF9800;
+}
+
+.child-list ul.collection.active-child-list {
+    background: initial;
+    margin: 0;
+    padding: 0 0 4em;
+    overflow: auto;
+    height: 100%;
+}
+
+.scrollable {
+    min-height: 18%;
+    /* overflow: hidden; */
+    padding: 4em 3em;
+    /* display: flex; */
+    /* height: 100%; */
+    width: 100%;
+}
+
+body>nav {
+    z-index: 1;
+}
+
+nav a.brand-logo {
+    font-size: 1.7em;
+    margin: 0 0.7em;
+}
+
+.new-page-item .input-field.inline {
+    margin: 0 0px;
+    width: 100%;
+}
+
+.new-page-item input.new-page-input {
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+    color: #4783a0;
+    font-size: 1.1em;
+}
+
+.indicator.input {
+    /* background: rgb(188, 195, 199); */
+}
+
+.scrollable {
+    /* margin: 4em 0; */
+}
+
+.book-editor div#markdown_content {
+    box-shadow: 0 0px 4px 0px rgba(69, 90, 100, 0.57);
+    min-height: 100%;
+}
+
+.toolspace {
+    background: white;
+    height: 4rem;
+}
+
+.book-page-list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.active-child-list li.collection-item .indicator-container {
+    /* border: solid; */
+    /* background: #c5c5c5; */
+    display: flex;
+    height: 2.5rem;
+    width: 3.8rem;
+    /* margin: 1px; */
+    align-items: center;
+    justify-content: center;
+}
+
+.new-page-item .indicator-container {
+    width: 3.2rem !important;
 }

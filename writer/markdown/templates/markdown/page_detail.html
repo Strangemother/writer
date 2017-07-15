@@ -1,8 +1,10 @@
-    {% extends "markdown/base.html" %}
+{% extends "markdown/base.html" %}
 {% load static %}
+
+{% block body_class%}page{% endblock %}
+
 {% block title %}
     {% with books=object.books %}
-    <a class='waves-effect wave-light btn' href="{% url 'book-list' %}">Books</a>
     <span class="title-books">
         {% for book in books %}
         <a class='' href="{% url 'book' book.id %}">{{ book }}</a>
@@ -18,6 +20,7 @@
 
 {% block nav_items %}
     <li><a href="#meta" class='toggle-meta'>Meta</a></li>
+    {{ block.super }}
 {% endblock nav_items %}
 
 
@@ -36,35 +39,7 @@
         </ul>
     </section>
 
-    <div class="flex-inline">
-
-        <section class="child-list">
-            <h3>Children</h3>
-            <!-- Accepts object  -->
-            {% include "markdown/child_nest.html" %}
-        </section>
-        {% verbatim %}
-        <section class="editor-container" :style='[styles]' id='markdown_app'>
-            <div class="tools">
-                <ul class="collection commands">
-                    <li :class="['collection-item command', command.name]" v-for='command in commands' v-if='command.icon != false'>
-                        <a href="javascript:;"><i class="material-icons">{{ command.icon }}</i></a>
-                    </li>
-                </ul>
-            </div>
-            <div id="markdown_editor">
-                <textarea
-                    v-bind:class='styles'
-                    id="markdown-input"></textarea>
-            </div>
-        </section>
-        {% endverbatim %}
-
-        <section class="content container">
-            <div id='markdown_content'>{{ object.render|safe }}</div>
-        </section>
-
-    </div>
+    {% include "markdown/page_interface.html" %}
 
     <section id='meta' class="hidden page-info">
         <h3>Meta Data</h3>
@@ -148,10 +123,15 @@
 
 {% block js %}
   {{ block.super }}
-  <script src='{% static "js/ace/src/ace.js" %}'></script>
-  <script src='{% static "js/IT.js" %}'></script>
-  <script src='{% static "js/workerRPC.js" %}'></script>
-  <script src='{% static "js/markdown-editor.js" %}'></script>
-  <script src='{% static "js/views/page-detail.js" %}'></script>
-  <link type="text/css" rel="stylesheet" href="{% static '/css/markdown/markdown-theme.css' %}"  media="screen,projection"/>
+
+    <script>
+        var PAGE = {
+            id: {{object.pk}}
+            , initValue: `{% for content in object.contents.all %}{{ content.text_content|safe }}\n{% endfor %}`
+        }
+    </script>
+
+    {% include 'markdown/page_detail_js.html' %}
+  <script src='{% static "js/views/meta-panel.js" %}'></script>
+
 {% endblock js %}

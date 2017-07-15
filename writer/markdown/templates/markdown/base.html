@@ -1,1 +1,22 @@
 {% extends "base.html" %}
+{% block title %}
+    {% with books=object.books %}
+    <span class="title-books">
+        {% for book in books %}
+        <a class='' href="{% url 'book' book.id %}">{{ book }}</a>
+        {% endfor %}
+    </span>
+    <span class="title-name">
+        {{ object.name }}
+    </span>
+    {% endwith %}
+
+{% endblock title %}
+
+{% block nav_items %}
+
+    <li><a href="javascript:;">
+        <a class='waves-effect wave-light btn' href="{% url 'book-list' %}">Books</a>
+    </a></li>
+
+{% endblock nav_items %}

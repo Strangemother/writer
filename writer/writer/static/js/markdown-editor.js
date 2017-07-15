@@ -1,3 +1,10 @@
+window.markdownEditorConfig = {
+    commands: {}
+    , intelliKeys: {}
+    // , addCommands
+    // , addIntelliKeys
+}
+
 ;(function(){
 
 let p ='/static/js/markdown-worker.js';
@@ -7,6 +14,7 @@ var hooked_renderer = {};
 let config;
 
 var rpc = new WorkerRPC(p, function(){
+    console.log('RPC Callback')
     for (var i = 0; i < onReadyCallbacks.length; i++) {
         onReadyCallbacks[i](rpc)
     }
@@ -33,27 +41,6 @@ var rpc = new WorkerRPC(p, function(){
 });
 
 commands = {
-    bold: {
-        name: 'bold'
-        , bindKey: {win: 'Ctrl-B',  mac: 'Command-B'}
-        , insert: "**|**"
-        , reverse: true
-        , icon: 'format_bold'
-    }
-    , italic: {
-        name: 'italic'
-        , bindKey: {win: 'Ctrl-I',  mac: 'Command-I'}
-        , insert: "_|_"
-        , reverse: true
-        , icon: 'format_italic'
-    }
-    , strikethough: {
-        name: 'strikethough'
-        , bindKey: {win: 'Ctrl-Shift-S',  mac: 'Command-Shift-S'}
-        , insert: "~~|~~"
-        , reverse: true
-        , icon: 'strikethrough_s'
-    }
 };
 
 intelliKeys = {
@@ -101,6 +88,7 @@ class AceRender {
 
     constructor(editorName, contentName){
         this.intelliLine = {}
+        this.callbacks = []
         this.editor = this.makeEditor(editorName)
         onReadyCallbacks.push(this.sendWaiting.bind(this))
 
@@ -256,13 +244,18 @@ class AceRender {
     setText(htmlText, editor) {
         editor = editor == undefined? this.editor: editor;
         editor.setValue(htmlText)
+        editor.clearSelection()
 
-
-        if(rpc._ready == false) return;
+        if(rpc._ready == false) {
+            console.info('RPC not prepared', htmlText)
+            this._earlySetText = htmlText
+            return
+        }
 
         rpc.setText(htmlText, function(d){
             console.log('worker setText said:', d)
         })
+
         // this.outputNode.innerHTML = this.outputNode.innerHTML;
     }
 
@@ -281,11 +274,12 @@ class AceRender {
         var editor = ace.edit(IDhtml);
         let session = editor.getSession();
 
-        editor.setTheme("ace/theme/monokai");
+        editor.setTheme("ace/theme/chrome");
         // editor.setShowPrintMargin(false);
         editor.renderer.setShowGutter(false)
         // editor.renderer.setOption('showLineNumbers', false)
         session.setMode("ace/mode/markdown");
+        editor.$blockScrolling = Infinity
 
         let styles = this.styles();
         for(let name in styles) {
@@ -293,7 +287,10 @@ class AceRender {
         }
 
         this.addCommands(editor, commands);
+        console.log('adding commands')
+        this.addCommands(editor, markdownEditorConfig.commands)
         this.addIntelliKeys(editor, intelliKeys);
+        this.addIntelliKeys(editor, markdownEditorConfig.intelliKeys);
         session.on('change', change)
 
         return editor;
@@ -307,8 +304,19 @@ class AceRender {
     }
 
     sendWaiting() {
+        if(this._waiting == undefined) {
+            return
+        };
         for (var i = 0; i < this._waiting.length; i++) {
             this.send(this._waiting[i][0], this._waiting[i][1])
+        }
+
+        if(this._earlySetText) {
+            console.log('setting early text')
+            window.setTimeout(function(){
+                this.setText(this._earlySetText);
+                delete this._earlySetText
+            }.bind(this), 100)
         }
     }
 
@@ -354,6 +362,9 @@ class AceRender {
         };
 
         console.log('RPC Said:', data)
+        for (var i = this.callbacks.length - 1; i >= 0; i--) {
+            this.callbacks[i](data)
+        }
     }
 
     handleEventError(d){
@@ -413,7 +424,7 @@ class AceRender {
 config = {
     renderers: [hooked_renderer]
     , commands: commands
-    , intelliKeys
+    , intelliKeys: intelliKeys
     , renderClass: AceRender
 };
 

@@ -3,7 +3,8 @@
 {% block title %}Page Form{% endblock title %}
 {% block content %}
     <section class="form">
-        <form action="{% if object.pk != '' %}{% url 'page-form' %}{% else %}{% url 'page-form' object.pk %}{% endif %}" method='POST'>
+        <!--  action="{% if object.pk != '' %}{% url 'page-form' %}{% else %}{% url 'page-form' object.pk %}{% endif %}" -->
+        <form method='POST'>
             {% csrf_token %}
             {{ form }}
             <button type="submit">Save</button>

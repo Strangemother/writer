@@ -1,0 +1,44 @@
+<div class="flex-inline">
+
+    <section class="child-list" id='page_list'>
+        <h3>Children</h3>
+        <!-- Accepts object  -->
+        {% block child_list %}
+            {% if child_list %}
+                {% include child_list %}
+            {% else %}
+                {% include "markdown/child_nest.html" %}
+            {% endif %}
+        {% endblock child_list %}
+    </section>
+    {% verbatim %}
+    <section class="editor-container" :style='[styles]' id='markdown_app'>
+        <div class="tools">
+            <ul class="collection commands">
+                <li :class="['collection-item command', command.name]" v-for='command in commands' v-if='command.icon != false'>
+                    <a href="javascript:;" @click='actionCommand(command)'>
+                        <i class="material-icons">{{ command.icon }}</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    {% endverbatim %}
+        <div class="init-markdown">{% if markdown %}{{ markdown }}{% else %}
+        {{ object.render|safe }}{% endif %}</div>
+        <div id="markdown_editor">
+            <textarea
+                v-bind:class='styles'
+                id="markdown-input"></textarea>
+        </div>
+    </section>
+
+    <section class="content container">
+        <div class="scrollable">
+            <div id='markdown_content'>
+                {{ object.render|safe }}
+            </div>
+        </div>
+        <div id="initial_render"></div>
+    </section>
+
+</div>
