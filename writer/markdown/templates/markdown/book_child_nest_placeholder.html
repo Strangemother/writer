@@ -5,23 +5,61 @@
     {% verbatim book_page %}
 
         <ul class="collection active-child-list">
-            <li :class="['collection-item', {active: item.object == pageId, loading: item.object == loading}]" v-for='item in pages'>
-                <div class="indicator-container">
-                    <div :class="['indicator', {active: item.object == pageId, loading: item.object == loading}]"></div>
+
+            <li :class="['collection-item flex-vertical', {active: item.object == pageId, loading: item.object == loading}]" v-for='item in pages'>
+
+                <div class="flex-inline">
+                    <div class="indicator-container" @click='indicatorClick(item, $event)'>
+                        <div :class="['indicator', {active: item.object == pageId, loading: item.object == loading}]"></div>
+                    </div>
+                    <a :href="item.url" @click='select_page(item.object, $event)' :key="item.object">{{item.name}}</a>
                 </div>
-                <a :href="item.url" @click='select_page(item.object, $event)' :key="item.object">{{item.name}}</a>
+
+                <ul class="collection-active-child-list-child">
+                    <li
+                        v-for='subItem in item.children'
+                        :class="['collection-item flex-vertical', {active: subItem.object == pageId, loading: subItem.object == loading}]"
+                        >
+                        <div class="flex-inline">
+
+
+                            <div class="indicator-container">
+                                <div @click='indicatorClick(subItem, $event)'
+                                    :class="['indicator', {active: subItem.object == pageId, loading: subItem.object == loading}]"></div>
+                            </div>
+                            <a :href="subItem.url" @click='select_page(subItem.object, $event)' :key="subItem.object">{{subItem.name}}</a>
+                        </div>
+
+
+                            <ul class="collection-active-child-list-child">
+                                <li
+                                    v-for='subItemItem in subItem.children'
+                                    :class="['collection-item flex-vertical', {active: subItemItem.object == pageId, loading: subItemItem.object == loading}]"
+                                    >
+                                    <div class="flex-inline">
+                                        <div class="indicator-container" @click='indicatorClick(subItemItem, $event)'>
+                                            <div
+                                                :class="['indicator', {active: subItemItem.object == pageId, loading: subItemItem.object == loading}]"></div>
+                                        </div>
+                                        <a :href="subItemItem.url" @click='select_page(subItemItem.object, $event)' :key="subItemItem.object">{{subItemItem.name}}</a>
+                                    </div>
+                                </li>
+
+                                <li :class="['collection-item new-page-item', { hidden: openSubList.indexOf(subItem.object) == -1 }]" >
+                                    <add-page :ref='"addPage-" + subItem.object' :parent='subItem' v-on:enter='enterKey'></add-page>
+                                </li>
+                            </ul>
+
+                    </li>
+
+                    <li :class="['collection-item new-page-item', { hidden: openSubList.indexOf(item.object) == -1 }]" >
+                        <add-page :ref='"addPage-" + item.object' :parent='item' v-on:enter='enterKey'></add-page>
+                    </li>
+                </ul>
             </li>
+
             <li :class="['collection-item new-page-item']">
-                <div class="indicator-container">
-                    <div :class="['indicator input']"></div>
-                </div>
-                <div class="input-field inline">
-                    <input type="text"
-                        @keyup.enter='enterKey($event.target.value)'
-                        placeholder='Add Page'
-                        :value='newPageValue'
-                        class='new-page-input'>
-                </div>
+                <add-page ref='addPage' v-on:enter='enterKey'></add-page>
             </li>
         </ul>
     {% endverbatim book_page %}

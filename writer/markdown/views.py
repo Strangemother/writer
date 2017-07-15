@@ -123,27 +123,6 @@ class PageCreateView(CreateView):
     fields = '__all__'
 
 
-class PageCreateJSONView(JSONDetailView, CreateView):
-    success_url = reverse_lazy('book-list')
-    model = Page
-    fields = '__all__'
-
-    def form_valid(self, form):
-        # form.instance.created_by = self.request.user
-
-        # Append to the local page
-        r = super(PageCreateJSONView, self).form_valid(form)
-        page_key = self.kwargs.get('pk', None)
-        if page_key is not None:
-            Book.objects.get(pk=page_key).pages.add(form.instance)
-
-        return self.render_to_response(dict(
-            valid=form.is_valid(),
-            page_id=form.instance.pk,
-            page_name=form.instance.name,
-            page_text_render=form.instance.text_render(),
-            )
-        )
 
 
 class BookPageCreateView(CreateView):
@@ -162,11 +141,43 @@ class BookPageCreateView(CreateView):
 
         # Append to the local page
         r = super(BookPageCreateView, self).form_valid(form)
-        page_key = self.kwargs.get('pk', None)
-        if page_key is not None:
-            Book.objects.get(pk=page_key).pages.add(form.instance)
+
+        # Add first content block
+        pc = PageContent(text_content='# {}'.format(form.instance.name))
+        pc.save()
+        form.instance.contents.add(pc)
+
+        parent_page_key = self.kwargs.get('parent_pk', None)
+        if parent_page_key is not None:
+            page = Page.objects.get(pk=parent_page_key)
+            form.instance.child_of = page
+            form.instance.save()
+        else:
+            page_key = self.kwargs.get('pk', None)
+            if page_key is not None:
+                Book.objects.get(pk=page_key).pages.add(form.instance)
+
         return r
 
+class PageCreateJSONView(JSONDetailView, BookPageCreateView):
+
+    def form_valid(self, form):
+        # form.instance.created_by = self.request.user
+
+        # Append to the local page
+        r = super(PageCreateJSONView, self).form_valid(form)
+        child_of = None
+        if form.instance.child_of is not None:
+            child_of = form.instance.child_of.pk
+
+        return self.render_to_response(dict(
+            valid=form.is_valid(),
+            page_id=form.instance.pk,
+            page_child_of=child_of,
+            page_name=form.instance.name,
+            page_text_render=form.instance.text_render(),
+            )
+        )
 
 class BookCreateView(CreateView):
     success_url = reverse_lazy('book-list')

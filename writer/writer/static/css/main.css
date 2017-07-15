@@ -256,7 +256,8 @@ section.content.container {
     /* border: solid 3px #ff0000; */
     /* transition: min-height .35s ease; */
     height: 100%;
-    outline: solid 2px #2ac15b;
+    /* outline: solid 2px #2ac15b; */
+    width: 100%;
 }
 
 section.child-list .collection-item {
@@ -269,11 +270,12 @@ section.child-list .collection-item {
 }
 
 section.child-list ul {
-    padding: 0 0 0 0.7rem;
+    padding: 0 0 0 1rem;
     border: none;
-    background: #EEE;
-    margin: 0em 0 0.6em 0em;
-    border-left: solid 2px #c3c3c3;
+    /* background: #EEE; */
+    /* margin: 0em 0 0.6em 0em; */
+    /* border-left: solid 2px #c3c3c3; */
+    width: 100%;
 }
 
 .child-list a span.index {
@@ -379,23 +381,24 @@ div#markdown_content {
     /* height: 100%; */
 }
 
-ul.collection.commands {
+.editor-container ul.collection {
     display: flex;
     margin: 0;
     border: none;
 }
 
-.commands .command a {
+.tools .collection-item a {
     padding: 1rem;
     display: flex;
     color: inherit;
 }
 
-.tools {
+.editor-container .tools {
     color: #666;
+    display: flex;
 }
 
-li.collection-item.command {
+.editor-container .collection li.collection-item {
     padding: 0;
     color: inherit;
     border-bottom: none;
@@ -499,7 +502,7 @@ nav a.brand-logo {
 }
 
 .indicator.input {
-    /* background: rgb(188, 195, 199); */
+    background: rgb(188, 195, 199);
 }
 
 .scrollable {
@@ -531,8 +534,43 @@ nav a.brand-logo {
     /* margin: 1px; */
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .new-page-item .indicator-container {
-    width: 3.2rem !important;
+    /* width: 3.2rem !important; */
+}
+
+.indicator-container:hover {
+    background: #f3f3f3;
+}
+
+.book-page-list .active-child-list a:hover {
+    background: #EEE;
+    color: #000;
+}
+
+.tools .collection-item a.disabled {
+    color: #e0e0e0;
+}
+
+ul.collection.interface-tools {
+    margin-left: auto;
+}
+
+span.new-page-item {
+    display: flex;
+    width: 100%;
+}
+
+.flex-vertical {
+    flex-direction: column;
+}
+
+.active-child-list .flex-vertical {
+    width: 100%;
+}
+
+li.new-page-item.hidden {
+    display: none;
 }

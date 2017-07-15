@@ -25,6 +25,51 @@ $.ajaxSetup({
 
 var bus = new Vue({})
 
+var addPageComponent = Vue.component('add-page', {
+    template: `<span class="new-page-item">
+        <div class="indicator-container">
+                <div :class="['indicator input']"></div>
+            </div>
+            <div class="input-field inline">
+                <input type="text"
+                    @keyup.enter='enterKey($event.target.value, parent)'
+                    placeholder='Add Page'
+                    v-model='newValue'
+                    class='new-page-input'>
+            </div></span>`
+    , data(){
+        return {
+            newValue: ''
+        }
+    }
+
+    , props: ['parent']
+    , methods: {
+        enterKey(value, parent){
+            this.$emit('enter', {value, parent})
+        }
+    }
+})
+
+
+var pageItem = Vue.component('page-item', {
+    template: `<div class="flex-inline">
+        <div class="indicator-container">
+            <div @click='indicatorClick(item, $event)'
+                :class="['indicator', {active: item.object == pageId, loading: item.object == loading}]"></div>
+        </div>
+        <a :href="item.url" @click='select_page(item.object, $event)' :key="item.object">{{item.name}}</a>
+    </div>`
+    , props: ['item']
+    , methods: {
+
+        indicatorClick(item, $event) {
+            console.log('indicatorClick(item, $event)')
+        }
+
+    }
+})
+
 var markdownApp = new Vue({
     el: '#markdown_app'
 
@@ -34,7 +79,20 @@ var markdownApp = new Vue({
         }
         , pageId: PAGE.id
         , contentId: undefined
+        , synced: false
         , commands: markdownEditorConfig.commands
+        , tools: []
+        , lastOnlineSave: ''
+        , saveButton: {
+            icon:'save'
+            , name: 'save'
+            , disabled: self.synced
+            , click($event, command){
+                console.log('save clicked')
+                this.onlineStore()
+                bus.$emit('focus')
+            }
+        }
     }
 
     , mounted(){
@@ -75,11 +133,23 @@ var markdownApp = new Vue({
         this.renderer.callbacks.push(this.rendererCallback.bind(this));
 
         bus.$on('page', this.pageHandle.bind(this))
+        bus.$on('focus', this.focusHandle.bind(this))
+
+        this.tools.push(this.saveButton)
     }
 
     , methods: {
 
-        actionCommand(command) {
+        actionCommand(command, $event) {
+            if(command.disabled == true) {
+                console.log('disabled button')
+                return
+            }
+
+            if(command.click) {
+                return command.click.call(this, $event, command)
+            }
+
             // Mention: Vue.js is so fucking awesome.
             this.renderer.onCommand(this.renderer.editor, command)
         }
@@ -91,6 +161,12 @@ var markdownApp = new Vue({
             this.contentId = data.content_ids[data.content_ids.length-1]
             console.log('pageHandle', data)
             this.renderer.setText(data.text)
+            this.lastOnlineSave = data.text;
+            this.saveButton.disabled = this.synced
+        }
+
+        , focusHandle(){
+            $('.ace_text-input')[0].focus()
         }
 
         , rendererCallback(data) {
@@ -143,6 +219,15 @@ var markdownApp = new Vue({
             this.sessionData[this.pageId] = this.editorValue()
             localStorage['markdown_editor'] = JSON.stringify(this.sessionData)
             this.sessionSaveDistance = 0;
+
+            if(this.lastOnlineSave == this.sessionData[this.pageId]) {
+                this.synced = true;
+                this.saveButton.disabled = this.synced
+                return
+            }
+
+            this.synced = false;
+            this.saveButton.disabled = this.synced
             //this.onlineStore(this.sessionData[this.pageId])
         }
 
@@ -171,7 +256,12 @@ var markdownApp = new Vue({
                 return
             }
 
-            $.post(`/page/data/${this.pageId}/`, d, this.postPageHandle.bind(this))
+            $.post(`/page/data/${this.pageId}/`, d, function(result){
+                this.lastOnlineSave = data;
+                this.synced = true
+                this.saveButton.disabled = this.synced
+                this.postPageHandle(result);
+            }.bind(this))
             // bus.$emit('save', {
             //     value: data
             //     , id: this.pageId
