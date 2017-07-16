@@ -8,8 +8,14 @@
 
             <li :class="['collection-item flex-vertical', {active: item.object == pageId, loading: item.object == loading}]" v-for='item in pages'>
 
-                <page-item :item='item' v-on:indicator_click='indicatorClick(item, $event)' v-on:select_page='selectPageEvent'></page-item>
-
+                <div class="flex-inline">
+                    <page-item :item='item' v-on:indicator_click='indicatorClick(item, $event)' v-on:select_page='selectPageEvent'></page-item>
+                    <div class="edit-icon">
+                        <a @click='editItem(item, $event)' href="#edit">
+                            <i class="material-icons">edit</i>
+                        </a>
+                    </div>
+                </div>
                 <!-- <div class="flex-inline">
                     <div class="indicator-container" @click='indicatorClick(item, $event)'>
                         <div :class="['indicator', {active: item.object == pageId, loading: item.object == loading}]"></div>
@@ -28,9 +34,14 @@
                         v-for='subItem in item.children'
                         :class="['collection-item flex-vertical', {active: subItem.object == pageId, loading: subItem.object == loading}]"
                         >
-
-                        <page-item :item='subItem' v-on:indicator_click='indicatorClick(subItem, $event)' v-on:select_page='selectPageEvent'></page-item>
-
+                        <div class="flex-inline">
+                            <page-item :item='subItem' v-on:indicator_click='indicatorClick(subItem, $event)' v-on:select_page='selectPageEvent'></page-item>
+                            <div class="edit-icon">
+                                <a @click='editItem(subItem, $event)' href="#edit">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                            </div>
+                        </div>
                         <!--  a page -->
                         <!-- <div class="flex-inline">
                             <div class="indicator-container" @click='indicatorClick(subItem, $event)'>
@@ -52,8 +63,14 @@
                                     :class="['collection-item flex-vertical', {active: subItemItem.object == pageId, loading: subItemItem.object == loading}]"
                                     >
                                     <!-- an article -->
-                                    <page-item :item='subItemItem' v-on:indicator_click='indicatorClick(subItemItem, $event)' v-on:select_page='selectPageEvent'></page-item>
-
+                                    <div class="flex-inline">
+                                        <page-item :item='subItemItem' v-on:indicator_click='indicatorClick(subItemItem, $event)' v-on:select_page='selectPageEvent'></page-item>
+                                        <div class="edit-icon">
+                                            <a @click='editItem(subItemItem, $event)' href="#edit">
+                                                <i class="material-icons">edit</i>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <!-- <div class="flex-inline">
                                         <div class="indicator-container" @click='indicatorClick(subItemItem, $event)'>
                                             <div

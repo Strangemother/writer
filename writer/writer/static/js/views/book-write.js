@@ -66,6 +66,82 @@ var pageList = new Vue({
             $.getJSON(url, this.pageDataHandle.bind(this))
         }
 
+        , editItem(item, $event) {
+            console.log('editItem', item)
+            let id =  'P_' + Math.random().toString(32).slice(2)
+            $('.tether-templates .edit-page-modal').clone().attr('id', id).appendTo('body')
+
+            let destoryApp = function(view){
+                view.$el.remove()
+                view.$destroy()
+            }
+
+            let app = new Vue({
+                el: `#${id}`
+                , data: {
+                    popupId: id
+                    , item: item
+                    , classes: {
+                        fade: false
+                        , error: false
+                    }
+                }
+                , methods: {
+                    create(){
+                        let listNode = $event.target;
+
+                        let tether = new Tether({
+                            element: `#${id}`
+                            , target: listNode
+                            , enabled: true
+                            , attachment: 'top left'
+                            , targetAttachment: 'top right'
+                            , classes: {
+                                element: 'tether-modal'
+                            }
+                        });
+                        setTimeout(function(){
+                            let el = this.$refs.name
+                            el.focus()
+                            el.setSelectionRange(0, el.value.length)
+                        }.bind(this), 100)
+                        this.tether = tether;
+                    }
+
+                    , submitForm(e){
+                        console.log('Title', this.item.name)
+                        e.preventDefault()
+                        let url = `/page/${this.item.object}/update/`
+                        $.post(url, { name: this.item.name }, this.submitHandle)
+                    }
+
+                    , submitHandle(d) {
+                        if(d.value == false)  {
+                            this.item.name = d.prev_name
+                            this.classes.error = true
+                            return;
+                        };
+
+                        this.classes.error = false;
+                        this.close()
+                    }
+
+                    , close(){
+                        console.log('Close')
+                        this.tether.disable()
+                        this.tether.destroy()
+                        this.classes.fade=true
+                        window.setTimeout(function(){
+                            destoryApp(this)
+                        }.bind(this), 600)
+                    }
+                }
+            })
+
+            this.tether = app;
+            app.create()
+        }
+
         , enterKey(data){
             let value = data.value;
             let parent = data.parent;
@@ -176,5 +252,6 @@ var pageList = new Vue({
             bus.$emit('pageId', { pageId: this.pageId})
             bus.$emit('focus')
         }
+
     }
 })

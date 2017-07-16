@@ -159,6 +159,13 @@ class BookPageCreateView(CreateView):
 
         return r
 
+
+class PageUpdateView(UpdateView):
+    model = Book
+    fields = '__all__'
+    success_url= reverse_lazy('book-list')
+
+
 class PageCreateJSONView(JSONDetailView, BookPageCreateView):
 
     def form_valid(self, form):
@@ -178,6 +185,30 @@ class PageCreateJSONView(JSONDetailView, BookPageCreateView):
             page_text_render=form.instance.text_render(),
             )
         )
+
+class PageUpdateJSONView(JSONDetailView, UpdateView):
+    model = Page
+    fields = ['name'] # '__all__'
+    success_url= reverse_lazy('book-list')
+
+
+    def form_valid(self, form):
+        # form.instance.created_by = self.request.user
+
+        # Append to the local page
+        prev_name = form.initial.get('name', None)
+        r = super(PageUpdateJSONView, self).form_valid(form)
+
+        return self.render_to_response(dict(
+            valid=form.is_valid(),
+            page_id=form.instance.pk,
+            page_child_of=form.instance.child_of.pk if form.instance.child_of else None,
+            prev_name=prev_name,
+            page_name=form.instance.name,
+            # page_text_render=form.instance.text_render(),
+            )
+        )
+
 
 class BookCreateView(CreateView):
     success_url = reverse_lazy('book-list')
@@ -217,11 +248,6 @@ class BookUpdateView(UpdateView):
     fields = '__all__'
     success_url = reverse_lazy('book-list')
 
-
-class PageUpdateView(UpdateView):
-    model = Book
-    fields = '__all__'
-    success_url= reverse_lazy('book-list')
 
 class PageDetail(DetailView):
     model = Page
