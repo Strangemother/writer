@@ -26,7 +26,10 @@ class Renderer {
           pedantic: false,
           sanitize: false,
           smartLists: true,
-          smartypants: false
+          smartypants: false,
+          highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+          }
         });
     }
 
@@ -137,7 +140,7 @@ var event = function(aceEvent) {
             for(let _line of _lines) {
                 _result = _result.concat(_line)
             }
-            
+
             data.lines = _result;
         }
 

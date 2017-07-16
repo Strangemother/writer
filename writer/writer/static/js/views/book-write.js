@@ -48,7 +48,11 @@ var pageList = new Vue({
     }
 
     , methods: {
-        select_page(pageId, event){
+        selectPageEvent(data){
+            this.select_page(data.item, data.$event)
+        }
+
+        , select_page(pageId, event){
             event.preventDefault();
 
             if(pageId == undefined) {
@@ -56,6 +60,8 @@ var pageList = new Vue({
             }
 
             this.loading = pageId
+            bus.$emit('loading', { loading: this.loading})
+
             let url = `/page/data/${pageId}/`
             $.getJSON(url, this.pageDataHandle.bind(this))
         }
@@ -98,6 +104,15 @@ var pageList = new Vue({
             if(i == -1) {
                 this.openSubList.push(item.object)
                 n = 'add'
+
+                //  Apply the focus to the newly spawned subment input item
+                let refs = this.$refs[`addPage-${item.object}`];
+                if(refs) {
+                    window.setTimeout(function(){
+                        $(refs[0].$el).find('input')[0].focus()
+                     }.bind(this), 100)
+                }
+
             } else {
                 this.openSubList.splice(i, 1)
             }
@@ -110,6 +125,7 @@ var pageList = new Vue({
                 name: data.page_name
                 , object: data.page_id
                 , url: `/page/${data.page_id}`
+                , children: []
             };
 
             if(data.page_child_of == null) {
@@ -124,15 +140,40 @@ var pageList = new Vue({
                     }
                 }
                 if(!found) {
-                    console.warn('Could not add child item correctly', r)
+                    let recF = function(pages, match){
+
+                        for (var i = pages.length - 1; i >= 0; i--) {
+                            let child = pages[i];
+                            if(child.object == match) {
+                                return child
+                            }
+
+                            if(child.children) {
+                                let v = recF(child.children, match);
+                                if(v != undefined) {
+                                    return v
+                                }
+                            }
+                        }
+                    }
+                    let page = recF(this.pages, data.page_child_of);
+                    if(page != undefined) {
+                        page.children.push(r)
+                    } else{
+                        console.warn('Could not add child item correctly', r)
+                    }
+
                 }
             }
         }
 
         , pageDataHandle(data) {
             this.loading = -1
+            bus.$emit('loading', { loading: this.loading})
             bus.$emit('page', data)
             this.pageId = data.id
+
+            bus.$emit('pageId', { pageId: this.pageId})
             bus.$emit('focus')
         }
     }

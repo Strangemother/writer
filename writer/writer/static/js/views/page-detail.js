@@ -54,17 +54,34 @@ var addPageComponent = Vue.component('add-page', {
 
 var pageItem = Vue.component('page-item', {
     template: `<div class="flex-inline">
-        <div class="indicator-container">
-            <div @click='indicatorClick(item, $event)'
-                :class="['indicator', {active: item.object == pageId, loading: item.object == loading}]"></div>
+        <div class="indicator-container" @click='indicatorClick(item, $event)'>
+            <div :class="['indicator', {active: item.object == pageId, loading: item.object == loading}]"></div>
         </div>
         <a :href="item.url" @click='select_page(item.object, $event)' :key="item.object">{{item.name}}</a>
     </div>`
     , props: ['item']
-    , methods: {
 
-        indicatorClick(item, $event) {
-            console.log('indicatorClick(item, $event)')
+    , data(){
+        return {
+            loading: -1
+            , pageId: -1
+        }
+    }
+
+    , mounted(){
+        bus.$on('loading', function(data){ this.loading = data.loading }.bind(this))
+        bus.$on('pageId', function(data){ this.pageId = data.pageId }.bind(this))
+    }
+
+    , methods: {
+        select_page(item, $event){
+            $event.preventDefault()
+            this.$emit('select_page', {item, $event});
+        }
+
+        , indicatorClick(item, $event) {
+            // console.log('indicatorClick(item, $event)')
+            this.$emit('indicator_click', {item, $event});
         }
 
     }
@@ -83,6 +100,7 @@ var markdownApp = new Vue({
         , commands: markdownEditorConfig.commands
         , tools: []
         , lastOnlineSave: ''
+        , localMismatch: false
         , saveButton: {
             icon:'save'
             , name: 'save'
@@ -93,6 +111,27 @@ var markdownApp = new Vue({
                 bus.$emit('focus')
             }
         }
+        , mismatchButton: {
+            icon: 'compare_arrows'
+            , name: 'mismatch'
+            , disabled: true
+            , click($event, command){
+                console.log('resolve mismatch')
+
+                let v = this.getSessionValue()
+                this.editorValue(v)
+                window.setTimeout(function(){
+
+                    this.deleteSessionValue()
+                    this.saveButton.disabled = false
+                    this.localMismatch = this.localStorageMismatch();
+                    this.mismatchButton.disabled = !this.localMismatch
+                    this.onlineStore(v)
+                }.bind(this), 100)
+
+            }
+        }
+
     }
 
     , mounted(){
@@ -120,14 +159,6 @@ var markdownApp = new Vue({
             text = $(this.$el).find('.init-markdown').text()
         };
 
-        let storedText = this.getSessionValue();
-        if( storedText != undefined
-            && storedText.trim().length > 0
-            && text != storedText) {
-            console.info('replacing with local')
-            text = storedText;
-        };
-
         this.renderer.setText(text);
         AceRender.config.renderers[0] = this.renderer
         this.renderer.callbacks.push(this.rendererCallback.bind(this));
@@ -136,11 +167,32 @@ var markdownApp = new Vue({
         bus.$on('focus', this.focusHandle.bind(this))
 
         this.tools.push(this.saveButton)
+        this.tools.push(this.mismatchButton)
     }
 
     , methods: {
 
-        actionCommand(command, $event) {
+        localStorageMismatch(pageId, text) {
+            if(pageId == undefined){
+                pageId = this.pageId;
+
+            }
+
+            if(text == undefined){
+                text = this.editorValue()
+            }
+
+            let storedText = this.getSessionValue(pageId);
+            if( storedText != undefined
+                && storedText.trim().length > 0
+                && text != storedText) {
+                return true;
+            };
+
+            return false;
+        }
+
+        , actionCommand(command, $event) {
             if(command.disabled == true) {
                 console.log('disabled button')
                 return
@@ -160,6 +212,8 @@ var markdownApp = new Vue({
             this.contentIds = data.content_ids
             this.contentId = data.content_ids[data.content_ids.length-1]
             console.log('pageHandle', data)
+            this.localMismatch = this.localStorageMismatch(data.id, data.text);
+            this.mismatchButton.disabled = !this.localMismatch
             this.renderer.setText(data.text)
             this.lastOnlineSave = data.text;
             this.saveButton.disabled = this.synced
@@ -167,45 +221,63 @@ var markdownApp = new Vue({
 
         , focusHandle(){
             $('.ace_text-input')[0].focus()
+
         }
 
         , rendererCallback(data) {
-            //console.log('rendererCallback', data)
+            console.log('rendererCallback', data)
             this.save(hard=false)
         }
 
         , save(hard=true){
             if(hard){
-                console.log('full save')
+                console.info('full save')
                 return this.localCache(this.editorValue())
             };
+
             // console.log('save?')
             this.sessionSaveDistance += 1
-            this.bouncedSessionSave()
+            if(!this.synced) {
+                this.bouncedSessionSave()
+            }
 
             if(this.sessionSaveDistance > 10) {
-                this.sessionSave()
+                this.localSessionSave()
             }
         }
 
-        , getSessionValue(){
+        , getSessionValue(pageId){
             let d = localStorage['markdown_editor']
             if(d != undefined) {
                 this.sessionData = JSON.parse(d)
             }
 
-            return this.sessionData[this.pageId]
+            return this.sessionData[pageId || this.pageId]
         }
 
-        , editorValue() {
+
+        , deleteSessionValue(pageId){
+            let d = localStorage['markdown_editor']
+            if(d != undefined) {
+                d = JSON.parse(d)
+            }
+
+            delete d[pageId || this.pageId]
+            localStorage['markdown_editor'] = JSON.stringify(d)
+        }
+
+        , editorValue(v) {
+            if(v){
+                return this.renderer.setText(v);
+            }
             return this.renderer.editor.getValue()
         }
 
         , bouncedSessionSave(){
-            return this.sessionSave()
+            return this.localSessionSave()
         }
 
-        , sessionSave(){
+        , localSessionSave(){
 
             if(this.sessionData == undefined) {
                 let d = localStorage['markdown_editor']
@@ -216,8 +288,20 @@ var markdownApp = new Vue({
                 }
             }
 
+            if(this.sessionData[this.pageId] != undefined) {
+                // debugger
+                if(this.localMismatch) {
+                    console.warn('Local mismatch, save session failure.')
+                    this.saveButton.disabled = this.synced
+                } else {
+                    console.warn('sessionSave overwriting local:', this.pageId)
+
+                }
+            }
+
             this.sessionData[this.pageId] = this.editorValue()
             localStorage['markdown_editor'] = JSON.stringify(this.sessionData)
+
             this.sessionSaveDistance = 0;
 
             if(this.lastOnlineSave == this.sessionData[this.pageId]) {
@@ -283,6 +367,10 @@ var markdownApp = new Vue({
             }
 
             o[this.pageId] = data
+            if(o[this.pageId] != undefined) {
+                console.warn(`Local data ${this.pageId} already exists`)
+            }
+
             localStorage['markdown_editor'] = JSON.stringify(o)
         }
 

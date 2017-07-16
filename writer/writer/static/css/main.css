@@ -574,3 +574,14 @@ span.new-page-item {
 li.new-page-item.hidden {
     display: none;
 }
+
+#markdown_content>pre {
+    background: rgb(243, 243, 243);
+    padding: 0.5em;
+    border-radius: 4px;
+    color: #3c3c3c;
+}
+
+#markdown_content pre code {
+    color: inherit;
+}
