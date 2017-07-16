@@ -97,7 +97,7 @@ var markdownApp = new Vue({
         , pageId: PAGE.id
         , contentId: undefined
         , synced: false
-        , commands: markdownEditorConfig.commands
+        , commands: window['markdownEditorConfig'] ? markdownEditorConfig.commands: {}
         , tools: []
         , lastOnlineSave: ''
         , localMismatch: false
@@ -152,6 +152,15 @@ var markdownApp = new Vue({
         this.bouncedSessionSave = debounce(this.bouncedSessionSave.bind(this), 2000)
 
         $(window).resize(slowCall)
+
+        if(window['AceRender']) {
+            this.createRenderer()
+        } else {
+            console.warn('No Renderer')
+        }
+    }
+
+    , createRenderer(){
         this.renderer = new AceRender('markdown_editor', 'markdown_content')
         let text = PAGE.initValue;
         if(text.trim().length == 0) {

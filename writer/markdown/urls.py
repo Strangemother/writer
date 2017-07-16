@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'book/(?P<pk>[0-9]+)/$', views.BookDetail.as_view(), name='book'),
 
     url(r'book/editor/(?P<pk>[0-9]+)/$', views.BookEditorDetail.as_view(), name='book-editor'),
+    url(r'book/editor/(?P<pk>[0-9]+)/2/$', views.BookEditor2Detail.as_view(), name='book-editor'),
     url(r'book/(?P<pk>[0-9]+)/new-page/(?P<parent_pk>[0-9]+)$', views.PageCreateJSONView.as_view(), name='book-new-page'),
     url(r'book/(?P<pk>[0-9]+)/new-page/$', views.PageCreateJSONView.as_view(), name='book-new-page'),
 

@@ -111,6 +111,9 @@ class BookDetail(DetailView):
 class BookEditorDetail(BookDetail):
     template_name = 'markdown/book_write.html'
 
+class BookEditor2Detail(BookDetail):
+    template_name = 'markdown/book_write_2.html'
+
 
 class BookPageContent(FormView):
     template_name = 'markdown/book_pagecontent.html'

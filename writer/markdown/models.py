@@ -5,6 +5,10 @@ from renderer import markdown_render
 from functools import partial
 from itertools import chain
 
+from django.contrib.auth.models import AbstractUser
+
+class Owner(AbstractUser):
+    pass
 
 class PageContent(models.Model):
 
@@ -31,22 +35,49 @@ class PageContent(models.Model):
         return self._render_cache
 
 
-class Page(models.Model):
-    '''A Songle unit, presenting a markdown file associated with
-    a book.
-    '''
+class MetaModel(models.Model):
+    INT = 'i'
+    TEXT = 'u'
+    TYPES = (
+        (INT, 'Number'),
+        (TEXT, 'Text'),
+        )
+    name = models.CharField(max_length=100)
+    meta_type = models.CharField(
+        max_length=1,
+        choices=TYPES,
+        default=TEXT,
+    )
+
+
+class ColorMeta(MetaModel):
+
+    color = models.CharField(max_length=100)
+
+
+class UnitModel(models.Model):
 
     # File name, or rarely changing identity.
-    name = models.TextField()
-
-    # Data content
-    contents = models.ManyToManyField(PageContent, blank=True)
+    name = models.TextField(max_length=255)
+    filename = models.CharField(max_length=255, null=True, blank=True)
 
     # Decedency chain, noting ancestors and up.
     child_of = models.ForeignKey('self', null=True, blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey(Owner, related_name='page_owner', null=True, blank=True)
+    metas = models.ManyToManyField(MetaModel, blank=True)
+    private = models.BooleanField(default=True)
+
+
+class Page(UnitModel):
+    '''A Songle unit, presenting a markdown file associated with
+    a book.
+    '''
+
+    # Data content
+    contents = models.ManyToManyField(PageContent, blank=True)
 
     def books(self):
         '''
@@ -181,7 +212,7 @@ class Page(models.Model):
         return u'Page {} "{}" {} content{}'.format(self.pk, self.name, pl, s)
 
 
-class Book(models.Model):
+class Book(UnitModel):
     '''A single unit of many pages, config and grouping
     to define a collection of Page classes
     '''
@@ -191,9 +222,6 @@ class Book(models.Model):
     # The initial page or the README page content.
     # This may render a different style page. (or no page)
     index_page = models.ForeignKey(Page, null=True, blank=True, related_name='index_page')
-
-    name = models.CharField(max_length=255)
-    filename = models.CharField(max_length=255, null=True, blank=True)
 
     def children_nest(self, depth=-1):
         children = self.pages
@@ -214,3 +242,4 @@ class Book(models.Model):
         pl = self.pages.count()
         s = '' if pl == 1 else 's'
         return u'"{}" {} page{}'.format(self.name, pl, s)
+

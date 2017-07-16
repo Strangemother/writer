@@ -164,5 +164,5 @@ class AceRender {
 }
 
 (function(){
-    renderer = new AceRender('markdown_editor', 'markdown_content')
+    //renderer = new AceRender('markdown_editor', 'markdown_content')
 })()

@@ -1,0 +1,47 @@
+{% extends "markdown/book_detail.html" %}
+{% load static %}
+
+{% comment "why" %}
+    The book_write page is the same as a single page editor, with ajax feedback
+    for page selection, allowing all pages of a book to be edited without
+    reload.
+{% endcomment %}
+
+{% block body_class%}book-editor page{% endblock %}
+
+{% block content %}
+    {% include "markdown/page_interface.html" with child_list="markdown/book_child_nest_placeholder.html" markdown=object.index_page.text_render %}
+
+    <div class="mdd">
+      <script>
+        var booklistData=  {
+                    id: {{ object.pk }}
+                    , name: "{{ object.name }}"
+                    , count: {{ object.pages.count }}
+                    , children: [{% for page in object.pages.all %}{% with object=page %}
+                                {% include "markdown/book_child_nest_js_item.html" %}
+                            {% endwith %}{% endfor %}]
+                }
+
+    </script>
+    </div>
+{% endblock content %}
+
+
+{% block js %}
+  {{ block.super }}
+    <script>
+        var PAGE = {
+            id: (function(){ return {{ object.index_page.pk }}; })()
+            , bookId: {{object.pk}}
+            , indexContentIds:(function(){ return {{ object.index_page.contents_pk_list }}; })()
+            , contentIds: [{% for content in object.contents.all %}{{ content.pk}}, {% endfor %}]
+            , initValue: `{% for content in object.contents.all %}{{ content.text_content|safe }}\n\n{% endfor %}`
+        }
+    </script>
+
+    {% include 'markdown/page_detail_js_2.html' %}
+
+  <script src='{% static "js/views/book-write.js" %}'></script>
+  <script src='{% static "js/views/book-write-2.js" %}'></script>
+{% endblock js %}

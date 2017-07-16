@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from models import Book, Page, PageContent
+import models
 
 
 class BookAdmin(admin.ModelAdmin):
@@ -16,6 +16,9 @@ class PageContentAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Book, BookAdmin)
-admin.site.register(Page, PageAdmin)
-admin.site.register(PageContent, PageContentAdmin)
+admin.site.register(models.Book, BookAdmin)
+admin.site.register(models.Page, PageAdmin)
+admin.site.register(models.Owner, PageAdmin)
+admin.site.register(models.UnitModel, PageAdmin)
+admin.site.register(models.ColorMeta, PageAdmin)
+admin.site.register(models.PageContent, PageContentAdmin)
