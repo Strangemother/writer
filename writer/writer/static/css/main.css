@@ -683,3 +683,16 @@ li.new-page-item.hidden {
 .tether-modal .div.close-button:hover {
     background: #eee;
 }
+
+.dev .init-markdown {
+    display: initial;
+}
+
+.writer-2 .init-markdown {
+    display: block;
+}
+
+.markdown-editor {
+    border: solid 1px #CCC;
+    margin: 1em;
+}

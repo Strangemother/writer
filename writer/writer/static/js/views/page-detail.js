@@ -160,25 +160,6 @@ var markdownApp = new Vue({
         }
     }
 
-    , createRenderer(){
-        this.renderer = new AceRender('markdown_editor', 'markdown_content')
-        let text = PAGE.initValue;
-        if(text.trim().length == 0) {
-            console.info('replacing text with init data')
-            text = $(this.$el).find('.init-markdown').text()
-        };
-
-        this.renderer.setText(text);
-        AceRender.config.renderers[0] = this.renderer
-        this.renderer.callbacks.push(this.rendererCallback.bind(this));
-
-        bus.$on('page', this.pageHandle.bind(this))
-        bus.$on('focus', this.focusHandle.bind(this))
-
-        this.tools.push(this.saveButton)
-        this.tools.push(this.mismatchButton)
-    }
-
     , methods: {
 
         localStorageMismatch(pageId, text) {
@@ -199,6 +180,25 @@ var markdownApp = new Vue({
             };
 
             return false;
+        }
+
+        , createRenderer(){
+            this.renderer = new AceRender('markdown_editor', 'markdown_content')
+            let text = PAGE.initValue;
+            if(text.trim().length == 0) {
+                console.info('replacing text with init data')
+                text = $(this.$el).find('.init-markdown').text()
+            };
+
+            this.renderer.setText(text);
+            AceRender.config.renderers[0] = this.renderer
+            this.renderer.callbacks.push(this.rendererCallback.bind(this));
+
+            bus.$on('page', this.pageHandle.bind(this))
+            bus.$on('focus', this.focusHandle.bind(this))
+
+            this.tools.push(this.saveButton)
+            this.tools.push(this.mismatchButton)
         }
 
         , actionCommand(command, $event) {

@@ -10,7 +10,7 @@
 {% block body_class%}book-editor page{% endblock %}
 
 {% block content %}
-    {% include "markdown/page_interface.html" with child_list="markdown/book_child_nest_placeholder.html" markdown=object.index_page.text_render %}
+    {% include "markdown/page_interface_2.html" with child_list="markdown/book_child_nest_placeholder.html" markdown=object.index_page.text_render %}
 
     <div class="mdd">
       <script>
@@ -31,6 +31,8 @@
 {% block js %}
   {{ block.super }}
     <script>
+        var L = console.log
+
         var PAGE = {
             id: (function(){ return {{ object.index_page.pk }}; })()
             , bookId: {{object.pk}}
@@ -39,9 +41,15 @@
             , initValue: `{% for content in object.contents.all %}{{ content.text_content|safe }}\n\n{% endfor %}`
         }
     </script>
+  <script src='{% static "js/IT.js" %}'></script>
 
-    {% include 'markdown/page_detail_js_2.html' %}
+  <script src='{% static "js/workerRPC.js" %}'></script>
+  <script src='{% static "js/mdwriter/client.js" %}'></script>
+  <script src='{% static "js/mdwriter/renderer.js" %}'></script>
+  <script src='{% static "js/mdwriter/app.js" %}'></script>
+  {% include 'markdown/page_detail_js_2.html' %}
+
+  <!-- <script src='{% static "js/mdwriter/worker.js" %}'></script> -->
 
   <script src='{% static "js/views/book-write.js" %}'></script>
-  <script src='{% static "js/views/book-write-2.js" %}'></script>
 {% endblock js %}

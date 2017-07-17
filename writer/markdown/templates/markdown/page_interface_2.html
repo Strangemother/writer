@@ -1,0 +1,117 @@
+<div class="flex-inline writer-2">
+
+    <section class="child-list" id='page_list'>
+        <h3>Children</h3>
+        <!-- Accepts object  -->
+        {% block child_list %}
+            {% if child_list %}
+                {% include child_list %}
+            {% else %}
+                {% include "markdown/child_nest.html" %}
+            {% endif %}
+        {% endblock child_list %}
+    </section>
+    {% verbatim %}
+
+    <section class="editor-container" :style='[styles]' id='markdown_app'>
+        <div class="tools">
+            <ul class="collection commands">
+                <li :class="['collection-item command', command.name]" v-for='command in commands' v-if='command.icon != false'>
+                    <a href="javascript:;" @click='actionCommand(command)'>
+                        <i class="material-icons">{{ command.icon }}</i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="collection interface-tools">
+                <li :class="['collection-item interface-tool', item.name]" v-for='item in tools'>
+
+                    <a href="javascript:;"
+                        :class='{disabled: item.disabled}'
+                        @click='actionCommand(item, $event)'>
+                        <i class="material-icons">{{ item.icon }}</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    {% endverbatim %}
+        <div class="init-markdown">{% if markdown %}{{ markdown }}{% else %}
+        {{ object.render|safe }}{% endif %}</div>
+
+        <div id="writer_template">
+            <div class="markdown-editor">
+                <input type="text browser-default">
+                <div class="carets">
+                    <span class="caret-item" v-for='caret in carets'>
+                        <span class="caret" :caret=caret></span>
+                    </span>
+                </div>
+
+                <div class="input-view" ref='input'>
+                    will be deleted
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <div>
+                <markdown-editor ref='m1'></markdown-editor>
+                <markdown-editor ref='m2'></markdown-editor>
+            </div>
+
+            <textarea id="markdown-input"></textarea>
+        </div>
+
+
+    </section>
+
+    <section class="content container">
+        <div class="scrollable">
+            <div id='markdown_content' contenteditable="true" spellcheck=true>
+                {{ object.render|safe }}
+            </div>
+        </div>
+        <div id="initial_render"></div>
+    </section>
+
+    <div class="tether-templates">
+        <div class="edit-page-modal">
+
+            <div :class="['edit-page', classes]">
+                <div class="div close-button" @click='close'><a>&#x2716;</a></div>
+                <div class="row">
+                    <form class="col s12" v-on:submit='submitForm($event)'>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input
+                            placeholder="Page Tile"
+                            id="title"
+                            ref='name'
+                            type="text"
+                            class="validate"
+                            v-model='item.name'>
+                          <label for="title">Title</label>
+                        </div>
+                        <!-- <div class="input-field col s6">
+                          <input id="last_name" type="text" class="validate">
+                          <label for="last_name">Last Name</label>
+                        </div> -->
+                      </div>
+
+                    <div class="buttons col s12">
+                        <button
+                            class="btn waves-effect waves-light"
+                            type="submit"
+                            name="action">Save</button>
+                        <a class="btn delete-btn waves-effect waves-light">Delete</a>
+                    </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
