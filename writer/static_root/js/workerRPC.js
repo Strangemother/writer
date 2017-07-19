@@ -42,9 +42,8 @@ var _id = function(){
 };
 
 var log = function(...args){
-    console.log.apply(console, args)
+    //console.log.apply(console, args)
 }
-
 var rpcs = []
 var itPath = '/static/js/IT.js';
 
@@ -88,8 +87,7 @@ class BaseRPC {
         for (var i = 0; i < arguments.length; i++) {
             n.push(arguments[i])
         };
-
-        console.log.apply(console.log, n)
+        log.apply(console, n)
     }
 }
 

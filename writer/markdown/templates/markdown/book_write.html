@@ -41,6 +41,9 @@
     </script>
 
     {% include 'markdown/page_detail_js.html' %}
+    {% include 'markdown/modal.html' %}
 
+  <script src='{% static "js/vendor/gravel.js" %}'></script>
+  <script src='{% static "js/views/modal.js" %}'></script>
   <script src='{% static "js/views/book-write.js" %}'></script>
 {% endblock js %}

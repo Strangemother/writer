@@ -1,9 +1,9 @@
 import mistune
-import mistune_contrib
-from mistune_contrib import highlight
+# import mistune_contrib
+# from .mistune_contrib import highlight
 
 
-class HighlightRenderer(mistune.Renderer, highlight.HighlightMixin):
+class HighlightRenderer(mistune.Renderer)#, highlight.HighlightMixin):
 
     def _nil(self):
         print 1

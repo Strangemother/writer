@@ -274,6 +274,7 @@ class AceRender {
         var editor = ace.edit(IDhtml);
         let session = editor.getSession();
 
+        editor.setOption("wrap", true)
         editor.setTheme("ace/theme/chrome");
         // editor.setShowPrintMargin(false);
         editor.renderer.setShowGutter(false)

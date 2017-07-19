@@ -1,0 +1,315 @@
+/*
+Reset styles for elements used
+ */
+.gravel .gravel-title,
+.gravel .gravel-body,
+.gravel .gravel-buttons {
+    display: initial;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    color: #666;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+/* main popup panel styles. */
+.gravel {
+    background-color: #FFF;
+    border: solid 1px #CCC;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px -1px rgba(50, 50, 50, .2);
+    padding: 20px 40px;
+    width: 460px;
+    max-width: 1000px;
+    min-width: 400px;
+}
+
+/* Close Button */
+.gravel .gravel-close {
+    font-size: 1.5em;
+    line-height: 2em;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: #AAA;
+    font-weight: bold;
+    cursor: pointer;
+    width: 2em;
+    border: none;
+    background-color: #FFF;
+    height: 2em;
+    text-align: center;
+}
+
+.gravel .gravel-close:hover {
+    background-color: #919191;
+    color: #FFF;
+}
+
+/* Title */
+.gravel h2.gravel-title {font-size: 48px;font-weight: normal;margin: 0;height: 1.5em;color: #233545;display: block;line-height: 1.5em;text-overflow: ellipsis;width: 92%;overflow: hidden;}
+
+/* content */
+.gravel .gravel-body {
+    display: block;
+    margin: 0px;
+    margin-top: .5em}
+
+/* button style */
+.gravel .gravel-buttons {
+border-top: solid 1px #F0F0F0;
+padding: 10px 0px 0px 0px;
+margin: 15px 0px 5px 0px;
+display: block;
+}
+
+.gravel .gravel-buttons .gravel-button {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 30px;
+    text-transform: uppercase;
+}
+
+.gravel .gravel-buttons .gravel-button {
+border: none;
+border-color: #EEE;
+font-size: 16px;
+font-weight: normal;
+letter-spacing: 1px;
+border-radius: 2px;
+/* box-shadow: 0 1px 1px rgba(100, 100, 100, .4); */
+/* height: 35px; */
+line-height: 35px;
+padding: .3em 1.3em;
+cursor: pointer;
+margin: 10px 15px 0px 15px;
+float: initial !important;
+display: inline-block;
+}
+
+.gravel .gravel-buttons .gravel-button.dark {
+    text-shadow: 0 1px 0px rgba(255, 255, 255, 0.46);
+}
+
+/* as a button is rendered, it may require a placeholder */
+.gravel .gravel-buttons .button-placeholder {
+    height: 30px;
+    min-width: 60px;
+    border: solid 1px #eee;
+    line-height: 30px;
+    padding: 0 15px;
+    float: left;
+    margin: 10px;
+}
+
+/*
+Right floated buttons. Left is auto.
+ */
+.gravel .gravel-buttons .gravel-button.right {
+    float: right !important;
+}
+
+.gravel .gravel-buttons .gravel-button.blue {
+    color: white;
+    background-color: #3CA5CE;
+    float: right;
+}
+
+.gravel .gravel-buttons .gravel-button.red {
+    color: white;
+    background-color: #A0140E;
+}
+
+.gravel .gravel-buttons .gravel-button.orange {
+    color: white;
+    background-color: #E06C00;
+}
+
+.gravel .gravel-buttons .gravel-button.yellow {
+    color: #333;
+    background-color: #E0B60E;
+}
+
+.gravel .gravel-buttons .gravel-button.green {
+    color: #FFF;
+    background-color: #6DBE62;
+    border: solid 1px #3BA83B;
+}
+
+.gravel .gravel-buttons .gravel-button.purple {
+    color: white;
+    background-color: #7B4196;
+}
+
+
+.gravel.dark {
+background-color: #333;
+border: none;
+border-radius: 0px;
+box-shadow: 0px 10px 0px -4px rgba(50, 50, 50, .2);
+width: 600px;
+padding: 20px;
+color: #FFF;
+}
+
+.gravel.dark .gravel-close {
+font-size: 2.5em;
+line-height: 1.5em;
+color: #222020;
+width: 1.5em;
+background-color: #333333;
+height: 1.5em;
+}
+
+.gravel.dark .gravel-close:hover {
+color: #FFF;
+}
+
+.gravel.dark h2.gravel-title {
+font-size: 24px;
+font-weight: normal;
+margin: 0px 0 20px;
+color: #EEE;
+line-height: 1em;
+}
+
+
+.gravel.dark .gravel-title,
+.gravel.dark .gravel-body,
+.gravel.dark .gravel-buttons {
+color: #FFF;
+text-shadow: none;
+font-size: 1.2em;
+line-height: 1.8em;
+}
+
+.gravel.dark .gravel-buttons {
+border-top: solid 1px #2C2828;
+padding: 20px 0px 0px 0px;
+margin: 15px 0px 0px 0px;
+}
+
+.gravel.dark .gravel-buttons .gravel-button {
+border-color: #EEE;
+font-size: 14px;
+font-weight: normal;
+letter-spacing: 1px;
+border-radius: 2px;
+box-shadow: 0 1px 0px rgba(0, 0, 0, .2);
+height: 50px;
+line-height: 50px;
+padding: 0 20px;
+opacity: inherit;
+margin: 0px 10px 0px 0px;
+border: none;
+}
+
+
+
+
+.gravel.flat {
+background-color: #E5E5E5;
+border: none;
+border-radius: 0px;
+box-shadow: 0px 1px 1px 1px rgba(2, 7, 2, .1);
+width: 600px;
+padding: 0px;
+color: #444;
+}
+
+.gravel.flat .gravel-body {
+display: block;
+margin: 0px;
+width: 100%;
+margin-top: 0px;
+padding: 20px 20px 20px;
+padding-right: 45px;
+min-width: initial;
+}
+
+.gravel.flat .gravel-close {
+font-size: 2em;
+line-height: 2em;
+color: #DFDFDF;
+width: 1.5em;
+background-color: #F5F5F5;
+height: 2em;
+/*text-shadow: 0 1px 1px #646464;*/
+}
+
+.gravel.flat .gravel-close:hover {
+color: #3F3F3F;
+}
+
+.gravel.flat h2.gravel-title {
+font-size: 28px;
+font-weight: 400;
+margin: 0px 0px 0px;
+color: #555555;
+line-height: 1.3em;
+background: #F5F5F5;
+padding: 10px 20px;
+height: 2em;
+width: 95%;
+font-family: inherit;
+}
+
+.gravel.flat .gravel-title,
+.gravel.flat .gravel-body,
+.gravel.flat .gravel-buttons {
+color: #303030;
+text-shadow: none;
+font-size: 1.3em;
+line-height: 2em;
+}
+
+.gravel.flat .gravel-buttons {
+border-top: none;
+padding: 0px 0px 0px 0px;
+margin: 10px 0px 0px 0px;
+}
+
+.gravel.flat .gravel-buttons .gravel-button {
+border-color: #EEE;
+font-size: 1em;
+font-weight: normal;
+letter-spacing: 1px;
+border-radius: 0px;
+box-shadow: 0 1px 0px rgba(0, 0, 0, .2);
+height: 3em;
+line-height: 2em;
+padding: 0 2em;
+opacity: inherit;
+margin: 0px 0px 0px 0px;
+border: none;
+top: 0px;
+position: relative;
+font-family: inherit;
+outline: none;
+}
+
+.gravel.reflow {
+    transition: top ease .5s;
+}
+
+
+.gravel .gravel-buttons .gravel-button:first-child {
+    margin-left: 0;
+}
+
+h2.gravel-title {}
+
+.gravel .row {
+    margin-bottom: 1em;
+}
+
+body .gravel input[type=text]:focus {
+    border-bottom: 2px solid #5590bb;
+    box-shadow: None;
+}
+
+.select-wrapper {
+    position: relative;
+}

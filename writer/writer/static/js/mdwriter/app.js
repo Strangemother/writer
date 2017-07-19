@@ -12,7 +12,6 @@ Vue.component('markdown-editor', {
     , mounted(){
         console.log('markdown-editor mounted')
         this.renderer = new Renderer(this.$refs.input);
-        window.rr = this.renderer;
     }
 
     , data() {

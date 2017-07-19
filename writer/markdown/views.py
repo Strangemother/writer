@@ -3,7 +3,13 @@ from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from models import Book, Page, PageContent
 from forms import BookForm, BookPageContentForm, PageContentForm
-from django.urls import reverse_lazy
+
+from django import VERSION as DJ_VER
+if DJ_VER[1] < 10:
+    from django.core.urlresolvers import reverse as reverse_lazy
+else:
+    from django.urls import reverse_lazy
+
 from django.http import JsonResponse
 from django.views.generic.detail import BaseDetailView
 from django.views.generic import TemplateView

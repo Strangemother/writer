@@ -322,7 +322,7 @@ div#markdown_editor {
     border: solid 1px white;
     min-width: 20em;
     min-height: 20em;
-    height: 92%;
+    height: 88%;
     /* max-width: 500px; */
 }
 
@@ -474,7 +474,7 @@ ul.collection.active-child-list {
 .scrollable {
     min-height: 18%;
     /* overflow: hidden; */
-    padding: 4em 3em;
+    padding: 4em 3em 3em;
     /* display: flex; */
     /* height: 100%; */
     width: 100%;
@@ -576,7 +576,7 @@ li.new-page-item.hidden {
     display: none;
 }
 
-#markdown_content>pre {
+#markdown_content pre {
     background: rgb(243, 243, 243);
     padding: 0.5em;
     border-radius: 4px;
@@ -695,4 +695,51 @@ li.new-page-item.hidden {
 .markdown-editor {
     border: solid 1px #CCC;
     margin: 1em;
+}
+
+.templates {
+    display: none;
+}
+
+.gravel-body.content h2.gravel-title {
+    display: none;
+}
+
+.standard-modal-container h2.gravel-title.title {
+    margin-top: 0;
+}
+
+body .gravel h2.gravel-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.gravel .gravel-buttons .gravel-button:last-child {
+    margin-right: 0;
+}
+
+.gravel .gravel-buttons {
+    border-top: solid 1px #F0F0F0;
+    padding: 10px 0px 0px 0px;
+    margin: 15px 0px 5px 0px;
+    display: block;
+}
+
+
+body .gravel.gravel-container {
+    padding-top: 0.5em;
+    border: none;
+    transition: top 1s ease;
+    /* display: flex; */
+    /* flex-direction: column; */
+}
+
+.gravel.standard-modal-container {
+    /* padding: 0; */
+}
+.gravel.gravel-container {
+    box-shadow: none;
 }

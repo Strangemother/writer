@@ -1,0 +1,157 @@
+
+{% verbatim %}
+<div class="templates">
+    <div class="standard-modal-container">
+        <div class="standard-modal">
+            <h2 class="gravel-title">%(title)s</h2>
+            <p class="modal-content">%(text)s</p>
+        </div>
+    </div>
+    <div class="install-modal-container">
+        <div class="install-modal">
+            <h2 class="gravel-title">Install</h2>
+            <div class="modal-content">
+                <div class="install-card">
+                    <span class="icon">
+                        <i class="material-icons circle">%(item.persona.icon)s</i>
+                    </span>
+                    <span class="plugin-content">
+                        <h3 class="plugin-title">%(item.name)s</h3>
+                        <p class="plugin-description">%(item.description)s</p>
+                    </span>
+                </div>
+                </p>
+                <hr>
+                <p ref='action-message' class='action-message'>Download and install?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- note-modal.js -->
+    <div class="note-add-modal-container">
+        <div class='note-add-modal'>
+            <h2 class="gravel-title">Notes for {{link.name}}</h2>
+            <p class="note-info">Add notes for
+                <a :href="link.url">
+                    <span class="link-name">{{ link.name }}</span>.
+                </a>
+            </p>
+            <div class="inline-form">
+                <textarea class="modal-add-note"
+                    ref='input'
+                    @keyup='keyupEvent($event)'
+                    @keydown.ctrl='ctrl_keydownEvent($event)'
+                    @keyup.ctrl='ctrlKeyupEvent($event)'
+                    @keyup.enter='enterKey($event)'
+                    placeholder='"Cherry pie and Banana milkshake." Press (CTRL+S) to save.'
+                    autofocus>{{ initialValue }}</textarea>
+            </div>
+
+            <div class="note-tools row">
+                <div class="note-actions col s6">
+                    <a href="javascript:;"
+                        :class='toggleNoteClass'
+                        @click='toggleNotes'>
+                        <i class="material-icons">{{ toggleIcon }}</i>
+                    </a>
+                </div>
+                <div class="note-extras col s6">
+                    <div class="right">
+                        <a :href="'/notes/add/' + link.id" class='open-note'>Open</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notes-list-container">
+                <ul :class="['notes-list collection', { hidden: hideNotes }]">
+                    <li class="notes-list collection-item"
+                        v-for='item in sorted(notes, "notes")'>
+                        <div class="name">{{ item.name }}</div>
+                        <div class="text">{{ item.text }}</div>
+                        <div class="created">{{ item.created }}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="delete-link-modal-container delete-link-modal">
+        <h2 class="gravel-title">Delete %(bookmark.name)s</h2>
+        <p class="text-content">Would you like to delete bookmark list "%(bookmark.name)s" and all its links?</p>
+    </div>
+
+    <div class="add-link-modal-container">
+        <div class="add-link-modal">
+            <h2 class="gravel-title">
+                <span v-if='link == undefined'>New</span>
+                <span v-else>Edit</span>
+                <span>Bookmark</span>
+            </h2>
+
+            <form class="col s12">
+
+                <input type="hidden" name="id" value="%(link.id)s">
+                <div class="row url-input">
+                    <div class="input-field col s12">
+                        <input id="url_%(id)s"
+                            type="text"
+                            name='url'
+                            value="%(link.url)s"
+                            class="validate">
+                        <label for="url_%(id)s">URL</label>
+                    </div>
+                </div>
+
+                <div class="row name-input">
+                    <div class="input-field col s12">
+                        <input id="name_%(id)s"
+                            name='name'
+                            type="text"
+                            value="%(link.name)s"
+                            class="validate">
+                        <label for="name_%(id)s">Name</label>
+                    </div>
+                </div>
+
+
+                <div class="row group-input">
+
+                    <div class="col s10">
+                        <div :class="['group-selector col s12 browser-default', {hidden: showNew}]">
+
+                            <select id="group_%(id)s" class="groups" name='group'>
+                                <option value="" :selected="linkGroup == undefined">No Group</option>
+                                <option v-for='item in groups'
+                                    :data-selected="isSelected(item)"
+                                    :value="item.id">{{ item.name }}</option>
+                            </select>
+
+                            <label for="group_%(id)s">Group</label>
+                        </div>
+
+                        <div :class="['new-group input-field col s12', {hidden: !showNew}]">
+                            <input id="new_group_%(id)s" name='new_group' type="text" class="validate">
+                            <label for="new_group_%(id)s">New Group Name</label>
+                        </div>
+                    </div>
+
+                    <div class="col s2 group-button-container">
+                        <a class="btn-floating" v-on:click='addGroupButton'>
+                            <i class="material-icons">add</i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row hidden">
+                    <div class="input-field col s12">
+                        <input id="group_%(id)s" type="text" class="validate">
+                        <label for="group_%(id)s">New Group</label>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endverbatim %}

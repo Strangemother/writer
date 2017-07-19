@@ -143,7 +143,7 @@ var markdownApp = new Vue({
             }
 
             this._wt = window.setTimeout(function(){
-                this.fitHeight()
+                //this.fitHeight()
             }.bind(this), 300)
         }.bind(this);
 
@@ -388,7 +388,6 @@ var markdownApp = new Vue({
             let top = $(this.$el).position().top;
             let viewHeight = $(window).height();
             let height = viewHeight - top;
-
             this.styles.maxHeight = `${height}px`;
             this.styles.minHeight = `${height}px`;
         }

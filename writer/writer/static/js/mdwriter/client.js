@@ -18,5 +18,5 @@ var clientWorker = function(workerPath, renderer) {
         }
     });
 
-    return [onReadyCallbacks, rpc];
+    return onReadyCallbacks;
 }

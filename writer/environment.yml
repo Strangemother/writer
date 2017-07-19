@@ -1,0 +1,23 @@
+name: writer-env
+channels: !!python/tuple
+- !!python/unicode
+  'http://sfp-inf.jpmchase.net:9999/pkgs/'
+- !!python/unicode
+  'http://sfp-inf.jpmchase.net:9000/conda/mrad/channel/dev/'
+- !!python/unicode
+  'http://sfp-inf.jpmchase.net:9000/conda/f3'
+- !!python/unicode
+  'http://sfp-inf.jpmchase.net:9000/conda/wcat'
+dependencies:
+- pkgs::django=1.10.4=py27_0
+- pkgs::mistune=0.7.3=py27_0
+- pkgs::pip=9.0.1=py27_1
+- pkgs::pygments=2.1.3=py27_0
+- pkgs::python=2.7.12=0
+- pkgs::setuptools=27.2.0=py27_1
+- pkgs::vs2008_runtime=9.00.30729.1=2
+- pkgs::wheel=0.29.0=py27_0
+- pip:
+  - mistune-contrib (c:\dev\writer-master\writer\mistune-contrib-master)==0.1
+prefix: C:\FAST\anaconda\2.5.0\envs\writer-env
+
