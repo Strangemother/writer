@@ -4,6 +4,290 @@
 		"selected_items":
 		[
 			[
+				"random",
+				"randomId"
+			],
+			[
+				"class",
+				"classes"
+			],
+			[
+				"inpu",
+				"inputNodePrefix"
+			],
+			[
+				"exis",
+				"existingNode"
+			],
+			[
+				"exi",
+				"existingNode"
+			],
+			[
+				"clone",
+				"cloneAndReplace"
+			],
+			[
+				"init",
+				"initRender"
+			],
+			[
+				"hm",
+				"htmlNode"
+			],
+			[
+				"html",
+				"htmlNode"
+			],
+			[
+				"set",
+				"setup"
+			],
+			[
+				"ma",
+				"markdown-editor"
+			],
+			[
+				"Wok",
+				"WorkerRPC\t(client.js)"
+			],
+			[
+				"client",
+				"clientWorker\t(client.js)"
+			],
+			[
+				"worker",
+				"workerPath"
+			],
+			[
+				"crea",
+				"createRenderer"
+			],
+			[
+				"For",
+				"ForeignKey"
+			],
+			[
+				"PageUp",
+				"PageUpdateView"
+			],
+			[
+				"submi",
+				"submitForm\t(page_interface.html)"
+			],
+			[
+				"tether",
+				"tether-templates\t(page_interface.html)"
+			],
+			[
+				"def",
+				"default\t(page-detail.js)"
+			],
+			[
+				"lcoa",
+				"localMismatch"
+			],
+			[
+				"mis",
+				"mismatchButton"
+			],
+			[
+				"edit",
+				"editorValue"
+			],
+			[
+				"lca",
+				"localMismatch"
+			],
+			[
+				"page",
+				"pageId"
+			],
+			[
+				"loc",
+				"localStorageMismatch"
+			],
+			[
+				"di",
+				"disabled"
+			],
+			[
+				"select",
+				"select_page\t(book-write.js)"
+			],
+			[
+				"indic",
+				"indicatorClick\t(book-write.js)"
+			],
+			[
+				"index",
+				"indexOf\t(markdown-editor.js)"
+			],
+			[
+				"page_c",
+				"page_child_of"
+			],
+			[
+				"child",
+				"children"
+			],
+			[
+				"paret",
+				"parent_page_key"
+			],
+			[
+				"parent_",
+				"parent_page_key"
+			],
+			[
+				"BookP",
+				"BookPageCreateView"
+			],
+			[
+				"Page",
+				"PageContent"
+			],
+			[
+				"last",
+				"lastOnlineSave"
+			],
+			[
+				"sync",
+				"synced"
+			],
+			[
+				"newPa",
+				"newPageValue"
+			],
+			[
+				"clear",
+				"clearEnterKey"
+			],
+			[
+				"PageCre",
+				"PageCreateJSONView\t(views.py)"
+			],
+			[
+				"JSON",
+				"JSONDetailView"
+			],
+			[
+				"load",
+				"loading"
+			],
+			[
+				"boo",
+				"book\t(page_detail.html)"
+			],
+			[
+				"content",
+				"contents_pk_list\t(models.py)"
+			],
+			[
+				"contentI",
+				"contentIds"
+			],
+			[
+				"page_",
+				"page_pk"
+			],
+			[
+				"posat",
+				"postPageHandle"
+			],
+			[
+				"PageC",
+				"PageContentForm"
+			],
+			[
+				"error",
+				"errors"
+			],
+			[
+				"PageCon",
+				"PageContent"
+			],
+			[
+				"add",
+				"addIntelliKeys"
+			],
+			[
+				"kes",
+				"intelliKeys"
+			],
+			[
+				"inte",
+				"intelliKeys"
+			],
+			[
+				"fnc",
+				"function"
+			],
+			[
+				"root",
+				"root_page"
+			],
+			[
+				"selec",
+				"select_page"
+			],
+			[
+				"False",
+				"false"
+			],
+			[
+				"getSess",
+				"getSessionValue"
+			],
+			[
+				"rev",
+				"reverse_lazy"
+			],
+			[
+				"PageContent",
+				"PageContentCreateView\t(views.py)"
+			],
+			[
+				"P",
+				"Pagecontent\t(forms.py)"
+			],
+			[
+				"Book",
+				"BookPageContent\t(views.py)"
+			],
+			[
+				"session",
+				"sessionSave"
+			],
+			[
+				"sess",
+				"sessionSaveDistance"
+			],
+			[
+				"mark",
+				"markdown_editor"
+			],
+			[
+				"strin",
+				"string\t(workerRPC.js)"
+			],
+			[
+				"call",
+				"callbacks\t(markdown-editor.js)"
+			],
+			[
+				"stye",
+				"styles"
+			],
+			[
+				"view",
+				"viewHeight"
+			],
+			[
+				"markdown",
+				"markdownApp"
+			],
+			[
 				"err",
 				"errors"
 			],
@@ -22,10 +306,6 @@
 			[
 				"Managed",
 				"ManagedPool"
-			],
-			[
-				"call",
-				"call_func"
 			],
 			[
 				"__ini",
@@ -188,10 +468,6 @@
 				"broker_data"
 			],
 			[
-				"worker",
-				"worker_args\tfunction"
-			],
-			[
 				"com_",
 				"com_q"
 			],
@@ -238,287 +514,76 @@
 			[
 				"re",
 				"readlines\tfunction"
-			],
-			[
-				"CA",
-				"CACHE_PATH\tstatement"
-			],
-			[
-				"CAC",
-				"CACHE_FOLDER"
-			],
-			[
-				"CACHE",
-				"CACHE_DIR"
-			],
-			[
-				"CACH",
-				"CACHE_DIR"
-			],
-			[
-				"folder",
-				"folder_data"
-			],
-			[
-				"root",
-				"root_path"
-			],
-			[
-				"displ",
-				"displayLength"
-			],
-			[
-				"res",
-				"results"
-			],
-			[
-				"getJSON",
-				"getJSONHandler"
-			],
-			[
-				"writ",
-				"writelines\tfunction"
-			],
-			[
-				"max_",
-				"max_recursive"
-			],
-			[
-				"match",
-				"matcher"
-			],
-			[
-				"recurs",
-				"recursive"
-			],
-			[
-				"file",
-				"file_match\tstatement"
-			],
-			[
-				"sca",
-				"scan_yield\tfunction"
-			],
-			[
-				"if",
-				"ifmain\tif __name__ == '__main__'"
-			],
-			[
-				"dir",
-				"dirpath"
-			],
-			[
-				"clea",
-				"clearColor"
-			],
-			[
-				"AP",
-				"Apply\t(files.js)"
-			],
-			[
-				"consol",
-				"consoleLog"
-			],
-			[
-				"templat",
-				"template_path"
-			],
-			[
-				"temp",
-				"template_finders"
-			],
-			[
-				"render",
-				"render_result"
-			],
-			[
-				"import",
-				"importlib"
-			],
-			[
-				"url_ca",
-				"url_cans_append"
-			],
-			[
-				"cp",
-				"capture"
-			],
-			[
-				"pl",
-				"plain\t(index.py)"
-			],
-			[
-				"APP",
-				"APP_NAME"
-			],
-			[
-				"Impo",
-				"ImportError"
-			],
-			[
-				"print_",
-				"print_headers"
-			],
-			[
-				"has",
-				"has_header"
-			],
-			[
-				"get_",
-				"get_header"
-			],
-			[
-				"header",
-				"HeaderDict\timport"
-			],
-			[
-				"resolve",
-				"resolve_path"
-			],
-			[
-				"template_p",
-				"template_paths\t(routing.py)"
-			],
-			[
-				"template_",
-				"template_finders"
-			],
-			[
-				"def",
-				"default_template_maps"
-			],
-			[
-				"templ",
-				"template_path"
-			],
-			[
-				"app_",
-				"app_urls"
-			],
-			[
-				"db_",
-				"db_field"
-			],
-			[
-				"MySQL",
-				"MySQLConnection"
-			],
-			[
-				"data",
-				"database\tmodule"
-			],
-			[
-				"captu",
-				"captures"
-			],
-			[
-				"_cahin",
-				"_chain_capture"
-			],
-			[
-				"dis",
-				"discover_template\tfunction"
-			],
-			[
-				"_chi",
-				"_chain_capture"
-			],
-			[
-				"resolv",
-				"resolvers"
-			],
-			[
-				"url_",
-				"url_cans"
-			],
-			[
-				"_ch",
-				"_chain\tstatement"
-			],
-			[
-				"_ci",
-				"_chain_capture"
-			],
-			[
-				"_chain",
-				"_chain_capture"
-			],
-			[
-				"pare",
-				"parent_name"
-			],
-			[
-				"My",
-				"MySQLdb"
-			],
-			[
-				"mat",
-				"matched"
-			],
-			[
-				"lazy",
-				"lazy_reg"
-			],
-			[
-				"rege",
-				"regex_laxy_caller"
-			],
-			[
-				"reg",
-				"reg_str"
-			],
-			[
-				"regex_ma",
-				"regex_match_handler"
-			],
-			[
-				"none",
-				"None\tinstance"
-			],
-			[
-				"url_pa",
-				"url_pattern_matcher"
-			],
-			[
-				"spli",
-				"splitext\tfunction"
-			],
-			[
-				"tem",
-				"templ_finder\tforstmt"
-			],
-			[
-				"template_pat",
-				"template_path"
-			],
-			[
-				"os",
-				"os.environ"
-			],
-			[
-				"env",
-				"environ"
-			],
-			[
-				"prit",
-				"print"
-			],
-			[
-				"__",
-				"__name__"
-			],
-			[
-				"ba",
-				"bad_url"
-			],
-			[
-				"Rou",
-				"RouteClass"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "writer/markdown/templates/markdown/book_write_2.html",
+			"settings":
+			{
+				"buffer_size": 2035,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "writer/markdown/templates/markdown/page_interface_2.html",
+			"settings":
+			{
+				"buffer_size": 4110,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "writer/writer/static/js/markdown-worker.js",
+			"settings":
+			{
+				"buffer_size": 5094,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "/* A base class for all renderers to communicate to the worker.\n*/\n\n(function(){\n\nL('renderer.js')\n\nvar rpc = new WorkerRPC();\n\nvar workerRenderer = {\n    testWorkerMessage: function(e){\n        /* called if the worker send 'test' */\n        console.log('TestEvent', e);\n    }\n};\n\n/* build a client worker and bind messages to a function set or\nthe worker renderer.*/\nvar onReadyCallbacks = clientWorker('/static/js/mdWriter/workers/render-worker.js', workerRenderer);\n\n\nclass WorkerBase {\n    /* Communicate to the singleton callback. */\n\n    constructor(editorName, contentName){\n        onReadyCallbacks.push(this.sendWaiting.bind(this))\n        this._waiting = []\n        this.init.apply(this, arguments)\n    }\n\n    init(){\n\n    }\n\n    getWorker(){\n        return rpc\n    }\n\n    sendWaiting() {\n        for (var i = 0; i < this._waiting.length; i++) {\n            this.send(this._waiting[i][0], this._waiting[i][1])\n        }\n    }\n\n    send(content, cb) {\n        let rpc = this.getWorker();\n\n        if(rpc._ready) {\n            var p = rpc.event(content, this.eventReply.bind(this))\n        } else{\n            if(this._waiting == undefined) {\n                this._waiting = []\n            };\n            this._waiting.push([content, cb])\n        }\n    }\n\n    eventReply(data) {\n\n\n        if(data.success == false){\n            return this.handleEventError(data)\n        };\n\n        console.log('RPC Said:', data)\n    }\n\n    handleEventError(d){\n        console.log('handle error')\n        let fn = `${d.request}HandleEvent`\n        if(this[fn] != undefined) {\n            this[fn](d)\n        }\n    }\n\n}\n\n\nclass Renderer extends WorkerBase {\n    init(entity){\n        /* Init with a given entity.*/\n        console.log('new renderer', entity)\n        //this.send('hello')\n        this.editor = this.makeEditor(entity)\n    }\n\n    styles() {\n        return {\n            fontSize: \"18px\"\n        }\n    }\n\n    setText(htmlText, editor) {\n        console.log('setText', htmlText)\n    }\n\n    getText(){}\n\n    getNodeByString(value) {\n        // return a html node with the given value\n        entity = document.getElementById(entity)\n    }\n\n    makeEditor(entity) {\n\n        if(IT.g(entity).is('string') ) {\n            entity = this.getNodeByString(entity)\n        };\n\n        L('makeEditor', entity)\n\n        let instance = this.setup(entity);\n    }\n\n    setup(htmlNode){\n        L('setup instance', htmlNode)\n        this.instance = new InputInstance(htmlNode);\n        this.instance.initRender()\n        this._setup = true;\n    }\n\n    destroy(){\n        L('destory instance')\n        this.instance.destroy()\n        this._setup = false;\n    }\n}\n\nclass InputInstance {\n\n    constructor(node, config) {\n        this.cloneAndReplace(node);\n        this.config = config\n\n        this.inputNode = undefined;\n    }\n\n    cloneAndReplace(node){\n        /* replicate the given node and replace the view instance.*/\n        this.replaceInputNode(node);\n    }\n\n    replaceInputNode(replaceNode){\n        /* replace the view node with the given node as an instance.*/\n        let existing;\n        let options = this.getInputNodeOptions(replaceNode)\n        let newInputNode = this.createInputNode(options)\n        this.insertAfter()\n    }\n\n    insertNodeAfter(target, newSibling) {\n        /* push a node after a target*/\n    }\n\n    getInputNodeOptions(existingNode) {\n        /* return an object of config for the input node,\n        copying information from existing node if required. */\n        let id = existingNode? existingNode.id: this.randomId();\n        let defaultClasses = 'input-view input-node';\n        let classes = existingNode? existingNode.classList.value: defaultClasses\n        let o = {\n            id: id\n            , classes: classes\n        }\n\n        return o;\n    }\n\n    createInputNode(options){\n        let nodeType = 'div';\n\n        let defOptions = {\n            id: this.randomId()\n            , type: 'div'\n        }\n\n        let config = Object.assign(defOptions, options);\n        nodeType = defOptions.type || nodeType;\n        delete config.type;\n\n        return $(`<${nodeType}/>`, config)\n    }\n\n    randomId(){\n        return this.inputNodePrefix() + '_' + (Math.random().toString(32).slice(2))\n    }\n\n    inputNodePrefix(){\n        return 'input_node'\n    }\n\n    removeInputNode() {\n        /* remove the current input node from the screen and return*/\n        this.inputNode.remove()\n        return this.inputNode\n    }\n\n    initRender(){\n        /* Render; assuming the first time*/\n        debugger\n    }\n\n    destory(){\n\n    }\n}\n\nwindow.Renderer = Renderer\n\n})()\n",
+			"file": "writer/writer/static/js/mdwriter/renderer.js",
+			"file_size": 4712,
+			"file_write_time": 131447209530272662,
+			"settings":
+			{
+				"buffer_size": 4604,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "writer/writer/static/js/mdwriter/workers/render-worker.js",
+			"settings":
+			{
+				"buffer_size": 366,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "writer/writer/static/js/mdwriter/app.js",
+			"settings":
+			{
+				"buffer_size": 803,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "writer/writer/static/js/views/page-detail.js",
+			"settings":
+			{
+				"buffer_size": 12544,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -527,17 +592,21 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 263.0,
-		"last_filter": "rremo",
+		"height": 337.0,
+		"last_filter": "mov",
 		"selected_items":
 		[
 			[
-				"rremo",
-				"Package Control: Remove Package"
-			],
-			[
 				"mov",
 				"File: Move"
+			],
+			[
+				"re",
+				"File: Rename"
+			],
+			[
+				"rremo",
+				"Package Control: Remove Package"
 			],
 			[
 				"rename",
@@ -636,10 +705,6 @@
 				"Set Syntax: JavaScript Next"
 			],
 			[
-				"re",
-				"File: Rename"
-			],
-			[
 				"move",
 				"File: Move"
 			],
@@ -736,7 +801,7 @@
 				"Set Syntax: Python"
 			]
 		],
-		"width": 416.0
+		"width": 440.0
 	},
 	"console":
 	{
@@ -769,10 +834,63 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/jay/Documents/projects/writer"
+		"/C/Users/jay/Documents/projects/writer",
+		"/C/Users/jay/Documents/projects/writer/writer",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/static",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/static/css/markdown",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates",
+		"/C/Users/jay/Documents/projects/writer/writer/static_root",
+		"/C/Users/jay/Documents/projects/writer/writer/static_root/fonts",
+		"/C/Users/jay/Documents/projects/writer/writer/writer",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/css",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/mdwriter",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/vendor",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/vendor/highlight",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/templates"
 	],
 	"file_history":
 	[
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/page_detail_js_2.html",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/mdwriter/client.js",
+		"/C/Users/jay/Documents/projects/writer/env/Lib/site-packages/django/contrib/admin/static/admin/css/base.css",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/mdwriter/worker.js",
+		"/C/Users/jay/Documents/projects/writer/writer/static_root/js/markdown-communicator.js",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/views.py",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/urls.py",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/views/book-write-2.js",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/ace/mdwriter/app.js",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/views/page-detail.js",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/views/book-write.js",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/admin.py",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/models.py",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/book_child_nest_placeholder.html",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/settings.py",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/book_list.html",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/base.html",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/page_interface.html",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/templates/base.html",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/book_write.html",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/static/css/markdown/markdown-theme.css",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/markdown-worker.js",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/markdown-editor.js",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/vendor/tether-1.3.3/examples/pin/index.html",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/forms.py",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/css/main.css",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/page_detail.html",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/page_detail_js.html",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/book_child_nest_js_item.html",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/markdown-commands.js",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/child_nest.html",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/views/meta-panel.js",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/book_child_nest.html",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/page_form.html",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/book_pagecontent.html",
+		"/C/Users/jay/Documents/projects/writer/writer/writer/static/js/workerRPC.js",
+		"/C/Users/jay/Documents/projects/writer/writer/markdown/templates/markdown/book_detail.html",
+		"/C/Users/jay/Documents/projects/writer/writer/static_root/js/ace/src/ace.js",
 		"/C/Users/jay/Documents/GitHub/files/v4/worker.py",
 		"/E/backups 2016/Actionscript/FlightGame/com/strangemother/projects/FlightGame.as",
 		"/C/Users/jay/Desktop/New folder (2)/ShipThruster.as",
@@ -862,49 +980,11 @@
 		"/F/clients/strangemother/minisite/site/app/app/__init__.py",
 		"/F/clients/strangemother/minisite/site/pybin/stopgap/templates/error.html",
 		"/F/clients/strangemother/minisite/site/app/settings.py",
-		"/F/clients/strangemother/minisite/site/app/__init__.py",
-		"/F/clients/strangemother/minisite/site/app/app/hello.py",
-		"/F/clients/strangemother/minisite/site/app/app/test.py",
-		"/C/Users/jay/AppData/Local/Temp/Rar$DIa0.385/setup.py",
-		"/F/clients/strangemother/minisite/site/app/hello.py",
-		"/F/clients/strangemother/minisite/site/httpdocs/.htaccess",
-		"/F/clients/strangemother/minisite/site/pybin/bottle.py",
-		"/C/Users/jay/AppData/Local/Temp/Rar$DIa0.659/storages.py",
-		"/C/Users/jay/AppData/Local/Temp/Rar$DIa0.306/database.py",
-		"/C/Users/jay/AppData/Local/Temp/fz3temp-1/index.py",
-		"/F/clients/strangemother/minisite/site/test.py",
-		"/F/clients/strangemother/minisite/site/app/index.py",
-		"/F/clients/strangemother/minisite/site/sftp-config.json",
-		"/F/clients/strangemother/minisite/site/hello.py",
-		"/F/clients/strangemother/minisite/site/index.py",
-		"/F/clients/strangemother/minisite/site/env/Lib/site-packages/itsdangerous.py",
-		"/C/Users/jay/Downloads/test.php",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/Attribute.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/objects/BabylonMesh.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/tests/InstanceTests.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/files.js",
-		"/C/Users/jay/AppData/Local/Temp/Rar$DIa0.266/doT.min.js",
-		"/C/Users/jay/Documents/projects/babylon/index-v2.html",
-		"/C/Users/jay/Documents/projects/babylon/js/lib/objects.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/main.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/objects.mutators.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/core/BaseClass.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/tests.js",
-		"/C/Users/jay/Documents/projects/babylon/css/main.css",
-		"/C/Users/jay/Desktop/test.py",
-		"/C/Users/jay/Documents/GitHub/CottonDuck/node_modules/babel-preset-es2015/node_modules/babel-plugin-transform-regenerator/.test/tests.es6.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/Light.js",
-		"/C/Users/jay/Documents/projects/babylon/js/lib/materials.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/config.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/AppInterface.js",
-		"/C/Users/jay/Documents/projects/babylon/js/lib/GameScene.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/foo.js",
-		"/C/Users/jay/Documents/projects/babylon/js-v2/lib/loader.js",
-		"/C/Users/jay/AppData/Local/Temp/Rar$DRa0.652/malko-l.js-bacc4ec/l.js"
+		"/F/clients/strangemother/minisite/site/app/__init__.py"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -947,6 +1027,63 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"removeNode",
+			"editorName",
+			"renderer",
+			"INT",
+			" ",
+			"first_name",
+			"editItem",
+			"href=\"#edit\">",
+			"setOp",
+			"set",
+			"localCache",
+			"            \n",
+			"pageId",
+			"loading",
+			"llection-active-child-list-child\"",
+			"llection-active-child-list-child",
+			"subItem",
+			"page_of",
+			"command",
+			"editor",
+			"markdown",
+			"text",
+			"child_list",
+			"page",
+			"setText",
+			"strikethrough",
+			"strikethough",
+			"other",
+			"bullet",
+			"markdownEditorConfig",
+			"commands",
+			"markdownEditorConfig",
+			"addComm",
+			"addCommands",
+			"*args, **kwargs",
+			"for",
+			"sendWaiting",
+			"onReadyCallbacks",
+			"rpc",
+			"markdownApp",
+			"            \n",
+			"save",
+			"save ",
+			"save",
+			"this._wai",
+			"),",
+			"nav_items",
+			")\n",
+			"onCommand",
+			"italic",
+			"italix",
+			"commands",
+			"renderer",
+			"AceRender",
+			"minHeight",
+			"click",
+			"nav",
 			"scan_func(",
 			"scan_func",
 			"/",
@@ -1017,64 +1154,7 @@
 			"...",
 			">>> ",
 			"\\",
-			"rescurse",
-			"AttributeError",
-			"max",
-			"file",
-			"folders",
-			"self.data",
-			"\\",
-			"__init__",
-			"disc",
-			"get_module_template",
-			"render_result",
-			"call_route_url",
-			"call_url",
-			"route_urls",
-			"_route_data",
-			"route_urls",
-			"url",
-			"app_name",
-			"call_route_url",
-			"call_endpoint",
-			"call_mapped_url",
-			"name",
-			"print",
-			"dbdesigner",
-			"try",
-			"None",
-			"isclass",
-			"False",
-			"DB fail",
-			"DB Fail",
-			"finalize_route",
-			"call_e",
-			"raw",
-			"FETCH",
-			"Resolvers",
-			"apture RESOLVE ob",
-			"print",
-			"RESOLVE",
-			" raw",
-			"!!",
-			"Render ",
-			"Render",
-			"!!",
-			"!!  Render",
-			"Filename Result",
-			"!! Render",
-			"finaliz",
-			"print",
-			"raw",
-			"...",
-			" raw(",
-			"ROOT",
-			"raw",
-			"call_url",
-			"call_root",
-			"Root",
-			"XX",
-			"XX  "
+			"rescurse"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1099,8 +1179,267 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "writer/markdown/templates/markdown/book_write_2.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2035,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1798,
+								1798
+							]
+						],
+						"settings":
+						{
+							"doccontinue.autostop": true,
+							"doccontinue.enabled": true,
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "writer/markdown/templates/markdown/page_interface_2.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4110,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1215,
+								1215
+							]
+						],
+						"settings":
+						{
+							"doccontinue.autostop": true,
+							"doccontinue.enabled": true,
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "writer/writer/static/js/markdown-worker.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 5094,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5094,
+								5084
+							]
+						],
+						"settings":
+						{
+							"doccontinue.autostop": true,
+							"doccontinue.enabled": true,
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 46.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "writer/writer/static/js/mdwriter/renderer.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4604,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2651,
+								2652
+							]
+						],
+						"settings":
+						{
+							"doccontinue.autostop": true,
+							"doccontinue.enabled": true,
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 821.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "writer/writer/static/js/mdwriter/workers/render-worker.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 366,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								102,
+								102
+							]
+						],
+						"settings":
+						{
+							"doccontinue.autostop": true,
+							"doccontinue.enabled": true,
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "writer/writer/static/js/mdwriter/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 803,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								411,
+								411
+							]
+						],
+						"settings":
+						{
+							"doccontinue.autostop": true,
+							"doccontinue.enabled": true,
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "writer/writer/static/js/views/page-detail.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5287,
+								6016
+							]
+						],
+						"settings":
+						{
+							"doccontinue.autostop": true,
+							"doccontinue.enabled": true,
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2423.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1121,11 +1460,25 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				2,
+				0,
+				3,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.306269577598,
+			0.537551020408,
 			1.0
 		],
 		"rows":
@@ -1160,6 +1513,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"page-detai",
+				"writer\\writer\\static\\js\\views\\page-detail.js"
+			],
 			[
 				"utils.",
 				"python\\server\\utils.py"
@@ -1317,7 +1674,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -1325,7 +1682,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 238.0,
+	"side_bar_width": 453.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
