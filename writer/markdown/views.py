@@ -132,8 +132,6 @@ class PageCreateView(CreateView):
     fields = '__all__'
 
 
-
-
 class BookPageCreateView(CreateView):
     '''
     Create a page and append to a book using the associated book id.
@@ -194,6 +192,7 @@ class PageCreateJSONView(JSONDetailView, BookPageCreateView):
             page_text_render=form.instance.text_render(),
             )
         )
+
 
 class PageUpdateJSONView(JSONDetailView, UpdateView):
     model = Page
@@ -260,3 +259,7 @@ class BookUpdateView(UpdateView):
 
 class PageDetail(DetailView):
     model = Page
+
+
+class PageExportView(PageDetail):
+    template_name = 'markdown/page_export.html'

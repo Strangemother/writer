@@ -236,6 +236,7 @@ var markdownApp = new Vue({
         , rendererCallback(data) {
             console.log('rendererCallback', data)
             this.save(hard=false)
+            dataConnection.update(data)
         }
 
         , save(hard=true){

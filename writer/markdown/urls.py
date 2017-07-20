@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'page/add/$', views.PageCreateView.as_view(), name='page-form'),
     url(r'page/edit/(?P<pk>[0-9]+)/$', views.PageUpdateView.as_view(), name='page-form'),
     url(r'page/(?P<pk>[0-9]+)/update/$', views.PageUpdateJSONView.as_view(), name='page-update'),
+    url(r'page/(?P<pk>[0-9]+)/export/$', views.PageExportView.as_view(), name='page-export'),
 
     url(r'book/add/$', views.BookCreateView.as_view(), name='book-form'),
     url(r'book/edit/(?P<pk>[0-9]+)/$', views.BookUpdateView.as_view(), name='book-form'),

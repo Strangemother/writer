@@ -82,7 +82,12 @@ var event = function(aceEvent) {
     }
 
     let text = data.text.length;
-    let result = { success: true, text: text};
+    let result = {
+        success: true
+        , lines: aceEvent.lines
+        , start: aceEvent.start
+        , end: aceEvent.end
+    };
 
     var lines = data.lines;
     let startRow = lines[aceEvent.start.row];

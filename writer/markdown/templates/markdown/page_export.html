@@ -1,0 +1,97 @@
+{% extends "markdown/base.html" %}
+{% load static %}
+
+{% block body_class%}export{% endblock %}
+
+
+{% block title %}
+    <span class="title-name">
+        {{ object.name }}
+    </span>
+{% endblock title %}
+
+
+{% block content %}
+    <div class="container">
+        <h3>Export</h3>
+
+        <ul class='collection'>
+            <li class='collection-item name'>
+                <span class="label">name</span>
+                <span class="value">{{ object.name }}</span>
+            </li>
+
+            <li class='collection-item created'>
+                <span class="label">created</span>
+                <span class="value">{{ object.created }}</span>
+            </li>
+
+            <li class='collection-item root'>
+                <span class="label">root books</span>
+                {% if object.root_page %}
+                <span class="value">
+                    <a class='waves-effect wave-light btn'
+                        href="{% url 'page' object.root_page.pk %}">{{ object.root_page }}</a>
+                </span>
+                {% else %}
+                    {% for book in books %}
+                    <a class='waves-effect wave-light btn'
+                        href="{% url 'book' book.id %}">{{ book }}</a>
+                    {% endfor %}
+                {% endif %}
+            </li>
+            <li class='collection-item parent'>
+                <span class="label">parent page</span>
+                <span class="value">
+                    {% if object.child_of %}
+                    <a class='waves-effect wave-light btn'
+                        href="{% url 'page' object.child_of.pk %}">{{ object.child_of }}</a>
+                    {% else %}
+                    No parent page
+                    {% endif %}
+                </span>
+            </li>
+             <li class='collection-item breadcrumbs'>
+                <span class="label">Page Crumbs</span>
+                {% include 'markdown/breadcrumbs.html' %}
+            </li>
+            <li class='collection-item'>
+                <span class="label">Sibling Pages</span>
+                <span class="value">
+                    {% for page in object.siblings %}
+                        <a class='waves-effect wave-light btn'
+                            href="{% url 'page' page.pk %}">{{ page }}</a>
+                    {% endfor %}
+                </span>
+            </li>
+            <li class='collection-item'>
+                <span class="label">Next Page</span>
+                <span class="value">
+                    {% with sibling_next=object.sibling_next %}
+                        {% if sibling_next %}
+                        <a class='waves-effect wave-light btn'
+                            href="{% url 'page' sibling_next.pk %}">{{ sibling_next }}</a>
+                        {% endif %}
+                    {% endwith %}
+                </span>
+            </li>
+
+            <li class='collection-item'>
+                <span class="label">Previous Page</span>
+                <span class="value">
+                    {% with sibling_before=object.sibling_before %}
+                        {% if sibling_before %}
+                        <a class='waves-effect wave-light btn'
+                            href="{% url 'page' sibling_before.pk %}">{{ sibling_before }}</a>
+                        {% endif %}
+                    {% endwith %}
+                </span>
+            </li>
+        </ul>
+
+        <div class="tools">
+            <a href="#" class="btn waves-light">Export</a>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -236,7 +236,7 @@ section.page-info {
 }
 
 section.content.container {
-    display: flex;
+    /* display: flex; */
     /* vertical-align: top; */
     background: #f3f3f3;
     /* border: solid; */
@@ -245,6 +245,7 @@ section.content.container {
     /* max-height: 860px; */
     /* border: solid 1px; */
     overflow: auto;
+    flex-direction: column;
 }
 
 .flex-inline {
@@ -322,13 +323,15 @@ div#markdown_editor {
     border: solid 1px white;
     min-width: 20em;
     min-height: 20em;
-    height: 88%;
+    height: 100%;
     /* max-width: 500px; */
 }
 
 section.editor-container {
     width: 60%;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 #markdown_content td {
@@ -472,10 +475,10 @@ ul.collection.active-child-list {
 }
 
 .scrollable {
-    min-height: 18%;
-    /* overflow: hidden; */
-    padding: 4em 3em 3em;
-    /* display: flex; */
+    min-height: 92%;
+    overflow: hidden;
+    padding: 0em 3em 3em;
+    display: flex;
     /* height: 100%; */
     width: 100%;
 }
@@ -513,6 +516,7 @@ nav a.brand-logo {
 .book-editor div#markdown_content {
     box-shadow: 0 0px 4px 0px rgba(69, 90, 100, 0.57);
     min-height: 100%;
+    margin-top: 2px;
 }
 
 .toolspace {
@@ -742,4 +746,28 @@ body .gravel.gravel-container {
 }
 .gravel.gravel-container {
     box-shadow: none;
+}
+
+
+div#markdown_content:focus {
+    outline: solid 2px;
+    /* z-index: inherit; */
+}
+
+.content-options {
+    padding: 0 3em;
+    display: flex;
+    flex-direction: row-reverse;
+    color: rgb(189, 196, 199);
+    align-items: center;
+}
+
+.content-options a {
+    padding: 1em 0em;
+    display: flex;
+    color: inherit;
+}
+
+.content-options a:hover {
+    color: #455a64;
 }

@@ -32,6 +32,39 @@
 })
 */
 
+var dataConnection = new Vue({
+
+    methods: {
+
+        getPage(pageId, func){
+            if(pageId == undefined) {
+                return true;
+            }
+
+            this.loading = pageId
+            bus.$emit('loading', { loading: this.loading})
+
+            let url = `/page/data/${pageId}/`
+            $.getJSON(url, this.handle(pageId, func))
+        }
+
+        , handle(pageId, func) {
+
+            return function(data){
+                bus.$emit('page', data)
+                bus.$emit('pageId', { pageId: pageId})
+                if(func != undefined) {
+                    func(data, pageId)
+                }
+            }.bind(this)
+        }
+
+        , update(data) {
+            console.log(data)
+        }
+    }
+})
+
 var pageList = new Vue({
     el: '#page_list'
     , data: {
@@ -48,22 +81,14 @@ var pageList = new Vue({
     }
 
     , methods: {
+
         selectPageEvent(data){
             this.select_page(data.item, data.$event)
         }
 
         , select_page(pageId, event){
             event.preventDefault();
-
-            if(pageId == undefined) {
-                return true;
-            }
-
-            this.loading = pageId
-            bus.$emit('loading', { loading: this.loading})
-
-            let url = `/page/data/${pageId}/`
-            $.getJSON(url, this.pageDataHandle.bind(this))
+            dataConnection.getPage(pageId, this.pageDataHandle.bind(this))
         }
 
         , editItem(item, $event) {
@@ -245,11 +270,6 @@ var pageList = new Vue({
 
         , pageDataHandle(data) {
             this.loading = -1
-            bus.$emit('loading', { loading: this.loading})
-            bus.$emit('page', data)
-            this.pageId = data.id
-
-            bus.$emit('pageId', { pageId: this.pageId})
             bus.$emit('focus')
         }
 
