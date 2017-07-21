@@ -1,92 +1,3 @@
-$.ajaxSetup({
-     beforeSend: function(xhr, settings) {
-         function getCookie(name) {
-             var cookieValue = null;
-             if (document.cookie && document.cookie != '') {
-                 var cookies = document.cookie.split(';');
-                 for (var i = 0; i < cookies.length; i++) {
-                     var cookie = jQuery.trim(cookies[i]);
-                     // Does this cookie string begin with the name we want?
-                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                         break;
-                     }
-                 }
-             }
-             return cookieValue;
-         }
-         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-             // Only send the token to relative URLs i.e. locally.
-             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-         }
-     }
-});
-
-
-var bus = new Vue({})
-
-var addPageComponent = Vue.component('add-page', {
-    template: `<span class="new-page-item">
-        <div class="indicator-container">
-                <div :class="['indicator input']"></div>
-            </div>
-            <div class="input-field inline">
-                <input type="text"
-                    @keyup.enter='enterKey($event.target.value, parent)'
-                    placeholder='Add Page'
-                    v-model='newValue'
-                    class='new-page-input'>
-            </div></span>`
-    , data(){
-        return {
-            newValue: ''
-        }
-    }
-
-    , props: ['parent']
-    , methods: {
-        enterKey(value, parent){
-            this.$emit('enter', {value, parent})
-        }
-    }
-})
-
-
-var pageItem = Vue.component('page-item', {
-    template: `<div class="flex-inline">
-        <div class="indicator-container" @click='indicatorClick(item, $event)'>
-            <div :class="['indicator', {active: item.object == pageId, loading: item.object == loading}]"></div>
-        </div>
-        <a :href="item.url" @click='select_page(item.object, $event)' :key="item.object">{{item.name}}</a>
-    </div>`
-    , props: ['item']
-
-    , data(){
-        return {
-            loading: -1
-            , pageId: -1
-        }
-    }
-
-    , mounted(){
-        bus.$on('loading', function(data){ this.loading = data.loading }.bind(this))
-        bus.$on('pageId', function(data){ this.pageId = data.pageId }.bind(this))
-    }
-
-    , methods: {
-        select_page(item, $event){
-            $event.preventDefault()
-            this.$emit('select_page', {item, $event});
-        }
-
-        , indicatorClick(item, $event) {
-            // console.log('indicatorClick(item, $event)')
-            this.$emit('indicator_click', {item, $event});
-        }
-
-    }
-})
-
 var markdownApp = new Vue({
     el: '#markdown_app'
 
@@ -136,22 +47,7 @@ var markdownApp = new Vue({
 
     , mounted(){
 
-        let slowCall = function(){
-            if(this._wt) {
-                window.clearTimeout(this._wt);
-                this._wt = undefined
-            }
-
-            this._wt = window.setTimeout(function(){
-                //this.fitHeight()
-            }.bind(this), 300)
-        }.bind(this);
-
-        slowCall()
-
         this.bouncedSessionSave = debounce(this.bouncedSessionSave.bind(this), 2000)
-
-        $(window).resize(slowCall)
 
         if(window['AceRender']) {
             this.createRenderer()
@@ -395,23 +291,3 @@ var markdownApp = new Vue({
     }
 })
 
-
-
-// Returns a function, that, as long as it continues to be invoked, will not
-// be triggered. The function will be called after it stops being called for
-// N milliseconds. If `immediate` is passed, trigger the function on the
-// leading edge, instead of the trailing.
-function debounce(func, wait, immediate) {
-    var timeout;
-    return function() {
-        var context = this, args = arguments;
-        var later = function() {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-};

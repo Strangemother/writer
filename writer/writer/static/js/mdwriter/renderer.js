@@ -1,4 +1,5 @@
 /* A base class for all renderers to communicate to the worker.
+v2
 */
 
 (function(){

@@ -7,7 +7,7 @@ window.markdownEditorConfig = {
 
 ;(function(){
 
-let p ='/static/js/markdown-worker.js';
+let p ='/static/js/mdwriter/worker.js';
 var onReadyCallbacks = []
 var hooked_renderer = {};
 

@@ -45,7 +45,7 @@ var log = function(...args){
     //console.log.apply(console, args)
 }
 var rpcs = []
-var itPath = '/static/js/IT.js';
+var itPath = '../lib/IT.js';
 
 var rpc_onmessage = function(e){
     log('rpc_onmessage')

@@ -29,21 +29,39 @@
 
 
 {% block js %}
-  {{ block.super }}
-    <script>
-        var PAGE = {
-            id: (function(){ return {{ object.index_page.pk }}; })()
-            , bookId: {{object.pk}}
-            , indexContentIds:(function(){ return {{ object.index_page.contents_pk_list }}; })()
-            , contentIds: [{% for content in object.contents.all %}{{ content.pk}}, {% endfor %}]
-            , initValue: `{% for content in object.contents.all %}{{ content.text_content|safe }}\n\n{% endfor %}`
-        }
-    </script>
+{{ block.super }}
+<script>
+    var PAGE = {
+        id: (function(){ return {{ object.index_page.pk }}; })()
+        , bookId: {{object.pk}}
+        , indexContentIds:(function(){ return {{ object.index_page.contents_pk_list }}; })()
+        , contentIds: [{% for content in object.contents.all %}{{ content.pk}}, {% endfor %}]
+        , initValue: `{% for content in object.contents.all %}{{ content.text_content|safe }}\n\n{% endfor %}`
+    }
+</script>
 
-    {% include 'markdown/page_detail_js.html' %}
-    {% include 'markdown/modal.html' %}
+{% include 'markdown/modal.html' %}
+<link type="text/css" rel="stylesheet" href="{% static '/css/markdown/markdown-theme.css' %}"  media="screen,projection"/>
 
-  <script src='{% static "js/vendor/gravel.js" %}'></script>
-  <script src='{% static "js/views/modal.js" %}'></script>
-  <script src='{% static "js/views/book-write.js" %}'></script>
+<!--  vendors and core components -->
+<script src='{% static "js/ace/src/ace.js" %}'></script>
+<script src='{% static "js/lib/IT.js" %}'></script>
+<script src='{% static "js/lib/workerRPC.js" %}'></script>
+<script src='{% static "js/vendor/gravel.js" %}'></script>
+
+<!--  page default applications.  -->
+<script src='{% static "js/views/base.js" %}'></script>
+<script src='{% static "js/views/menu-app.js" %}'></script>
+<script src='{% static "js/views/book-write.js" %}'></script>
+
+<!-- markdown application  -->
+<script src='{% static "js/mdwriter/editor.js" %}'></script>
+<script src='{% static "js/mdwriter/storage.js" %}'></script>
+<script src='{% static "js/mdwriter/commands.js" %}'></script>
+
+<!--  view application and connectivity -->
+<script src='{% static "js/views/editor-app.js" %}'></script>
+<script src='{% static "js/views/modal.js" %}'></script>
+<script src='{% static "js/views/data-connection.js" %}'></script>
+
 {% endblock js %}

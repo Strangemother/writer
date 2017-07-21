@@ -55,18 +55,6 @@ class Renderer {
     }
 }
 
-var Range = function(startRow, startColumn, endRow, endColumn) {
-    this.start = {
-        row: startRow,
-        column: startColumn
-    };
-
-    this.end = {
-        row: endRow,
-        column: endColumn
-    };
-};
-
 
 var setText = function(text) {
     data.text = text
@@ -96,48 +84,51 @@ var event = function(aceEvent) {
     };
 
     var lines = data.lines;
-    let startRow = lines[aceEvent.start.row];
-    let endRow = lines[aceEvent.end.row];
-    let selected;
+    let startRowVal = aceEvent.start.row;
+    let endRowVal = aceEvent.end.row;
+    let startColVal = aceEvent.start.column;
+    let endColVal = aceEvent.end.column;
+    let startRow = lines[startRowVal];
+    let endRow = lines[endRowVal];
 
     if(aceEvent.action == 'remove') {
 
-        if(aceEvent.start.row == aceEvent.end.row) {
-            result.text = lines[aceEvent.end.row].slice(aceEvent.start.column, aceEvent.end.column)
-            data.lines[aceEvent.end.row] = lines[aceEvent.end.row].slice(0, aceEvent.start.column)
-                // + '|' + result.text + '|'
-                + lines[aceEvent.end.row].slice(aceEvent.start.column + result.text.length)
-
+        if(startRowVal == endRowVal) {
+            let endLine = lines[endRowVal];
+            result.text = endLine.slice(startColVal, endColVal);
+            let startSlice = endLine.slice(0, startColVal)
+            let endSlice = endLine.slice(startColVal + result.text.length);
+            data.lines[endRowVal] = startSlice + endSlice;
         } else {
-            let selectedLines = data.lines.splice(aceEvent.start.row, aceEvent.end.row - aceEvent.start.row + 1)
-            let startKeep = selectedLines[0].slice(0, aceEvent.start.column)
-            let endKeep = selectedLines[selectedLines.length-1].slice(aceEvent.end.column, selectedLines[selectedLines.length-1].length);
+
+            let selectedLines = data.lines.splice(startRowVal, endRowVal - startRowVal + 1)
+            let startKeep = selectedLines[0].slice(0, startColVal)
+            let lastOf = selectedLines[selectedLines.length-1]
+            let endKeep = lastOf.slice(endColVal, lastOf.length);
             let repLine = startKeep + endKeep;
 
-            var spl = data.lines.splice(aceEvent.start.row, 0, repLine)
+            var spl = data.lines.splice(startRowVal, 0, repLine)
             result.text =  data.lines.join('\n');
         }
 
-        //console.log(data.lines.join('\n'))
-
     }else if(aceEvent.action == 'insert') {
 
-        if(aceEvent.start.row == aceEvent.end.row) {
+        if(startRowVal == endRowVal) {
             for (var i = 0; i < aceEvent.lines.length; i++) {
                 let line = aceEvent.lines[i];
-                let first = lines[aceEvent.end.row].slice(0, aceEvent.start.column);
-                let last = lines[aceEvent.end.row].slice(aceEvent.start.column);
-                data.lines[aceEvent.start.row] = first + line + last
+                let first = lines[endRowVal].slice(0, startColVal);
+                let last = lines[endRowVal].slice(startColVal);
+                data.lines[startRowVal] = first + line + last
             }
+
         } else {
-            // console.log('Multirow insert')
-            let startLine = lines[aceEvent.start.row]
-                , startKeep = startLine.slice(0, aceEvent.start.column)
-                , endKeep = startLine.slice(aceEvent.start.column)
+            let startLine = lines[startRowVal]
+                , startKeep = startLine.slice(0, startColVal)
+                , endKeep = startLine.slice(startColVal)
                 ;
             let _lines = [
                 // Lines before the selection
-                lines.slice(0, aceEvent.start.row)
+                lines.slice(0, startRowVal)
                 // line (before) insert + first line of the insert lines
                 , [startKeep + aceEvent.lines[0]]
                 // All new lines within first and last
@@ -145,7 +136,7 @@ var event = function(aceEvent) {
                 // last line of insert lines + line (after) insertion
                 , [aceEvent.lines[aceEvent.lines.length-1] + endKeep]
                 // all lines after insert line
-                , lines.slice(aceEvent.start.row + 1)
+                , lines.slice(startRowVal + 1)
             ]
             let _result = []
             for(let _line of _lines) {
@@ -156,23 +147,18 @@ var event = function(aceEvent) {
         }
 
         // Detect enter Key
-        if( aceEvent.start.row + 1 == aceEvent.end.row
+        if( startRowVal + 1 == endRowVal
             && aceEvent.lines.length == 2
             && aceEvent.lines[0] == '' && aceEvent.lines[1] == '') {
-                // console.log('Split')
-                let sr = aceEvent.start.row;
-                let sc =  aceEvent.start.column;
-                let line = lines[sr]
-                let r = [line.slice(0, sc), line.slice(sc)]
-                lines[sr] = r[0]
-                lines.splice(sr+1, 0, r[1])
-            }
-        //console.log(data.lines.join('\n'))
+                let line = lines[startRowVal]
+                let r = [line.slice(0, startColVal), line.slice(startColVal)]
+                lines[startRowVal] = r[0]
+                lines.splice(startRowVal + 1, 0, r[1])
+            };
     } else {
         console.log('nothing with', aceEvent.action)
     }
 
-    // console.log(data.lines.join('\n'))
     renderer.renderLines(data.lines);
     return result;
 }
