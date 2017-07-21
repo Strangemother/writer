@@ -74,6 +74,10 @@ var setText = function(text) {
     return text.length
 }
 
+var getLines = function(){
+    return data.lines
+}
+
 
 var event = function(aceEvent) {
 
@@ -87,6 +91,8 @@ var event = function(aceEvent) {
         , lines: aceEvent.lines
         , start: aceEvent.start
         , end: aceEvent.end
+        , action: aceEvent.action
+
     };
 
     var lines = data.lines;
@@ -124,7 +130,7 @@ var event = function(aceEvent) {
                 data.lines[aceEvent.start.row] = first + line + last
             }
         } else {
-            console.log('Multirow insert')
+            // console.log('Multirow insert')
             let startLine = lines[aceEvent.start.row]
                 , startKeep = startLine.slice(0, aceEvent.start.column)
                 , endKeep = startLine.slice(aceEvent.start.column)
@@ -153,7 +159,7 @@ var event = function(aceEvent) {
         if( aceEvent.start.row + 1 == aceEvent.end.row
             && aceEvent.lines.length == 2
             && aceEvent.lines[0] == '' && aceEvent.lines[1] == '') {
-                console.log('Split')
+                // console.log('Split')
                 let sr = aceEvent.start.row;
                 let sc =  aceEvent.start.column;
                 let line = lines[sr]
