@@ -45,8 +45,8 @@
 
 <!--  page default applications.  -->
 <script src='{% static "js/views/base.js" %}'></script>
-<script src='{% static "js/views/menu-app.js" %}'></script>
-<script src='{% static "js/views/book-write.js" %}'></script>
+<script src='{% static "js/views/app/menu-app.js" %}'></script>
+
 
 <!-- markdown application  -->
 <script src='{% static "js/mdwriter/editor.js" %}'></script>
@@ -54,9 +54,10 @@
 <script src='{% static "js/mdwriter/commands.js" %}'></script>
 
 <!--  view application and connectivity -->
-<script src='{% static "js/views/attachment-app.js" %}'></script>
+<script src='{% static "js/views/sub/attachment-app.js" %}'></script>
 <script src='{% static "js/views/editor-app.js" %}'></script>
 <script src='{% static "js/views/modal.js" %}'></script>
-<script src='{% static "js/views/data-connection.js" %}'></script>
+<script src='{% static "js/views/app/data-connection.js" %}'></script>
+<script src='{% static "js/views/app/book-write.js" %}'></script>
 
 {% endblock js %}

@@ -13,32 +13,35 @@ var hooked_renderer = {};
 
 let config;
 
-var rpc = new WorkerRPC(p, function(){
-    console.log('RPC Callback')
-    for (var i = 0; i < onReadyCallbacks.length; i++) {
-        onReadyCallbacks[i](rpc)
-    }
-}, function(e){
-    let fn = `${e.data.type}WorkerMessage`;
-
-    if(hooked_renderer == undefined) {
-        console.warn('message too early.')
-        return
-    }
-
-    if(config.renderers != undefined) {
-
-        for (var i = config.renderers.length - 1; i >= 0; i--) {
-            if(config.renderers[i][fn] != undefined) {
-                config.renderers[i][fn](e)
+let createRPC = function() {
+    var rpc = new WorkerRPC(p, function(){
+        console.log('RPC Callback')
+        for (var i = 0; i < onReadyCallbacks.length; i++) {
+            onReadyCallbacks[i](rpc)
             }
-        }
-    }
+        }, function(e){
+            let fn = `${e.data.type}WorkerMessage`;
 
-    if(hooked_renderer[fn] != undefined) {
-        hooked_renderer[fn](e)
-    }
-});
+            if(hooked_renderer == undefined) {
+                console.warn('message too early.')
+                return
+            }
+
+            if(config.renderers != undefined) {
+
+                for (var i = config.renderers.length - 1; i >= 0; i--) {
+                    if(config.renderers[i][fn] != undefined) {
+                        config.renderers[i][fn](e)
+                    }
+                }
+            }
+
+            if(hooked_renderer[fn] != undefined) {
+                hooked_renderer[fn](e)
+            }
+    });
+}
+
 
 commands = {
 };
@@ -78,30 +81,130 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
     };
 };
 
+class EditorTextBase {
 
-class AceRender {
+    setText(htmlText, editor) {
+        editor = editor == undefined? this.editor: editor;
+        editor.setValue(htmlText)
+        editor.clearSelection()
+
+        // if(rpc._ready == false) {
+        //     console.info('RPC not prepared', htmlText)
+        //     this._earlySetText = htmlText
+        //     return
+        // }
+        // rpc.setText(htmlText, function(d){
+        //     console.log('worker setText said:', d)
+        // })
+
+        // this.outputNode.innerHTML = this.outputNode.innerHTML;
+    }
+
+    getText(){
+        return this.editor.getValue()
+    }
+
+    getSelected(editor){
+        editor = editor == undefined? this.editor: editor;
+        return editor.session.getTextRange(this.getSelectRange(editor));
+    }
+
+    getSelectRange(editor){
+        editor = editor == undefined? this.editor: editor;
+        return editor.getSelectionRange()
+    }
+
+    setSelectRange(editor, startRow, startCol, endRow, endCol){
+
+        if(IT.g(editor).is('number') && endCol == undefined) {
+            // shift back if the editor is missing;
+            endCol= endRow;
+            endRow = startCol;
+            startCol = startRow;
+            startRow = editor;
+            editor = undefined;
+        }
+
+        editor = editor == undefined? this.editor: editor;
+        editor.selection.setRange(new Range(startRow, startCol, endRow, endCol))
+    }
+
     styles() {
         return {
             fontSize: "18px"
         }
     }
 
-    constructor(editorName, contentName){
-        this.intelliLine = {}
-        this.callbacks = []
-        this.editor = this.makeEditor(editorName)
-        onReadyCallbacks.push(this.sendWaiting.bind(this))
+    makeEditor(IDhtml) {
 
-        if(contentName != undefined) {
-            this.outputNode = document.getElementById(contentName)
-            let t = this.outputNode.innerHTML;
-            this.setText(t, this.editor);
+        let change = (function(p, editor) {
+            return function(e){
+                p.editorChangeEvent(editor, e)
+            }
+        })(this, editor)
+
+        var editor = ace.edit(IDhtml);
+        let session = editor.getSession();
+
+        editor.setOption("wrap", true)
+        editor.setTheme("ace/theme/chrome");
+        // editor.setShowPrintMargin(false);
+        editor.renderer.setShowGutter(false)
+        // editor.renderer.setOption('showLineNumbers', false)
+        session.setMode("ace/mode/markdown");
+        editor.$blockScrolling = Infinity
+
+        let styles = this.styles();
+        for(let name in styles) {
+            editor.container.style[name] = styles[name];
         }
+
+        this.addCommands(editor, commands);
+        console.log('adding commands')
+        this.addCommands(editor, markdownEditorConfig.commands)
+        this.addIntelliKeys(editor, intelliKeys);
+        this.addIntelliKeys(editor, markdownEditorConfig.intelliKeys);
+        session.on('change', change)
+
+        return editor;
+    }
+
+}
+
+class CommandEventBase extends EditorTextBase {
+
+    addCommands(editor, o) {
+
+        for(var key in o) {
+            let _id = o[key].id || key;
+            let name = o[key].name || key;
+            let bindKey = o[key].bindKey;
+            let caller = o[key].func
+            let exec = caller != undefined ? caller: this.bindCommand(o[key])
+            let r = {name, bindKey, exec}
+            editor.commands.addCommand(r)
+        }
+    }
+
+    bindCommand(o) {
+        var self= this;
+        let f = (function(o){
+            return function(editor){
+                self.onCommand(editor, o)
+            }
+        })(o)
+
+        return f;
+    }
+
+    _dispatch(content, cb) {
+        bus.$emit('renderer-event', { content, callback: cb });
     }
 
     onCommand(editor, o) {
         console.log('key', o)
         if(o.insert) {
+
             // Push chars around cursor or selection
             let sel = this.getSelected(editor);
             let cursorIndex = o.insert.indexOf("|");
@@ -192,110 +295,6 @@ class AceRender {
         }
     }
 
-    getSelected(editor){
-        editor = editor == undefined? this.editor: editor;
-        return editor.session.getTextRange(this.getSelectRange(editor));
-    }
-
-    getSelectRange(editor){
-        editor = editor == undefined? this.editor: editor;
-        return editor.getSelectionRange()
-    }
-
-    setSelectRange(editor, startRow, startCol, endRow, endCol){
-
-        if(IT.g(editor).is('number') && endCol == undefined) {
-            // shift back if the editor is missing;
-            endCol= endRow;
-            endRow = startCol;
-            startCol = startRow;
-            startRow = editor;
-            editor = undefined;
-        }
-
-        editor = editor == undefined? this.editor: editor;
-        editor.selection.setRange(new Range(startRow, startCol, endRow, endCol))
-    }
-
-    bindCommand(o) {
-        var self= this;
-        let f = (function(o){
-            return function(editor){
-                self.onCommand(editor, o)
-            }
-        })(o)
-
-        return f;
-    }
-
-    addCommands(editor, o) {
-
-        for(var key in o) {
-            let _id = o[key].id || key;
-            let name = o[key].name || key;
-            let bindKey = o[key].bindKey;
-            let caller = o[key].func
-            let exec = caller != undefined ? caller: this.bindCommand(o[key])
-            let r = {name, bindKey, exec}
-            editor.commands.addCommand(r)
-        }
-    }
-
-    setText(htmlText, editor) {
-        editor = editor == undefined? this.editor: editor;
-        editor.setValue(htmlText)
-        editor.clearSelection()
-
-        if(rpc._ready == false) {
-            console.info('RPC not prepared', htmlText)
-            this._earlySetText = htmlText
-            return
-        }
-
-        rpc.setText(htmlText, function(d){
-            console.log('worker setText said:', d)
-        })
-
-        // this.outputNode.innerHTML = this.outputNode.innerHTML;
-    }
-
-    getText(){
-        return this.editor.getValue()
-    }
-
-    makeEditor(IDhtml) {
-
-        let change = (function(p, editor) {
-            return function(e){
-                p.editorChangeEvent(editor, e)
-            }
-        })(this, editor)
-
-        var editor = ace.edit(IDhtml);
-        let session = editor.getSession();
-
-        editor.setOption("wrap", true)
-        editor.setTheme("ace/theme/chrome");
-        // editor.setShowPrintMargin(false);
-        editor.renderer.setShowGutter(false)
-        // editor.renderer.setOption('showLineNumbers', false)
-        session.setMode("ace/mode/markdown");
-        editor.$blockScrolling = Infinity
-
-        let styles = this.styles();
-        for(let name in styles) {
-            editor.container.style[name] = styles[name];
-        }
-
-        this.addCommands(editor, commands);
-        console.log('adding commands')
-        this.addCommands(editor, markdownEditorConfig.commands)
-        this.addIntelliKeys(editor, intelliKeys);
-        this.addIntelliKeys(editor, markdownEditorConfig.intelliKeys);
-        session.on('change', change)
-
-        return editor;
-    }
 
     addIntelliKeys(editor, intelliKeys){
         for(var k in intelliKeys) {
@@ -304,38 +303,16 @@ class AceRender {
         }
     }
 
-    sendWaiting() {
-        if(this._waiting == undefined) {
-            return
-        };
-        for (var i = 0; i < this._waiting.length; i++) {
-            this.send(this._waiting[i][0], this._waiting[i][1])
-        }
+}
 
-        if(this._earlySetText) {
-            console.log('setting early text')
-            window.setTimeout(function(){
-                this.setText(this._earlySetText);
-                delete this._earlySetText
-            }.bind(this), 100)
-        }
-    }
-
-    renderWorkerMessage(e) {
-        let oldHeight = this.outputNode.clientHeight;
-        this.outputNode.innerHTML = String(e.data.content)
-        if(oldHeight != this.outputNode.clientHeight) {
-            this.editor.resize()
-        }
-    }
+class RenderBase extends CommandEventBase {
 
     editorChangeEvent(editor, aceEvent) {
         /* read the value from the event and
         apply the content to the view.*/
         let event = aceEvent.action
-        let fn = `${event}AceRender`;
-
-        this.send(aceEvent)
+        let fn = `${event}AceEvent`;
+        this._dispatch(aceEvent)
         if(this[fn] != undefined){
             this[fn](editor, aceEvent);
         } else {
@@ -343,48 +320,11 @@ class AceRender {
         }
     }
 
-    send(content, cb) {
-
-        if(rpc._ready) {
-            var p = rpc.event(content, this.eventReply.bind(this))
-        } else{
-            if(this._waiting == undefined) {
-                this._waiting = []
-            };
-            this._waiting.push([content, cb])
-        }
-    }
-
-    eventReply(data) {
-
-
-        if(data.success == false){
-            return this.handleEventError(data)
-        };
-
-        // console.log('RPC Said:', data)
-        for (var i = this.callbacks.length - 1; i >= 0; i--) {
-            this.callbacks[i](data)
-        }
-    }
-
-    handleEventError(d){
-        console.log('handle error')
-        let fn = `${d.request}HandleEvent`
-        if(this[fn] != undefined) {
-            this[fn](d)
-        }
-    }
-
-    textHandleEvent(d) {
-        rpc.setText(this.getText(), this.eventReply.bind(this))
-    }
-
-    insertAceRender(editor, ev) {
+    insertAceEvent(editor, ev) {
         this._insertToEditor(editor, ev)
     }
 
-    removeAceRender(editor, ev) {
+    removeAceEvent(editor, ev) {
         let lines = this.outputNode.innerHTML.split('\n');
         let startRow = lines[ev.start.row];
         let endRow = lines[ev.end.row];
@@ -403,7 +343,6 @@ class AceRender {
             selectedLines[0] = selectedLines[0].slice(ev.start.column, selectedLines[0].length)
             selectedLines[selectedLines.length-1] = selectedLines[selectedLines.length-1].slice(0, ev.end.column)
             selected = selectedLines.join('\n')
-
         }
 
         console.log('editor: Deleted:', selected);
@@ -419,7 +358,73 @@ class AceRender {
 
         }
     }
+}
 
+
+class AceRender extends RenderBase {
+
+    constructor(editorName, contentName){
+        super()
+        this.intelliLine = {}
+        this.callbacks = []
+        this.editor = this.makeEditor(editorName)
+        // onReadyCallbacks.push(this.sendWaiting.bind(this))
+
+        if(contentName != undefined) {
+            this.outputNode = document.getElementById(contentName)
+            let t = this.outputNode.innerHTML;
+            this.setText(t, this.editor);
+        }
+    }
+
+
+    // sendWaiting() {
+    //     if(this._waiting == undefined) {
+    //         return
+    //     };
+    //     for (var i = 0; i < this._waiting.length; i++) {
+    //         this.send(this._waiting[i][0], this._waiting[i][1])
+    //     }
+
+    //     if(this._earlySetText) {
+    //         console.log('setting early text')
+    //         window.setTimeout(function(){
+    //             this.setText(this._earlySetText);
+    //             delete this._earlySetText
+    //         }.bind(this), 100)
+    //     }
+    // }
+
+    // renderWorkerMessage(e) {
+    //     let oldHeight = this.outputNode.clientHeight;
+    //     this.outputNode.innerHTML = String(e.data.content)
+    //     if(oldHeight != this.outputNode.clientHeight) {
+    //         this.editor.resize()
+    //     }
+    // }
+
+    // eventReply(data) {
+    //     if(data.success == false){
+    //         return this.handleEventError(data)
+    //     };
+
+    //     // console.log('RPC Said:', data)
+    //     for (var i = this.callbacks.length - 1; i >= 0; i--) {
+    //         this.callbacks[i](data)
+    //     }
+    // }
+
+    // handleEventError(d){
+    //     console.log('handle error')
+    //     let fn = `${d.request}HandleEvent`
+    //     if(this[fn] != undefined) {
+    //         this[fn](d)
+    //     }
+    // }
+
+    // textHandleEvent(d) {
+    //     rpc.setText(this.getText(), this.eventReply.bind(this))
+    // }
 };
 
 config = {

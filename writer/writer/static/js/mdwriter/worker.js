@@ -12,6 +12,7 @@ var main = function(){
     renderer = new Renderer();
     rpc = new WorkerRPC();
     rpc.setText = setText;
+    rpc.setBlocks = setBlocks;
     rpc.event = event;
 }
 
@@ -62,6 +63,11 @@ var setText = function(text) {
     return text.length
 }
 
+var setBlocks = function(blocks) {
+    /* store multiple text content blocks */
+    data.blocks = blocks;
+}
+
 var getLines = function(){
     return data.lines
 }
@@ -69,7 +75,13 @@ var getLines = function(){
 
 var event = function(aceEvent) {
 
+    if(data.blocks != undefined ){
+        console.log('into block mode');
+
+    };
+
     if(data.text == undefined) {
+
         return { request: 'text', success: false }
     }
 

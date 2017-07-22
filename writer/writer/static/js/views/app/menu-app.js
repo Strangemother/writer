@@ -99,6 +99,13 @@ var pageList = new Vue({
             dataConnection.getPage(pageId, this.pageDataHandle.bind(this))
         }
 
+        , newPage(data, callback) {
+            /* Send a new page reqest, calling the optional callback on complete.
+             */
+
+            dataConnection.newPage(data, callback)
+        }
+
         , editItem(item, $event) {
             console.log('editItem', item)
             let id =  'P_' + Math.random().toString(32).slice(2)
@@ -133,17 +140,20 @@ var pageList = new Vue({
                                 element: 'tether-modal'
                             }
                         });
+
                         setTimeout(function(){
                             let el = this.$refs.name
                             el.focus()
                             el.setSelectionRange(0, el.value.length)
-                        }.bind(this), 100)
+                        }.bind(this), 100);
+
                         this.tether = tether;
                     }
 
                     , submitForm(e){
                         console.log('Title', this.item.name)
                         e.preventDefault()
+
                         let url = `/page/${this.item.object}/update/`
                         $.post(url, { name: this.item.name }, this.submitHandle)
                     }
@@ -176,21 +186,14 @@ var pageList = new Vue({
         }
 
         , enterKey(data){
-            let value = data.value;
-            let parent = data.parent;
-            console.log('new page', value);
+            /* An enter key created a new page */
 
-            let id = PAGE.bookId;
-            let pval = ''
-            if(parent != undefined) {
-                pval = parent.object
-            }
-
-            let url = `/book/${id}/new-page/${pval}`
-            $.post(url, { name: value }, function(d){
+            let callback = function(d){
                 this.newPageHandle(d)
-                this.clearEnterKey(value, d);
-            }.bind(this))
+                this.clearEnterKey(data.value, d);
+            }.bind(this);
+
+            this.newPage(data, callback);
         }
 
         , clearEnterKey(originalValue, data) {

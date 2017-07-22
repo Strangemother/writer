@@ -1,6 +1,8 @@
 <div class="flex-inline">
 
     <section class="child-list" id='page_list'>
+        <!--  Nested child list of all pages and chapters within this book.
+        Built with server-side template for JS app usage. -->
         <h3>Children</h3>
         <!-- Accepts object  -->
         {% block child_list %}
@@ -11,9 +13,11 @@
             {% endif %}
         {% endblock child_list %}
     </section>
+
     {% verbatim %}
     <section class="editor-container" :style='[styles]' id='markdown_app'>
         <div class="tools">
+            <!-- updated and inserted editor commands. -->
             <ul class="collection commands">
                 <li :class="['collection-item command', command.name]"
                     v-for='command in commands' v-if='command.icon != false'>
@@ -22,6 +26,8 @@
                     </a>
                 </li>
             </ul>
+
+            <!-- updated and inserted editor panel tools (not commands) -->
             <ul class="collection interface-tools">
                 <li :class="['collection-item interface-tool', item.name]"
                     v-for='item in tools'>
@@ -35,6 +41,7 @@
             </ul>
         </div>
     {% endverbatim %}
+        <!--  Editor interface for live-type to the content render interface. -->
         <div class="init-markdown">{% if markdown %}{{ markdown }}{% else %}
         {{ object.render|safe }}{% endif %}</div>
         <div id="markdown_editor">
@@ -44,29 +51,41 @@
         </div>
     </section>
 
+    <!--  Markdown render result interface. the html is constantly updated -->
     <section class="content container">
+
         <div class="content-options">
+            <!-- render options tools box. -->
             <a href="javascript:;"><i class="material-icons">settings</i></a>
         </div>
+
         <div class="scrollable">
+
+            <!-- HTML Live update location, initially rendering the server-side
+            rendered result.
+            Content-editable for no-reason.
+            -->
             <div id='markdown_content' contenteditable="true" spellcheck=true>
                 {{ object.render|safe }}
             </div>
         </div>
+
         <div id="initial_render"></div>
     </section>
 
     <div class="tether-templates">
-        <div class="edit-page-modal">
 
+        <div class="edit-page-modal">
+            <!-- edit icon tether modal. -->
             <div :class="['edit-page', classes]">
                 <div class="div close-button" @click='close'><a>&#x2716;</a></div>
                 <div class="row">
                     <form class="col s12" v-on:submit='submitForm($event)'>
+                        <!-- Input for for name and deletions. -->
                       <div class="row">
                         <div class="input-field col s12">
                           <input
-                            placeholder="Page Tile"
+                            placeholder="Page Title"
                             id="title"
                             ref='name'
                             type="text"

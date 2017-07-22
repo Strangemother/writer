@@ -25,6 +25,32 @@ var dataConnection = new Vue({
             $.getJSON(url, this.handle(pageId, func))
         }
 
+        , newPage(data, callback) {
+            /* Send a new page reqest, calling the optional callback on complete.
+                data == {
+                    bookId: optional - default: PAGE.bookId.
+                    , parentId: optional - default from data.parent.object<pk>
+                }
+
+                if parentId is not defined, the page will live on the root
+                of the book.
+             */
+
+
+            let name = data.value;
+            let parent = data.parentId || data.parent;
+            console.log('new page', name);
+
+            let bookId = data.bookId || PAGE.bookId;
+            let pId = ''
+            if(parent != undefined) {
+                pId = parent.object
+            }
+
+            let url = `/book/${bookId}/new-page/${pId}`
+            $.post(url, { name: name }, callback)
+        }
+
         , handle(pageId, func) {
             /* return a wrapped function to handle the response from the page
             data endpoint.

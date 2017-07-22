@@ -41,6 +41,7 @@ class JSONResponseMixin(object):
 
 class JSONDetailView(JSONResponseMixin, BaseDetailView):
     def render_to_response(self, context, **response_kwargs):
+
         return self.render_to_json_response(context, **response_kwargs)
 
 
@@ -192,7 +193,6 @@ class PageCreateJSONView(JSONDetailView, BookPageCreateView):
 
     def form_valid(self, form):
         # form.instance.created_by = self.request.user
-
         # Append to the local page
         r = super(PageCreateJSONView, self).form_valid(form)
         child_of = None
@@ -205,6 +205,21 @@ class PageCreateJSONView(JSONDetailView, BookPageCreateView):
             page_child_of=child_of,
             page_name=form.instance.name,
             page_text_render=form.instance.text_render(),
+            )
+        )
+
+    def form_invalid(self, form):
+        # form.instance.created_by = self.request.user
+
+        # super(PageCreateJSONView, self).form_invalid(form)
+        # child_of = None
+        # if form.instance.child_of is not None:
+        #     child_of = form.instance.child_of.pk
+
+        return self.render_to_response(dict(
+            valid=form.is_valid(),
+            page_id=form.instance.pk,
+            errors=form.errors
             )
         )
 
