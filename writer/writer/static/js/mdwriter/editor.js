@@ -362,7 +362,7 @@ class AceRender {
             return this.handleEventError(data)
         };
 
-        console.log('RPC Said:', data)
+        // console.log('RPC Said:', data)
         for (var i = this.callbacks.length - 1; i >= 0; i--) {
             this.callbacks[i](data)
         }

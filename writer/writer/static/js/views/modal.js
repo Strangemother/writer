@@ -57,6 +57,118 @@ var standardModal = function(config={}) {
     return popup.data('gravel');
 };
 
+var attachmentModal = function(config={}){
+
+    let conf = Object.assign({}, config);
+
+    let uploadApp = function(htmlNode, modal) {
+
+        return new Vue({
+            el: htmlNode
+            , data: {
+                fileInputs: []
+            }
+            , created() {
+                this._files = {}
+            }
+            , mounted(){
+                console.log('mounted attachmentModal')
+                this.makeInput({ id: 'default' })
+
+                // Push the Vue virtual dom into the modal; else modal reposition
+                // won't target the correct item.
+                modal._popup = $(this.$el)
+            }
+
+            , methods: {
+
+                onChange(item, event) {
+                    console.log('input change')
+                    item.value = event.target.value;
+                    this._files[item.id] = event.target.files
+                    item.hasContent = item.value.length > 0;
+                    item.fileCount = event.target.files.length
+                    if(item.hasContent) {
+                        this.makeInput()
+                    } else {
+
+                        // Check if this item is the last of
+                        // all the items.
+                        //
+                        let pos = this.fileInputs.indexOf(item)
+                        if( this.fileInputs.length - 1
+                            != pos ) {
+                            let stepCheck = 1;
+                            let fileItem = this.fileInputs[pos + stepCheck]
+                            while(fileItem != undefined) {
+                                if(this.fileInputs[pos + stepCheck]
+                                    && this.fileInputs[pos + stepCheck].hasContent == false ) {
+                                    this.fileInputs.splice(pos + stepCheck, 1)
+                                    break
+                                }
+
+                                stepCheck += 1;
+                                fileItem = this.fileInputs[pos + stepCheck]
+                            }
+
+                        }
+                    }
+
+
+                    setTimeout(function(){
+                        modal.reflow()
+                    }, 500)
+                }
+
+                , makeInput(config) {
+                    let c = Object.assign({
+                        disabled: false
+                        , id: Math.random().toString(32).slice(2)
+                        , hasContent: false
+                        , value: ''
+                    });
+                    this.fileInputs.push(c)
+                }
+            }
+        })
+    }
+
+    return standardModal({
+        selector: '.templates .attachment-modal-container'
+        , containerClass: 'attachment-modal-container gravel-container animate-flag'
+        , lockHeight: false
+        , onShow(){
+            let self = this
+
+            setTimeout(function(){
+                uploadApp(self._popup[0], self)
+            })
+        }
+
+        , buttons: [
+            {
+                label: 'close'
+                , color: '#d3dbe6'
+                , classes: 'close-button'
+                , callback: function(e){
+                    conf.actionCallback && conf.actionCallback(false, e)
+                    if(!conf.actionCallback) {
+                        this.close()
+                    }
+                }
+            }
+            , {
+                label: 'upload'
+                , callback: function(e){
+                    conf.actionCallback && conf.actionCallback(true, e)
+                }
+                , position:'right'
+                , color: '#0089ec'
+            }
+        ]
+    })
+}
+
 var bookmarkModal = function(parent, link, actionCallback){
     if(actionCallback == undefined && IT.g(link).is('function')) {
         actionCallback = link;

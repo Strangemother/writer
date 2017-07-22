@@ -60,6 +60,13 @@ commands = {
         name: 'attach_file'
         , insert: '[FILE] |'
         , icon: 'attach_file'
+        , click(){
+            bus.$emit('attachment-modal', {
+                actionCallback(result, event) {
+                    console.log('attachment', result)
+                }
+            })
+        }
     }
 };
 

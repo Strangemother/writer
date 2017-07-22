@@ -6,6 +6,14 @@
 
         <ul class="collection active-child-list">
 
+            <li :class="['collection-item flex-vertical']" >
+                {% endverbatim book_page %}
+                <a href="/page/{{ object.index_page.pk }}" @click='select_page({{ object.index_page.pk }}, $event)' class="index-page">
+                {% verbatim book_page %}
+                    <i class="material-icons">home</i>
+                    <span class="home-text">Index</span>
+                </a>
+            </li>
             <li :class="['collection-item flex-vertical', {active: item.object == pageId, loading: item.object == loading}]" v-for='item in pages'>
 
                 <div class="flex-inline">

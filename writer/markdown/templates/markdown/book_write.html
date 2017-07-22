@@ -1,12 +1,6 @@
 {% extends "markdown/book_detail.html" %}
 {% load static %}
 
-{% comment "why" %}
-    The book_write page is the same as a single page editor, with ajax feedback
-    for page selection, allowing all pages of a book to be edited without
-    reload.
-{% endcomment %}
-
 {% block body_class%}book-editor page{% endblock %}
 
 {% block content %}
@@ -15,13 +9,13 @@
     <div class="mdd">
       <script>
         var booklistData=  {
-                    id: {{ object.pk }}
-                    , name: "{{ object.name }}"
-                    , count: {{ object.pages.count }}
-                    , children: [{% for page in object.pages.all %}{% with object=page %}
-                                {% include "markdown/book_child_nest_js_item.html" %}
-                            {% endwith %}{% endfor %}]
-                }
+            id: {{ object.pk }}
+            , name: "{{ object.name }}"
+            , count: {{ object.pages.count }}
+            , children: [{% for page in object.pages.all %}{% with object=page %}
+                        {% include "markdown/book_child_nest_js_item.html" %}
+                    {% endwith %}{% endfor %}]
+        }
 
     </script>
     </div>
@@ -60,6 +54,7 @@
 <script src='{% static "js/mdwriter/commands.js" %}'></script>
 
 <!--  view application and connectivity -->
+<script src='{% static "js/views/attachment-app.js" %}'></script>
 <script src='{% static "js/views/editor-app.js" %}'></script>
 <script src='{% static "js/views/modal.js" %}'></script>
 <script src='{% static "js/views/data-connection.js" %}'></script>

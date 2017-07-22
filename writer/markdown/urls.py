@@ -4,6 +4,8 @@ from markdown import views
 
 urlpatterns = [
     url(r'^$', views.BookModelList.as_view(), name='book-list'),
+    url(r'file/upload/$', views.FileUploadView.as_view(), name='file-upload'),
+
     url(r'page/(?P<pk>[0-9]+)/$', views.PageDetail.as_view(), name='page'),
     url(r'page/add/(?P<pk>[0-9]+)/$', views.BookPageCreateView.as_view(), name='book-page-form'),
     url(r'page/add/$', views.PageCreateView.as_view(), name='page-form'),

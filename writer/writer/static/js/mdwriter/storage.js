@@ -143,7 +143,7 @@ class StorageProxy {
     }
 
     streamPage(data, pageId) {
-        /* recevie a chunk update for a page, storing the
+        /* receive a chunk update for a page, storing the
         step. */
         for (var i = this.stores.length - 1; i >= 0; i--) {
             this.stores[i].streamPage(data, pageId)

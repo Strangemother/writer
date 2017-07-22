@@ -22,6 +22,7 @@ var markdownApp = new Vue({
                 bus.$emit('focus')
             }
         }
+
         , mismatchButton: {
             icon: 'compare_arrows'
             , name: 'mismatch'
@@ -47,49 +48,23 @@ var markdownApp = new Vue({
 
     , mounted(){
 
-        this.bouncedSessionSave = debounce(this.bouncedSessionSave.bind(this), 2000)
-
-        if(window['AceRender']) {
-            this.createRenderer()
-        } else {
+        if(!window['AceRender']) {
             console.warn('No Renderer')
-        }
+            return;
+        };
+
+        this.createRenderer();
     }
 
     , methods: {
 
-        localStorageMismatch(pageId, text) {
-            if(pageId == undefined){
-                pageId = this.pageId;
-
-            }
-
-            if(text == undefined){
-                text = this.editorValue()
-            }
-
-            let storedText = this.getSessionValue(pageId);
-            if( storedText != undefined
-                && storedText.trim().length > 0
-                && text != storedText) {
-                return true;
-            };
-
-            return false;
-        }
-
-        , createRenderer(){
+        createRenderer(){
             this.renderer = new AceRender('markdown_editor', 'markdown_content')
-            let text = PAGE.initValue;
-            if(text.trim().length == 0) {
-                console.info('replacing text with init data')
-                text = $(this.$el).find('.init-markdown').text()
-            };
-
-            this.renderer.setText(text);
+            this.renderer.setText(this.getInitValue());
             AceRender.config.renderers[0] = this.renderer
             this.renderer.callbacks.push(this.rendererCallback.bind(this));
 
+            // From data connection.
             bus.$on('page', this.pageHandle.bind(this))
             bus.$on('focus', this.focusHandle.bind(this))
 
@@ -97,7 +72,23 @@ var markdownApp = new Vue({
             this.tools.push(this.mismatchButton)
         }
 
+        , getInitValue(){
+            /* Return the initial content from the page data load
+            If this is blank, a request for data is made -
+            replied to by dataConnection*/
+            let text = PAGE.initValue;
+            if(text.trim().length == 0) {
+                console.info('replacing text with init data')
+                text = $(this.$el).find('.init-markdown').text()
+            };
+
+            return text;
+        }
+
         , actionCommand(command, $event) {
+            /* A UI action click (or some sort of hook) event to call
+            the given `command` click function.*/
+
             if(command.disabled == true) {
                 console.log('disabled button')
                 return
@@ -107,7 +98,6 @@ var markdownApp = new Vue({
                 return command.click.call(this, $event, command)
             }
 
-            // Mention: Vue.js is so fucking awesome.
             this.renderer.onCommand(this.renderer.editor, command)
         }
 
@@ -117,21 +107,24 @@ var markdownApp = new Vue({
             this.contentIds = data.content_ids
             this.contentId = data.content_ids[data.content_ids.length-1]
             console.log('pageHandle', data)
-            this.localMismatch = this.localStorageMismatch(data.id, data.text);
-            this.mismatchButton.disabled = !this.localMismatch
+            //this.localMismatch = this.localStorageMismatch(data.id, data.text);
+            // this.mismatchButton.disabled = !this.localMismatch
             this.renderer.setText(data.text)
-            this.lastOnlineSave = data.text;
+            // this.lastOnlineSave = data.text;
             this.saveButton.disabled = this.synced
         }
 
         , focusHandle(){
             $('.ace_text-input')[0].focus()
-
         }
 
         , rendererCallback(data) {
-            console.log('rendererCallback', data)
-            this.save(hard=false)
+            /*
+            Called by the editor with the event for action.
+            This should perpetuate the storage and actions.
+             */
+            // console.log('rendererCallback', data)
+            // this.save(hard=false)
             dataConnection.update(data)
         }
 
@@ -252,14 +245,8 @@ var markdownApp = new Vue({
                 this.saveButton.disabled = this.synced
                 this.postPageHandle(result);
             }.bind(this))
-            // bus.$emit('save', {
-            //     value: data
-            //     , id: this.pageId
-            //     , vue: this
-            //     , editor: this.renderer
-            // })
-
         }
+
         , postPageHandle(data) {
             console.log('content id', data.id)
             this.contentId = data.id
@@ -280,14 +267,6 @@ var markdownApp = new Vue({
             localStorage['markdown_editor'] = JSON.stringify(o)
         }
 
-        , fitHeight(){
-            console.log('resize')
-            let top = $(this.$el).position().top;
-            let viewHeight = $(window).height();
-            let height = viewHeight - top;
-            this.styles.maxHeight = `${height}px`;
-            this.styles.minHeight = `${height}px`;
-        }
     }
 })
 

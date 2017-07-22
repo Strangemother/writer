@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from models import Book, Page, PageContent
-from forms import BookForm, BookPageContentForm, PageContentForm
+from forms import BookForm, BookPageContentForm, PageContentForm, FileUploadForm
 
 from django import VERSION as DJ_VER
 if DJ_VER[1] < 10:
@@ -244,6 +244,10 @@ class PageContentUpdate(UpdateView):
     success_url = reverse_lazy('book-list')
 
 
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
+
 class PageContentCreateView(CreateView):
     template_name = 'markdown/book_pagecontent.html'
     success_url = reverse_lazy('book-list')
@@ -263,3 +267,17 @@ class PageDetail(DetailView):
 
 class PageExportView(PageDetail):
     template_name = 'markdown/page_export.html'
+
+
+class FileUploadView(JSONDetailView, FormView):
+    success_url = reverse_lazy('book-list')
+    form_class = FileUploadForm
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        files = request.FILES.getlist('file_field')
+        if form.is_valid():
+            import pdb; pdb.set_trace()  # breakpoint bd5d91ec //
+
+            # path = default_storage.save(p, ContentFile(image.read()))

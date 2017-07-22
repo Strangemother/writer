@@ -19,3 +19,11 @@ class BookPageContentForm(forms.Form):
     A single fragment from a page markdown push
     '''
     content = forms.CharField(widget=forms.Textarea)
+
+
+class FileUploadForm(forms.Form):
+    file_field = forms.FileField(
+        widget=forms.ClearableFileInput(
+            attrs={'multiple': True}
+            )
+        )

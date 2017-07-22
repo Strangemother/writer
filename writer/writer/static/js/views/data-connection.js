@@ -32,8 +32,8 @@ var dataConnection = new Vue({
             success
             */
             return function(data){
-                bus.$emit('page', data)
                 this.pageId = pageId;
+                bus.$emit('page', data)
                 bus.$emit('pageId', { pageId: pageId})
                 if(func != undefined) {
                     func(data, pageId)
@@ -46,7 +46,7 @@ var dataConnection = new Vue({
             an update of the content is requested. This should be saved
             and utilized. */
             console.log('dataConnection.update')
-            console.log(data)
+            // onsole.log('data', data)
             this.stores.streamPage(this.pageId, data);
         }
     }

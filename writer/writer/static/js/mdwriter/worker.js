@@ -80,16 +80,16 @@ var event = function(aceEvent) {
         , start: aceEvent.start
         , end: aceEvent.end
         , action: aceEvent.action
-
     };
 
-    var lines = data.lines;
-    let startRowVal = aceEvent.start.row;
-    let endRowVal = aceEvent.end.row;
-    let startColVal = aceEvent.start.column;
-    let endColVal = aceEvent.end.column;
-    let startRow = lines[startRowVal];
-    let endRow = lines[endRowVal];
+    let lines = data.lines
+        , startRowVal = aceEvent.start.row
+        , endRowVal   = aceEvent.end.row
+        , startColVal = aceEvent.start.column
+        , endColVal   = aceEvent.end.column
+        , startRow    = lines[startRowVal]
+        , endRow      = lines[endRowVal]
+        ;
 
     if(aceEvent.action == 'remove') {
 
@@ -102,10 +102,11 @@ var event = function(aceEvent) {
         } else {
 
             let selectedLines = data.lines.splice(startRowVal, endRowVal - startRowVal + 1)
-            let startKeep = selectedLines[0].slice(0, startColVal)
-            let lastOf = selectedLines[selectedLines.length-1]
-            let endKeep = lastOf.slice(endColVal, lastOf.length);
-            let repLine = startKeep + endKeep;
+                , startKeep   = selectedLines[0].slice(0, startColVal)
+                , lastOf      = selectedLines[selectedLines.length-1]
+                , endKeep     = lastOf.slice(endColVal, lastOf.length)
+                , repLine     = startKeep + endKeep
+                ;
 
             var spl = data.lines.splice(startRowVal, 0, repLine)
             result.text =  data.lines.join('\n');
@@ -126,6 +127,7 @@ var event = function(aceEvent) {
                 , startKeep = startLine.slice(0, startColVal)
                 , endKeep = startLine.slice(startColVal)
                 ;
+
             let _lines = [
                 // Lines before the selection
                 lines.slice(0, startRowVal)
@@ -137,8 +139,9 @@ var event = function(aceEvent) {
                 , [aceEvent.lines[aceEvent.lines.length-1] + endKeep]
                 // all lines after insert line
                 , lines.slice(startRowVal + 1)
-            ]
-            let _result = []
+            ];
+
+            let _result = [];
             for(let _line of _lines) {
                 _result = _result.concat(_line)
             }

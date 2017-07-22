@@ -1,12 +1,14 @@
 
 {% verbatim %}
 <div class="templates">
+
     <div class="standard-modal-container">
         <div class="standard-modal">
             <h2 class="gravel-title">%(title)s</h2>
             <p class="modal-content">%(text)s</p>
         </div>
     </div>
+
     <div class="install-modal-container">
         <div class="install-modal">
             <h2 class="gravel-title">Install</h2>
@@ -23,6 +25,29 @@
                 </p>
                 <hr>
                 <p ref='action-message' class='action-message'>Download and install?</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="attachment-modal-container">
+        <div class="attachment-modal">
+            <h2 class="gravel-title">Attachments</h2>
+            <div class="modal-content">
+                <form method="post" enctype="multipart/form-data" action='/file/upload/'>
+
+                    <div class="file-field input-field" v-for='item in fileInputs'>
+                        <div class="btn">
+                            <span>{{ item.fileCount }} File{{ item.fileCount == 1? "": 's' }}</span>
+                            <input type="file"
+                                :name='item.id' @change='onChange(item, $event)'
+                                :disabled='item.disabled'
+                                multiple>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

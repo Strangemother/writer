@@ -433,8 +433,9 @@ div#markdown_content {
 
 .book-page-list .active-child-list a {
     /* background: #EEE; */
-    padding: 0.7em 0.2em;
+    padding: 0.5em 0.2em;
     color: #333;
+    align-self: center;
 }
 
 ul.collection.active-child-list {
@@ -521,7 +522,7 @@ nav a.brand-logo {
 
 .toolspace {
     background: white;
-    height: 4rem;
+    height: 3.5rem;
 }
 
 .book-page-list {
@@ -770,4 +771,37 @@ div#markdown_content:focus {
 
 .content-options a:hover {
     color: #455a64;
+}
+
+.active-child-list a.index-page {
+    display: block;
+    padding: 0.5em 0em 0.5em 0.6em;
+    display: flex;
+    align-items: center;
+}
+
+.index-page span.home-text {
+    padding: 0 0.8em;
+}
+
+.attachment-modal-container .content {
+    min-width: 400px;
+    border: solid 1px;
+}
+
+.attachment-modal-container .content {}
+
+.attachment-modal-container {
+    min-width: 400px;
+    border: solid 23px red;
+}
+
+.attachment-modal {
+    min-width: 800px;
+}
+
+.attachment-modal .modal-content {
+    max-height: 600px;
+    /* border: solid; */
+    overflow: auto;
 }

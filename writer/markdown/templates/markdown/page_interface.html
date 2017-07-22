@@ -15,14 +15,16 @@
     <section class="editor-container" :style='[styles]' id='markdown_app'>
         <div class="tools">
             <ul class="collection commands">
-                <li :class="['collection-item command', command.name]" v-for='command in commands' v-if='command.icon != false'>
+                <li :class="['collection-item command', command.name]"
+                    v-for='command in commands' v-if='command.icon != false'>
                     <a href="javascript:;" @click='actionCommand(command)'>
                         <i class="material-icons">{{ command.icon }}</i>
                     </a>
                 </li>
             </ul>
             <ul class="collection interface-tools">
-                <li :class="['collection-item interface-tool', item.name]" v-for='item in tools'>
+                <li :class="['collection-item interface-tool', item.name]"
+                    v-for='item in tools'>
 
                     <a href="javascript:;"
                         :class='{disabled: item.disabled}'

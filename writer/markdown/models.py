@@ -190,7 +190,7 @@ class Page(UnitModel):
         return r
 
     def text_render(self):
-        return '\n'.join(self.text_render_items())
+        return '\n\n'.join(self.text_render_items())
 
     def text_render_items(self):
         r = []
