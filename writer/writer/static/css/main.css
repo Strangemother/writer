@@ -602,6 +602,7 @@ li.new-page-item.hidden {
     align-items: center;
     color: inherit;
     opacity: 0;
+    flex-direction: column;
 }
 
 .book-page-list .edit-icon a {color: #455a64;background: transparent;padding: 0.5em 0.5em;}
@@ -804,4 +805,12 @@ div#markdown_content:focus {
     max-height: 600px;
     /* border: solid; */
     overflow: auto;
+}
+
+.active-child-list .page-entity {
+    width: 100%;
+}
+
+.active-child-list ul.page-blocks {
+    padding: 0;
 }

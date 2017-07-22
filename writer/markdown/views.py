@@ -50,6 +50,9 @@ class JSONView(JSONResponseMixin, TemplateView):
 
 
 class PageContentJSON(JSONDetailView):
+    '''
+    JSON page content - get and post.
+    '''
     model = Page
 
     def get_data(self, context):
@@ -59,23 +62,35 @@ class PageContentJSON(JSONDetailView):
         pk = None
         text = None
 
+        ids = [] # [x.pk for x in page.contents.all()]
+        blocks = []
         if page is not None:
             rp = page.root_page()
             pk = page.pk
             text = page.text_render()
-            ids = [x.pk for x in page.contents.all()]
+            contents = page.contents.all().order_by('weight')
+            for cb in contents:
+                ids.append(cb.pk)
+                o = dict(
+                    text=cb.text_content,
+                    id=cb.pk,
+                )
+                blocks.append(o)
 
         d = dict(
-                text=text,
+                # text=text,
                 root_page=rp.pk if rp is not None else None,
                 id=pk,
-                content_ids=ids
+                content_blocks=blocks,
+                content_ids=ids,
             )
 
         return super(PageContentJSON, self).get_data(d)
 
     def post(self, request, *args, **kwargs):
-        print 'Post made to json content'
+        '''
+        Post made to json content
+        '''
         f = PageContentForm(request.POST)
 
         valid = f.is_valid()

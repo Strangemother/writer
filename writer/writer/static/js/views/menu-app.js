@@ -11,7 +11,8 @@ var addPageComponent = Vue.component('add-page', {
                     placeholder='Add Page'
                     v-model='newValue'
                     class='new-page-input'>
-            </div></span>`
+            </div>
+        </span>`
     , data(){
         return {
             newValue: ''
@@ -32,7 +33,16 @@ var pageItem = Vue.component('page-item', {
         <div class="indicator-container" @click='indicatorClick(item, $event)'>
             <div :class="['indicator', {active: item.object == pageId, loading: item.object == loading}]"></div>
         </div>
-        <a :href="item.url" @click='select_page(item.object, $event)' :key="item.object">{{item.name}}</a>
+        <div class="page-entity">
+            <a :href="item.url" @click='select_page(item.object, $event)' :key="item.object">{{item.name}}</a>
+            <ul class="page-blocks">
+                <li class="page-block-item"
+                    v-show='item.object == pageId'
+                    v-for='block in item.blocks' :weight='block.weight'>
+                    <a :href="'/block/' + block.id" class="block-link">{{ block.name.length == 0 ? "Block " + block.id: block.name }}</a>
+                </li>
+            </ul>
+        </div>
     </div>`
     , props: ['item']
 

@@ -12,7 +12,9 @@ class Owner(AbstractUser):
 
 class PageContent(models.Model):
 
+    name = models.CharField(max_length=255, blank=True, default='')
     text_content = models.TextField()
+    weight = models.IntegerField(default=-1)
 
     _render_cache = models.TextField(null=True, blank=True)
 

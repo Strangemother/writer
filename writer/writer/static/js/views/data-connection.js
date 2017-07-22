@@ -33,12 +33,25 @@ var dataConnection = new Vue({
             */
             return function(data){
                 this.pageId = pageId;
+                data = this.cleanData(data)
                 bus.$emit('page', data)
                 bus.$emit('pageId', { pageId: pageId})
                 if(func != undefined) {
                     func(data, pageId)
                 }
             }.bind(this)
+        }
+
+        , cleanData(data) {
+            /*return ready data for the application*/
+            let text = '';
+            for (var i = 0; i < data.content_blocks.length; i++) {
+
+                text += '\n\n' + data.content_blocks[i].text;
+            };
+
+            data.text = text;
+            return data;
         }
 
         , update(data) {

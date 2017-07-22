@@ -3,6 +3,15 @@
     , url: "{% url 'page' object.pk %}"
     , name: "{{ object.name }}"
     , childCount: {{ page.children.count }}
+    , blocks: [
+        {% for block in object.contents.all %}
+            {
+                id: {{ block.pk }},
+                name: "{{ block.name }}",
+                weight: {{ block.weight }}
+             },
+        {% endfor %}
+    ]
     , children: [
         {% for page in object.children %}
             {% with object=page %}
