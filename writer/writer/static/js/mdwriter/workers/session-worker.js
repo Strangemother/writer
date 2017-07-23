@@ -17,6 +17,14 @@ class BlockManager extends ManagerComponent {
         return this.insertBlockAt(blockIndex + 1, this.asBlock(text.slice(strIndex)))
     }
 
+    mergeBlockDown(blockIndex) {
+        /* Merge the target block index into the next block below.*/
+        let ta = this.session.blocks[blockIndex].text;
+        let tb = this.session.blocks[blockIndex + 1 ].text;
+        this.updateBlockText(blockIndex, ta + tb)
+        return this.removeBlockAt(blockIndex+1)
+    }
+
     asBlock(text) {
         return {
             text: text
@@ -42,7 +50,7 @@ class BlockManager extends ManagerComponent {
     }
 
     removeBlockAt(index) {
-        return this.session.blocks.splice(1, 1)
+        return this.session.blocks.splice(index, 1)
     }
 
     insertBlocksAt(index, blocks) {
@@ -244,6 +252,15 @@ class RemoveTextBlockManager extends InsertTextBlockManager {
 
     removeLines(e){
         debugger
+
+        if(e.lines.join('').length == 0) {
+            return this.removeReturn(e)
+        }
+
+    }
+
+    removeReturn(e){
+        this.mergeBlockDown(e.start.row)
     }
 }
 
