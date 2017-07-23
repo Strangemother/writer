@@ -87,7 +87,6 @@ var editorApp = new Vue({
             replied to by dataConnection*/
             let text = PAGE.initValue;
             if(text.trim().length == 0) {
-                console.info('replacing text with init data')
                 text = $(this.$el).find('.init-markdown').text()
             };
 

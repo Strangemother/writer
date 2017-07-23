@@ -16,9 +16,7 @@ class ManagerClientClass {
         this.init()
     }
 
-    init(){
-
-    }
+    init(){}
 
     getMethods(){
         /* returns an object of name:method to implement into the RPC.
@@ -33,13 +31,7 @@ class ManagerClientClass {
         return 'howdy'
     }
 
-    static mount(){
-        /* Start the `this` worker, implementing the instance
-        into the mounted clients.*/
-        self.manager.mountClient(this)
-    }
-
-    _mount(manager) {
+   _mount(manager) {
         /* Called at instance time by the manager, given the manager
         instance mounted into.*/
         this._init()
@@ -47,22 +39,28 @@ class ManagerClientClass {
         this.mounted()
     }
 
-    mounted(){
-        /* class is mounted and ready for use.*/
-    }
-
     _init(){
         this._methodCache = this.getMethods()
         self.manager.clients.push(this)
     }
 
-    receiveEvent(e) {
+    _receiveEvent(e) {
         let ename = e.name;
         if(ename in this._methodCache) {
             return [true, this._methodCache[ename](e)]
         }
 
         return [false, undefined];
+    }
+
+    mounted(){
+        /* class is mounted and ready for use.*/
+    }
+
+    static mount(){
+        /* Start the `this` worker, implementing the instance
+        into the mounted clients.*/
+        self.manager.mountClient(this)
     }
 
     mountMethods() {

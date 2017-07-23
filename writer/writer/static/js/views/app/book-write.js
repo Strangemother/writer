@@ -8,10 +8,20 @@ Manage content throughput for the entire application:
 
  */
 
+var bookWriteConfig = {
+    managerWorker: '/static/js/views/workers/manager.js'
+    , managerClients: [
+        '/static/js/mdwriter/workers/session-worker.js'
+        // html renderer
+        , '/static/js/mdwriter/workers/render-worker.js'
+    ]
+}
+
 ;(function(){
 
+
 var main = function() {
-    bus.bookWriter = new BookWriter();
+    bus.bookWriter = new BookWriter(bookWriteConfig);
 }
 
 
@@ -21,32 +31,31 @@ class WorkerManager {
     */
 
 
-    constructor(){
+    constructor(config={}){
         this.onReadyCallbacks = []
         this.hooked_renderer = {};
-        this.config = {};
+        this.config = config;
         console.log('book writer')
         this.init()
     }
 
     init(){
         /* Geenerate a new RPC */
-        let path = '/static/js/views/workers/manager.js';
+        let path = this.config.managerWorker;
         this.rpc = dataConnection.makeRPC(path, this.workerReady.bind(this))
     }
 
     workerReady(rpc, path) {
         console.log('worker manager ready')
-        rpc.addWorker('/static/js/mdwriter/workers/render-worker.js')
+        for (var i = 0; i < this.config.managerClients.length; i++) {
+            rpc.addWorker(this.config.managerClients[i])
+        }
     }
 
 }
 
-class WriterBase extends WorkerManager {
-}
 
-
-class EditorManager extends WriterBase {
+class EditorManager extends WorkerManager {
     /*
         handle thr throughput of the editor panel.
     */

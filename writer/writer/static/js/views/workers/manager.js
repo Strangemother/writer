@@ -77,10 +77,10 @@ class Manager {
     }
 
     eventHandle(event) {
-        console.log('manager event', event)
         let r = []
+        console.log('Manager receive event', event)
         for (var i = 0; i < this.clients.length; i++) {
-            let [success, v] = this.clients[i].receiveEvent(event);
+            let [success, v] = this.clients[i]._receiveEvent(event);
             if(success) {
                 r.push(v);
             }
