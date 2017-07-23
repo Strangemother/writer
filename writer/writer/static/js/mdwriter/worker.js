@@ -106,11 +106,11 @@ var event = function(aceEvent) {
     if(aceEvent.action == 'remove') {
 
         if(startRowVal == endRowVal) {
-            let endLine = lines[endRowVal];
-            result.text = endLine.slice(startColVal, endColVal);
-            let startSlice = endLine.slice(0, startColVal)
-            let endSlice = endLine.slice(startColVal + result.text.length);
-            data.lines[endRowVal] = startSlice + endSlice;
+            // let endLine = lines[endRowVal];
+            // result.text = endLine.slice(startColVal, endColVal);
+            // let startSlice = endLine.slice(0, startColVal)
+            // let endSlice = endLine.slice(startColVal + result.text.length);
+            // data.lines[endRowVal] = startSlice + endSlice;
         } else {
 
             let selectedLines = data.lines.splice(startRowVal, endRowVal - startRowVal + 1)
@@ -135,42 +135,42 @@ var event = function(aceEvent) {
             // }
 
         } else {
-            let startLine = lines[startRowVal]
-                , startKeep = startLine.slice(0, startColVal)
-                , endKeep = startLine.slice(startColVal)
-                ;
+            // let startLine = lines[startRowVal]
+            //     , startKeep = startLine.slice(0, startColVal)
+            //     , endKeep = startLine.slice(startColVal)
+            //     ;
 
-            let _lines = [
-                // Lines before the selection
-                lines.slice(0, startRowVal)
-                // line (before) insert + first line of the insert lines
-                , [startKeep + aceEvent.lines[0]]
-                // All new lines within first and last
-                , aceEvent.lines.slice(1, aceEvent.lines.length-1)
-                // last line of insert lines + line (after) insertion
-                , [aceEvent.lines[aceEvent.lines.length-1] + endKeep]
-                // all lines after insert line
-                , lines.slice(startRowVal + 1)
-            ];
+            // let _lines = [
+            //     // Lines before the selection
+            //     lines.slice(0, startRowVal)
+            //     // line (before) insert + first line of the insert lines
+            //     , [startKeep + aceEvent.lines[0]]
+            //     // All new lines within first and last
+            //     , aceEvent.lines.slice(1, aceEvent.lines.length-1)
+            //     // last line of insert lines + line (after) insertion
+            //     , [aceEvent.lines[aceEvent.lines.length-1] + endKeep]
+            //     // all lines after insert line
+            //     , lines.slice(startRowVal + 1)
+            // ];
 
-            let _result = [];
-            for(let _line of _lines) {
-                _result = _result.concat(_line)
-            }
+            // let _result = [];
+            // for(let _line of _lines) {
+            //     _result = _result.concat(_line)
+            // }
 
-            data.lines = _result;
+            // data.lines = _result;
         }
 
         // Detect enter Key
-        if( startRowVal + 1 == endRowVal
-            && aceEvent.lines.length == 2
-            && aceEvent.lines[0] == '' && aceEvent.lines[1] == '') {
-                let line = lines[startRowVal]
-                let r = [line.slice(0, startColVal), line.slice(startColVal)]
-                lines[startRowVal] = r[0]
-                // append a new line into the data. This is rendered as a return.
-                lines.splice(startRowVal + 1, 0, r[1])
-            };
+        // if( startRowVal + 1 == endRowVal
+        //     && aceEvent.lines.length == 2
+        //     && aceEvent.lines[0] == '' && aceEvent.lines[1] == '') {
+        //         let line = lines[startRowVal]
+        //         let r = [line.slice(0, startColVal), line.slice(startColVal)]
+        //         lines[startRowVal] = r[0]
+        //         // append a new line into the data. This is rendered as a return.
+        //         lines.splice(startRowVal + 1, 0, r[1])
+        //     };
     } else {
         console.log('nothing with', aceEvent.action)
     }
@@ -180,3 +180,10 @@ var event = function(aceEvent) {
 }
 
 ;main();
+
+
+[one
+two
+three
+four
+five]

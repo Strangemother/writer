@@ -55,33 +55,7 @@ class BlockManager extends ManagerComponent {
 }
 
 
-class TextSessionWorker extends BlockManager {
-
-    init(){
-        this.session = {
-            _started: +(new Date)
-            , events: []
-            , lines: []
-        }
-    }
-
-    _receiveEvent(e) {
-        if( this[`${e.action}ActionEvent`] != undefined) {
-            return [true, this[`${e.action}ActionEvent`].call(this, e)]
-        };
-        return super._receiveEvent(e)
-    }
-
-    setTextEvent(data) {
-        /* Automatically hooked to the testText event, capture the meta data for any incoming changes.*/
-        console.log('TextSessionWorker setTextEvent', data)
-    }
-
-    setPageEvent(page){
-        console.log('TextSessionWorker set page', page)
-        this.session.page = page
-        this.session.blocks = page.data.content_blocks
-    }
+class InsertTextBlockManager extends BlockManager {
 
     insertActionEvent(e) {
         /* From here we manage the text session, page updates denote
@@ -235,6 +209,71 @@ class TextSessionWorker extends BlockManager {
         at the position of the event */
         let c = this.splitBlockAtIndex(e.start.row, e.start.column)
         console.log('inserted enter key', c)
+    }
+}
+
+
+class RemoveTextBlockManager extends InsertTextBlockManager {
+
+    removeActionEvent(e) {
+        /* From here we manage the text session, page updates denote
+        any extra meta data required for running the
+        page context. */
+        this.session.events.push(e)
+        //console.log('TextSessionWorker insert event', e)
+        if(e.start.row == e.end.row) {
+            this.removeLine(e)
+        } else {
+            this.removeLines(e)
+        }
+
+        console.log('Line count:', this.session.blocks.length)
+    }
+
+    removeLine(e) {
+        /* single line remove event has occured such as a char.*/
+        let text = this.session.blocks[e.start.row].text;
+        if(text.substr(e.start.column, e.lines[0].length) != e.lines[0]) {
+            console.log('delete mismismatch')
+            return false;
+        };
+
+        this.session.blocks[e.start.row].text = text.substr(0, e.start.column) + text.substr(e.start.column + e.lines[0].length)
+        return true;
+    }
+
+    removeLines(e){
+        debugger
+    }
+}
+
+
+class TextSessionWorker extends RemoveTextBlockManager {
+
+    init(){
+        this.session = {
+            _started: +(new Date)
+            , events: []
+            , lines: []
+        }
+    }
+
+    _receiveEvent(e) {
+        if( this[`${e.action}ActionEvent`] != undefined) {
+            return [true, this[`${e.action}ActionEvent`].call(this, e)]
+        };
+        return super._receiveEvent(e)
+    }
+
+    setTextEvent(data) {
+        /* Automatically hooked to the testText event, capture the meta data for any incoming changes.*/
+        console.log('TextSessionWorker setTextEvent', data)
+    }
+
+    setPageEvent(page){
+        console.log('TextSessionWorker set page', page)
+        this.session.page = page
+        this.session.blocks = page.data.content_blocks
     }
 
 }
