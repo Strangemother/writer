@@ -42,16 +42,8 @@ class WorkerManager {
     init(){
         /* Geenerate a new RPC */
         let path = this.config.managerWorker;
-        this.rpc = dataConnection.makeRPC(path, this.workerReady.bind(this))
+        this.rpc = dataConnection.makeRPC(path, this.config.managerClients)
     }
-
-    workerReady(rpc, path) {
-        console.log('worker manager ready')
-        for (var i = 0; i < this.config.managerClients.length; i++) {
-            rpc.addWorker(this.config.managerClients[i])
-        }
-    }
-
 }
 
 
@@ -87,7 +79,6 @@ class BookWriter extends EditorManager {
             return this.handleEventError(data)
         };
 
-        // console.log('RPC Said:', data)
         for (var i = this.callbacks.length - 1; i >= 0; i--) {
             this.callbacks[i](data)
         }

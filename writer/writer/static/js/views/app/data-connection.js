@@ -68,54 +68,99 @@ var workerMixin = {
         this.onReadyCallbacks = []
         this.hooked_renderer = {};
         this.config = {};
+        bus.$on('page', this.pageHandle.bind(this))
     }
+
     , methods:{
 
-        makeRPC(path, readyCallback){
+        _makeRPC(path, readyCallback) {
 
             let p = path;
             let self = this;
             let config = this.config;
 
             let rpc = new WorkerRPC(p, function(){
-                if(readyCallback){
-                    readyCallback(rpc, p)
-                }
+                if(readyCallback){ readyCallback(rpc, p) };
+
                 console.log('RPC Callback')
+
                 for (var i = 0; i < self.onReadyCallbacks.length; i++) {
-                    self.onReadyCallbacks[i](self.rpc)
-                    }
-                }, function(e){
-                    let fn = `${e.data.type}WorkerMessage`;
+                    self.onReadyCallbacks[i](self.rpc);
+                }
+            }, function(e){
+                let fn = `${e.data.type}WorkerMessage`;
 
-                    if(self.hooked_renderer == undefined) {
-                        console.warn('message too early.')
-                        return
-                    }
+                if(self.hooked_renderer == undefined) {
+                    console.warn('message too early.')
+                    return
+                }
 
-                    if(config.renderers != undefined) {
+                if(config.renderers != undefined) {
 
-                        for (var i = config.renderers.length - 1; i >= 0; i--) {
-                            if(config.renderers[i][fn] != undefined) {
-                                config.renderers[i][fn](e)
-                            }
+                    for (var i = config.renderers.length - 1; i >= 0; i--) {
+                        if(config.renderers[i][fn] != undefined) {
+                            config.renderers[i][fn](e)
                         }
                     }
+                }
 
-                    if(self.hooked_renderer[fn] != undefined) {
-                        self.hooked_renderer[fn](e)
-                    }
+                if(self.hooked_renderer[fn] != undefined) {
+                    self.hooked_renderer[fn](e)
+                }
+
             });
 
             return rpc;
         }
 
+        , pageHandle(data){
+            console.log('dataConnection.pageHandle')
+            this.rpc.event({name: 'setPage', data})
+        }
+
+        , makeRPC(workerPath, clientPaths) {
+            /* Geenerate a new RPC */
+            this._clientPaths = clientPaths
+            this._workerPath = workerPath;
+            return this.rpc = this._makeRPC(workerPath, this.workerReady.bind(this))
+        }
+
+        , workerReady(rpc, path) {
+            console.log('worker manager ready')
+            for (var i = 0; i < this._clientPaths.length; i++) {
+                rpc.addWorker(this._clientPaths[i])
+            }
+        }
+
     }
 }
 
+var textSessionMixin = {
+    /* Handle inline and session changes to text. Perpetuating those changes
+    to the worker manager and emiting events upon complete.*/
+    methods: {
+
+        setText(data) {
+            /* Set the full editor text for the current page.*/
+            console.log('dataconnection.setText')
+            this.rpc.event({ name: 'setText', data})
+        }
+
+        , textUpdate(data) {
+            /* called by the interactive application (such as page detail)
+            an update of the content is requested. This should be saved
+            and utilized. */
+            console.log('dataConnection.update')
+            // onsole.log('data', data)
+            this.stores.streamPage(this.pageId, data);
+        }
+    }
+}
+
+
 var dataConnection = new Vue({
 
-    mixins: [pageManageMixin, workerMixin]
+    mixins: [pageManageMixin, workerMixin, textSessionMixin]
     , data: {
         pageId: -1
     }
@@ -139,14 +184,6 @@ var dataConnection = new Vue({
             return data;
         }
 
-        , update(data) {
-            /* called by the interactive application (such as page detail)
-            an update of the content is requested. This should be saved
-            and utilized. */
-            console.log('dataConnection.update')
-            // onsole.log('data', data)
-            this.stores.streamPage(this.pageId, data);
-        }
     }
 })
 

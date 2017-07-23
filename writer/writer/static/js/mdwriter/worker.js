@@ -127,12 +127,12 @@ var event = function(aceEvent) {
     }else if(aceEvent.action == 'insert') {
 
         if(startRowVal == endRowVal) {
-            for (var i = 0; i < aceEvent.lines.length; i++) {
-                let line = aceEvent.lines[i];
-                let first = lines[endRowVal].slice(0, startColVal);
-                let last = lines[endRowVal].slice(startColVal);
-                data.lines[startRowVal] = first + line + last
-            }
+            // for (var i = 0; i < aceEvent.lines.length; i++) {
+            //     let line = aceEvent.lines[i];
+            //     let first = lines[endRowVal].slice(0, startColVal);
+            //     let last = lines[endRowVal].slice(startColVal);
+            //     data.lines[startRowVal] = first + line + last
+            // }
 
         } else {
             let startLine = lines[startRowVal]
@@ -168,6 +168,7 @@ var event = function(aceEvent) {
                 let line = lines[startRowVal]
                 let r = [line.slice(0, startColVal), line.slice(startColVal)]
                 lines[startRowVal] = r[0]
+                // append a new line into the data. This is rendered as a return.
                 lines.splice(startRowVal + 1, 0, r[1])
             };
     } else {

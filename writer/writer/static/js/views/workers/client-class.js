@@ -35,8 +35,12 @@ class ManagerClientClass {
         /* Called at instance time by the manager, given the manager
         instance mounted into.*/
         this._init()
-        console.log('I am mounted')
+        // console.log('I am mounted')
         this.mounted()
+    }
+
+    _destroy() {
+        this.unmount()
     }
 
     _init(){
@@ -50,12 +54,19 @@ class ManagerClientClass {
             return [true, this._methodCache[ename](e)]
         }
 
+        let name = `${ename}Event`;
+        if(this[name]) {
+            return [true, this[name](e)]
+        }
+
         return [false, undefined];
     }
 
     mounted(){
         /* class is mounted and ready for use.*/
     }
+
+    unmount() {}
 
     static mount(){
         /* Start the `this` worker, implementing the instance

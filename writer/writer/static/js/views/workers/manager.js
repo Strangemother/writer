@@ -78,18 +78,26 @@ class Manager {
 
     eventHandle(event) {
         let r = []
-        console.log('Manager receive event', event)
         for (var i = 0; i < this.clients.length; i++) {
             let [success, v] = this.clients[i]._receiveEvent(event);
             if(success) {
                 r.push(v);
             }
         }
+
+        if(r.length == 0) {
+            console.log('Manager receive unhandled event', event)
+        }
         return r;
     }
 
+    removeClient(client) {
+        client._destroy()
+        this.clients.splice(this.clients.indexOf(client), 1)
+    }
+
     addWorkerHandle(event){
-        console.log('add handle', event)
+        // console.log('add handle', event)
         importScripts(event)
     }
 }

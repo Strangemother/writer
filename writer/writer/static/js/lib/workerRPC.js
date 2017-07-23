@@ -302,9 +302,10 @@ class WorkerRPC extends ClientRPC {
             if(e.data.name == 'reply') {
                 // data is nested in the reply function.
                 try {
-                    cb.call(this, e.data.content.content, e)
+                    cb && cb.call && cb.call(this, e.data.content.content, e)
                 } catch(error){
-                    cb(this, e.data.content.content, e)
+                    console.error('Worker Error', error)
+                    cb && cb(this, e.data.content.content, e)
                 }
 
             } else {

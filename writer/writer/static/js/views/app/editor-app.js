@@ -76,6 +76,7 @@ var editorApp = new Vue({
             // From data connection.
             bus.$on('page', this.pageHandle.bind(this))
             bus.$on('focus', this.focusHandle.bind(this))
+            bus.$on('editor-settext', this.editorSetTextHandle.bind(this))
 
             this.tools.push(this.saveButton)
             this.tools.push(this.mismatchButton)
@@ -122,9 +123,14 @@ var editorApp = new Vue({
             for (var i = 0; i <data.content_blocks.length; i++) {
                t += data.content_blocks[i].text += '\n'
             }
+
             this.renderer.setText(t)
             // this.lastOnlineSave = data.text;
             this.saveButton.disabled = this.synced
+        }
+
+         , editorSetTextHandle(e){
+            dataConnection.setText(e.text)
         }
 
         , focusHandle(){
@@ -143,7 +149,7 @@ var editorApp = new Vue({
             Called by the editor with the event for action.
             This should perpetuate the storage and actions.
              */
-            dataConnection.update(data)
+            dataConnection.textUpdate(data)
         }
 
         , postPageHandle(data) {

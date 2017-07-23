@@ -50,9 +50,9 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
 
 class EditorTextBase {
 
-    setText(htmlText, editor) {
+    setText(text, editor) {
         editor = editor == undefined? this.editor: editor;
-        editor.setValue(htmlText)
+        editor.setValue(text)
         editor.clearSelection()
 
         // if(rpc._ready == false) {
@@ -60,9 +60,7 @@ class EditorTextBase {
         //     this._earlySetText = htmlText
         //     return
         // }
-        // rpc.setText(htmlText, function(d){
-        //     console.log('worker setText said:', d)
-        // })
+        bus.$emit('editor-settext', { text, editor, parent: this})
 
         // this.outputNode.innerHTML = this.outputNode.innerHTML;
     }
@@ -93,7 +91,9 @@ class EditorTextBase {
         }
 
         editor = editor == undefined? this.editor: editor;
-        editor.selection.setRange(new Range(startRow, startCol, endRow, endCol))
+        let range = new Range(startRow, startCol, endRow, endCol)
+        editor.selection.setRange(range)
+        bus.$emit('editor-selectrange', { range, editor, parent: this})
     }
 
     styles() {

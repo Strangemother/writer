@@ -49,7 +49,7 @@ class RenderWorker extends ManagerComponent {
 
     init(){
         this.renderer = new MarkdownRenderer();
-
+        this.invalid
     }
 
     mountMethods() {
@@ -64,11 +64,12 @@ class RenderWorker extends ManagerComponent {
             return [true, this[`${e.action}ActionEvent`](e)]
         }
 
-        return super.receiveEvent(e)
+        return super._receiveEvent(e)
     }
 
     insertActionEvent(e) {
-        console.log('RenderWorker insert action')
+        //console.log('RenderWorker insert action')
+        this.invalid = true;
         return this.render(e)
     }
 
