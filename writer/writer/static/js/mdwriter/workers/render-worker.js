@@ -1,26 +1,33 @@
-(function(){
+//console.log('new render-worker', ManagerComponent)
 
-importScripts(
-    `/static/js/WorkerRPC.js`
-)
+class RenderWorker extends ManagerComponent {
 
-console.log('new render-worker')
-var rpc
-var main = function(){
-    rpc = new WorkerRPC();
-    rpc.render = render
-    rpc.event = event;
+    init(){
+        console.log('new render-worker')
+    }
+
+    mountMethods() {
+        return {
+            render: this.render.bind(this)
+        }
+    }
+
+    receiveEvent(e) {
+        if( e.action != undefined
+            && this[`${e.action}ActionEvent`] != undefined) {
+            return [true, this[`${e.action}ActionEvent`](e)]
+        }
+
+        return super.receiveEvent(e)
+    }
+
+    insertActionEvent(e) {
+        console.log('action event')
+    }
+
+    render(t) {
+        console.log('render the given text.')
+    }
 }
 
-var render = function(d){
-    /* render the text */
-    console.log('render', d)
-}
-
-var event = function(d){
-    console.log('render-worker', d)
-}
-
-;main();
-
-})()
+RenderWorker.mount()

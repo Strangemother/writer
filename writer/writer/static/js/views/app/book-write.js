@@ -12,15 +12,47 @@ Manage content throughput for the entire application:
 
 var main = function() {
     bus.bookWriter = new BookWriter();
+}
+
+
+class WorkerManager {
+    /*
+    setup and communicate to the worker
+    */
+
+
+    constructor(){
+        this.onReadyCallbacks = []
+        this.hooked_renderer = {};
+        this.config = {};
+        console.log('book writer')
+        this.init()
+    }
+
+    init(){
+        /* Geenerate a new RPC */
+        let path = '/static/js/views/workers/manager.js';
+        this.rpc = dataConnection.makeRPC(path, this.workerReady.bind(this))
+    }
+
+    workerReady(rpc, path) {
+        console.log('worker manager ready')
+        rpc.addWorker('/static/js/mdwriter/workers/render-worker.js')
+    }
 
 }
 
-class BookWriter {
+class WriterBase extends WorkerManager {
+}
 
-    constructor(){
 
+class EditorManager extends WriterBase {
+    /*
+        handle thr throughput of the editor panel.
+    */
+    init(){
+        super.init()
         this.initEvents()
-        console.log('book writer')
     }
 
     initEvents(){
@@ -28,21 +60,38 @@ class BookWriter {
     }
 
     rendererEvent(e) {
-        console.log('renderer')
-        // this._rpc(e)
+        this.rpc.event(e.content, e.callback)
     }
 
-    _rpc(){
-        if(rpc._ready) {
-            bus.$emit('renderer-event', { content, callback: cb });
-            var p = rpc.event(content, this.eventReply.bind(this))
-        } else{
-            if(this._waiting == undefined) {
-                this._waiting = []
-            };
-            this._waiting.push([content, cb])
+}
+
+class BookWriter extends EditorManager {
+
+    init(){
+        super.init()
+        bus.bookWriter = this;
+
+    }
+
+    eventReply(data) {
+        if(data.success == false){
+            return this.handleEventError(data)
+        };
+
+        // console.log('RPC Said:', data)
+        for (var i = this.callbacks.length - 1; i >= 0; i--) {
+            this.callbacks[i](data)
         }
     }
+
+    handleEventError(d){
+        console.log('handle error', d)
+        let fn = `${d.request}HandleEvent`
+        if(this[fn] != undefined) {
+            this[fn](d)
+        }
+    }
+
 }
 
 ;main();

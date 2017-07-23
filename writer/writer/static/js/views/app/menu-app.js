@@ -83,6 +83,10 @@ var pageList = new Vue({
         , newPageValue: ''
         , openSubList: []
     }
+
+    , created(){
+        bus.menuApp = this;
+    }
     , mounted(){
         this.pages = this.bookData.children
         this.pageId = PAGE.id

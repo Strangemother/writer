@@ -15,7 +15,7 @@
     </section>
 
     {% verbatim %}
-    <section class="editor-container" :style='[styles]' id='markdown_app'>
+    <section class="editor-container" :style='[styles]' id='markdown_app' >
         <div class="tools">
             <!-- updated and inserted editor commands. -->
             <ul class="collection commands">
@@ -30,7 +30,7 @@
             <!-- updated and inserted editor panel tools (not commands) -->
             <ul class="collection interface-tools">
                 <li :class="['collection-item interface-tool', item.name]"
-                    v-for='item in tools'>
+                    v-for='item in tools' v-cloak>
 
                     <a href="javascript:;"
                         :class='{disabled: item.disabled}'
@@ -66,7 +66,10 @@
             Content-editable for no-reason.
             -->
             <div id='markdown_content' contenteditable="true" spellcheck=true>
-                {{ object.render|safe }}
+                {% verbatim %}
+                <div class="html-view" v-html='html' v-cloak>
+                </div>
+                {% endverbatim %}
             </div>
         </div>
 

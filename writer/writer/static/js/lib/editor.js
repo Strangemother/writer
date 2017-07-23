@@ -7,40 +7,7 @@ window.markdownEditorConfig = {
 
 ;(function(){
 
-let p ='/static/js/mdwriter/worker.js';
-var onReadyCallbacks = []
-var hooked_renderer = {};
-
 let config;
-
-let createRPC = function() {
-    var rpc = new WorkerRPC(p, function(){
-        console.log('RPC Callback')
-        for (var i = 0; i < onReadyCallbacks.length; i++) {
-            onReadyCallbacks[i](rpc)
-            }
-        }, function(e){
-            let fn = `${e.data.type}WorkerMessage`;
-
-            if(hooked_renderer == undefined) {
-                console.warn('message too early.')
-                return
-            }
-
-            if(config.renderers != undefined) {
-
-                for (var i = config.renderers.length - 1; i >= 0; i--) {
-                    if(config.renderers[i][fn] != undefined) {
-                        config.renderers[i][fn](e)
-                    }
-                }
-            }
-
-            if(hooked_renderer[fn] != undefined) {
-                hooked_renderer[fn](e)
-            }
-    });
-}
 
 
 commands = {
@@ -402,33 +369,14 @@ class AceRender extends RenderBase {
     //         this.editor.resize()
     //     }
     // }
-
-    // eventReply(data) {
-    //     if(data.success == false){
-    //         return this.handleEventError(data)
-    //     };
-
-    //     // console.log('RPC Said:', data)
-    //     for (var i = this.callbacks.length - 1; i >= 0; i--) {
-    //         this.callbacks[i](data)
-    //     }
-    // }
-
-    // handleEventError(d){
-    //     console.log('handle error')
-    //     let fn = `${d.request}HandleEvent`
-    //     if(this[fn] != undefined) {
-    //         this[fn](d)
-    //     }
-    // }
-
+//
     // textHandleEvent(d) {
     //     rpc.setText(this.getText(), this.eventReply.bind(this))
     // }
 };
 
 config = {
-    renderers: [hooked_renderer]
+    renderers: []
     , commands: commands
     , intelliKeys: intelliKeys
     , renderClass: AceRender
@@ -436,6 +384,5 @@ config = {
 
 window.AceRender = AceRender;
 AceRender.config = config
-
 
 })()

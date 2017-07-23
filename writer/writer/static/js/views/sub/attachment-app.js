@@ -7,6 +7,7 @@ var attachmentApp = new Vue({
     created(){
         /* fetch data about page.*/
         console.log('attachmentApp')
+        bus.attachmentApp = this;
         bus.$on('attachment-modal', this.modal.bind(this))
     }
 
