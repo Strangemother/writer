@@ -5,7 +5,7 @@ manage the data session of a page, tracking character entry and page context
 class BlockManager extends ManagerComponent {
 
     replaceBlock(blockIndex, newBlock) {
-        console.log('replacing block', blockIndex)
+        // console.log('replacing block', blockIndex)
         this.insertBlockAt(blockIndex+1, newBlock)
         return this.removeBlockAt(blockIndex)
     }
@@ -53,10 +53,18 @@ class BlockManager extends ManagerComponent {
         return this.session.blocks.splice(index, 1)
     }
 
+    removeBlock(block) {
+        let index = this.session.blocks.indexOf(block)
+        if(index == -1) {
+            return false;
+        }
+        return this.removeBlockAt(index)
+    }
+
     insertBlocksAt(index, blocks) {
         /* insert many blocks into the block list
         returns the new blocks length*/
-        console.log('block insert at:', index, 'count:', blocks.length)
+        // console.log('block insert at:', index, 'count:', blocks.length)
         this.session.blocks.splice(index, 0, ...blocks)
         return this.session.blocks.length
     }
@@ -77,7 +85,7 @@ class InsertTextBlockManager extends BlockManager {
             this.insertLines(e)
         }
 
-        console.log('Line count:', this.session.blocks.length)
+        // console.log('Line count:', this.session.blocks.length)
     }
 
     insertLine(e){
@@ -138,13 +146,13 @@ class InsertTextBlockManager extends BlockManager {
 
         if(isMatch) {
             /* detected the same lines provided to the API*/
-            console.log('discovered', endRows.length, 'duplicated')
+            //console.log('discovered', endRows.length, 'duplicated')
             this.insertBlocksAt(e.end.row + dupIndex + 1, endRows)
             return
         }
 
         // debugger;
-        console.log('Applying', midLines.length ,'new rows')
+        //console.log('Applying', midLines.length ,'new rows')
         this.insertBlocksAt(e.start.row+1, midLines)
 
         return;
@@ -186,7 +194,7 @@ class InsertTextBlockManager extends BlockManager {
             , newText = text.substr(0, strIndex) + value + text.substr(strIndex)
             ;
 
-        console.log('add text to block', blockIndex)
+        //console.log('add text to block', blockIndex)
         this.updateBlockText(blockIndex, newText)
     }
 
@@ -204,7 +212,7 @@ class InsertTextBlockManager extends BlockManager {
 
             if (this.session.blocks[offsetIndex+i+1].text != lines[i].text)  {
                 isMatch = false;
-                console.log('Dup detection stop.')
+                // console.log('Dup detection stop.')
                 break;
             }
         };
@@ -216,7 +224,7 @@ class InsertTextBlockManager extends BlockManager {
         /* the return carriage is detected. a new line is inserted
         at the position of the event */
         let c = this.splitBlockAtIndex(e.start.row, e.start.column)
-        console.log('inserted enter key', c)
+        //console.log('inserted enter key', c)
     }
 }
 
@@ -235,14 +243,14 @@ class RemoveTextBlockManager extends InsertTextBlockManager {
             this.removeLines(e)
         }
 
-        console.log('Line count:', this.session.blocks.length)
+        // console.log('Line count:', this.session.blocks.length)
     }
 
     removeLine(e) {
         /* single line remove event has occured such as a char.*/
         let text = this.session.blocks[e.start.row].text;
         if(text.substr(e.start.column, e.lines[0].length) != e.lines[0]) {
-            console.log('delete mismismatch')
+            //console.log('delete mismismatch')
             return false;
         };
 
@@ -251,12 +259,29 @@ class RemoveTextBlockManager extends InsertTextBlockManager {
     }
 
     removeLines(e){
-        debugger
 
         if(e.lines.join('').length == 0) {
             return this.removeReturn(e)
         }
 
+        // splice top and bottom; delete middle lines
+        let startRow = e.start.row
+        let text = this.session.blocks[e.start.row].text;
+        let endText;
+        if(this.session.blocks[e.end.row] != undefined)  {
+            endText = this.session.blocks[e.end.row].text;
+        }
+
+        let startLine = text.slice(0, e.start.column);
+        let lastLine = endText.slice(e.end.column, endText.length);
+        this.updateBlockText(startRow, startLine + lastLine);
+        // remove block for all rows.
+
+        let removes = this.session.blocks.slice(e.start.row+1 , e.end.row + 1);
+        //console.log('Remove blocks:', removes.map((x)=>x.text))
+        for (var i = 0; i < removes.length; i++) {
+            this.removeBlock(removes[i])
+        }
     }
 
     removeReturn(e){
@@ -284,11 +309,11 @@ class TextSessionWorker extends RemoveTextBlockManager {
 
     setTextEvent(data) {
         /* Automatically hooked to the testText event, capture the meta data for any incoming changes.*/
-        console.log('TextSessionWorker setTextEvent', data)
+        // console.log('TextSessionWorker setTextEvent', data)
     }
 
     setPageEvent(page){
-        console.log('TextSessionWorker set page', page)
+        // console.log('TextSessionWorker set page', page)
         this.session.page = page
         this.session.blocks = page.data.content_blocks
     }
