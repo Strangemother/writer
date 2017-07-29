@@ -399,6 +399,7 @@ div.render-page {
 
 .editor-container .tools {
     color: #666;
+    min-height: 3.2em;
     display: flex;
 }
 
@@ -518,6 +519,7 @@ nav a.brand-logo {
     box-shadow: 0 0px 4px 0px rgba(69, 90, 100, 0.57);
     min-height: 100%;
     margin-top: 2px;
+    padding: 0;
 }
 
 .toolspace {
@@ -842,15 +844,15 @@ span.ace_fold-widget.ace_start {
 }
 
 .thread-log {
-    position: absolute;
+    /* position: absolute; */
     background: #eee;
     z-index: 10;
-    border: solid 2px #CCC;
-    min-width: 600px;
+    /* border: solid 2px #CCC; */
+    /* min-width: 600px; */
     bottom: 0;
     margin-bottom: 5em;
     padding: 1em;
-    max-height: 42%;
+    max-height: 60%;
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -879,7 +881,7 @@ span.ace_fold-widget.ace_start {
 }
 
 .log-container.counterMultiplier {
-    height: 400px;
+    height: 600px;
 }
 
 .counterMultiplier ul.messages {
@@ -978,4 +980,19 @@ div#line-view {
     /* box-shadow: 0px 4px 3px -3px rgba(69, 90, 100, 0.68); */
     max-height: 50%;
     overflow: auto;
+}
+
+.line span.index {
+    background: #d6d6d6;
+    color: #000;
+    padding: 2px 0.4em;
+    border-radius: 2px;
+    font-size: 12px;
+}
+
+.message-placer span.label {
+    width: 35%;
+    background: rgba(2, 2, 2, 0.11);
+    color: #455a64;
+    padding: 1px 0.3em;
 }

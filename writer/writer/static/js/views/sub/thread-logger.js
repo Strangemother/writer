@@ -5,6 +5,7 @@ Vue.component('thread-message', {
 
 Vue.component('thread-removeLine', {
     template: `<div :class="['thread-removeLine', message.name]">
+        <span class="label">removeLine</span>
         <span class="row">{{ message.content.blockIndex }}</span>
         <span class="column">{{ message.content.start }}</span>
         <span class="value">{{ message.content.length }}</span>
@@ -14,6 +15,7 @@ Vue.component('thread-removeLine', {
 
 Vue.component('thread-insertLine', {
     template: `<div :class="['thread-insertLine', message.name]">
+        <span class="label">insertLine</span>
         <span class="row">{{ message.content.blockIndex }}</span>
         <span class="column">{{ message.content.start }}</span>
         <span class="value">{{ message.content.value }}</span>
@@ -23,6 +25,17 @@ Vue.component('thread-insertLine', {
 
 Vue.component('thread-updateBlockText', {
     template: `<div :class="['thread-updateBlockText', message.name]">
+        <span class="label">updateBlockText</span>
+        <span class="row">{{ message.content.blockIndex }}</span>
+        <span class="column">Length: {{ message.content.textLength }}</span>
+    </div>`
+    , props: ['message']
+})
+
+
+Vue.component('thread-insertBlocksAt', {
+    template: `<div :class="['thread-insertBlocksAt', message.name]">
+        <span class="label">insertBlocksAt</span>
         <span class="row">{{ message.content.blockIndex }}</span>
         <span class="column">Length: {{ message.content.textLength }}</span>
     </div>`
@@ -31,6 +44,7 @@ Vue.component('thread-updateBlockText', {
 
 Vue.component('thread-splitBlockAtIndex', {
     template: `<div :class="['thread-splitBlockAtIndex', message.name]">
+        <span class="label">splitBlockAtIndex</span>
         <span class="row">{{ message.content.blockIndex }}</span>
         <span class="column">Index: {{ message.content.strIndex }}</span>
     </div>`
@@ -40,6 +54,7 @@ Vue.component('thread-splitBlockAtIndex', {
 
 Vue.component('thread-spliceBlockText', {
     template: `<div :class="['thread-spliceBlockText', message.name]">
+        <span class="label">spliceBlockText</span>
         <span class="row">{{ message.content.blockIndex }}</span>
         <span class="column">
             <span class="column">start: {{ message.content.startIndex }}</span>
@@ -51,14 +66,33 @@ Vue.component('thread-spliceBlockText', {
 
 Vue.component('thread-insertBlockAt', {
     template: `<div :class="['thread-insertBlockAt', message.name]">
+        <span class="label">insertBlockAt</span>
         <span class="row">{{ message.content.blockIndex }}</span>
         <span class="column">Count: {{ message.content.count }}</span>
     </div>`
     , props: ['message']
 })
 
+Vue.component('thread-removeBlockAt', {
+    template: `<div :class="['thread-removeBlockAt', message.name]">
+        <span class="label">removeBlockAt</span>
+        <span class="row">{{ message.content.blockIndex }}</span>
+    </div>`
+    , props: ['message']
+})
+
+Vue.component('thread-mergeBlockDown', {
+    template: `<div :class="['thread-mergeBlockDown', message.name]">
+        <span class="label">mergeBlockDown</span>
+        <span class="row">{{ message.content.blockIndex }}</span>
+    </div>`
+    , props: ['message']
+})
+
+
 Vue.component('thread-error', {
     template: `<div :class="['thread-error', message.name]">
+        <span class="label">error</span>
         <span class="column">{{ message.content.errStr }}</span>
 
     </div>`
@@ -67,6 +101,7 @@ Vue.component('thread-error', {
 
 Vue.component('thread-undefinedBlockIndex', {
     template: `<div :class="['thread-undefined', message.name]">
+        <span class="label">undefinedBlockIndex</span>
         <span class="column">Generating new block at missing index {{ message.content.blockIndex }}</span>
 
     </div>`
@@ -91,6 +126,7 @@ Vue.component('thread-logger', {
             </ul>
             <ul class="messages-header">
                 <li class="message-placer">
+                    <span class="label">Label</span>
                     <span class="row">Row</span>
                     <span class="column">Column</span>
                     <span class="value">Value</span>
