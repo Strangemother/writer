@@ -106,7 +106,6 @@ var pageList = new Vue({
         , newPage(data, callback) {
             /* Send a new page reqest, calling the optional callback on complete.
              */
-
             dataConnection.newPage(data, callback)
         }
 

@@ -161,7 +161,7 @@ class ClientRPC extends PromiseRPC {
         this.worker = new Worker(this.path);
         var self = this;
         this.worker.onmessage = function(e){
-            // log('message', e)
+            // console.log('message', e)
             self.receive.call(self, e);
         }
 
@@ -247,7 +247,7 @@ class WorkerRPC extends ClientRPC {
             return this.proxy;
         };
 
-
+        this._methods = [];
         this._ready = false;
 
         this.proxy = undefined
@@ -261,7 +261,7 @@ class WorkerRPC extends ClientRPC {
 
     receive(e){
         /* Receive a message from the worker */
-        this.log('RECEIVE', e.data.name, e.data.id);
+        console.log('RECEIVE', e.data.name, e.data.id);
         var m = this.getMethods();
         this.log('methods:', m, this.proxy);
 
@@ -330,13 +330,18 @@ class WorkerRPC extends ClientRPC {
                 this.reply(e.data, v)
             }
         } else if(proxied == false){
-            this.log('Did not find function', e.data.name)
+            console.log('Did not find function', e.data.name)
+
         }
 
         if(this._ready == false) {
             this._ready = true;
             this.readyCallback.apply(this, [e])
         };
+
+        if(this._methods[e.data.name] != undefined) {
+            this._methods[e.data.name](e.data, e)
+        }
     }
 
     activate(config) {
@@ -365,6 +370,13 @@ class WorkerRPC extends ClientRPC {
 
     setMethod(name, func){
         this.log('RPC Set:', name);
+
+        if(this._callers == undefined) {
+            // client side addition.
+            this._methods[name] = func;
+            return true;
+        };
+
         this._callers[name] = func;
         return true;
     }

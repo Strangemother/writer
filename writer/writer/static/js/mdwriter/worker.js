@@ -113,15 +113,15 @@ var event = function(aceEvent) {
             // data.lines[endRowVal] = startSlice + endSlice;
         } else {
 
-            let selectedLines = data.lines.splice(startRowVal, endRowVal - startRowVal + 1)
-                , startKeep   = selectedLines[0].slice(0, startColVal)
-                , lastOf      = selectedLines[selectedLines.length-1]
-                , endKeep     = lastOf.slice(endColVal, lastOf.length)
-                , repLine     = startKeep + endKeep
-                ;
+            // let selectedLines = data.lines.splice(startRowVal, endRowVal - startRowVal + 1)
+            //     , startKeep   = selectedLines[0].slice(0, startColVal)
+            //     , lastOf      = selectedLines[selectedLines.length-1]
+            //     , endKeep     = lastOf.slice(endColVal, lastOf.length)
+            //     , repLine     = startKeep + endKeep
+            //     ;
 
-            var spl = data.lines.splice(startRowVal, 0, repLine)
-            result.text =  data.lines.join('\n');
+            // var spl = data.lines.splice(startRowVal, 0, repLine)
+            // result.text =  data.lines.join('\n');
         }
 
     }else if(aceEvent.action == 'insert') {

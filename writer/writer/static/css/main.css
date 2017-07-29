@@ -238,7 +238,7 @@ section.page-info {
 section.content.container {
     /* display: flex; */
     /* vertical-align: top; */
-    background: #f3f3f3;
+    background: #f8f8f8;
     /* border: solid; */
     /* padding: 4em 3em; */
     /* padding: 0; */
@@ -813,4 +813,128 @@ div#markdown_content:focus {
 
 .active-child-list ul.page-blocks {
     padding: 0;
+}
+
+.ace_gutter-cell {
+    font-size: 12px;
+    /* vertical-align: bottom; */
+    /* display: flex; */
+    position: relative;
+    /* align-items: center; */
+    padding: .3em;
+}
+
+span.ace_fold-widget.ace_start {
+    /* background: red; */
+    width: 1.6em;
+    position: absolute;
+    top: 0;
+}
+
+.ace_layer.ace_gutter-layer.ace_folding-enabled {}
+
+.ace_editor .ace-chrome .ace_gutter {
+    background: white;
+}
+
+#markdown_app .ace_gutter {
+    background: rgba(243, 243, 243, 0.38);
+}
+
+.thread-log {
+    position: absolute;
+    background: #eee;
+    z-index: 10;
+    border: solid 2px #CCC;
+    min-width: 600px;
+    bottom: 0;
+    margin-bottom: 5em;
+    padding: 1em;
+    max-height: 42%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.thread-log ul.messages {
+    /* border: solid; */
+    background: white;
+    height: 93%;
+    overflow: auto;
+    margin: 0;
+}
+
+.log-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.thread-log h4.header {
+    margin: 0;
+}
+
+.log-container .messages {
+    display: flex;
+    flex-direction: column;
+}
+
+.log-container.counterMultiplier {
+    height: 400px;
+}
+
+.counterMultiplier ul.messages {
+    margin-top: 0;
+}
+
+ul.loglets {
+    margin-bottom: 0;
+}
+
+li.loglet.max-clear {
+    background: white;
+    color: #988b23;
+    font-family: monospace;
+    padding: 0.2em 0.3em;
+    font-size: 0.9em;
+}
+
+.log-container h4.header {
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+.thread-removeLine {
+    background: rgb(249, 207, 207);
+}
+
+.thread-insertLine {
+    background: rgb(215, 235, 215);
+}
+
+.message-placer {
+    display: flex;
+    border-bottom: solid 1px white;
+    align-items: center;
+    padding: 0.2em 0;
+    font-size: 0.9em;
+}
+
+.message-placer>* {
+    width: 100%;
+    text-align: center;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+ul.messages-header {
+    margin: 0;
+    background: white;
+}
+
+.thread-error {
+    background: rgb(255, 209, 209);
+    color: #820d0d;
+}
+
+.messages li.message {
 }

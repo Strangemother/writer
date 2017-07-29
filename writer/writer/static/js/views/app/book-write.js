@@ -30,12 +30,10 @@ class WorkerManager {
     setup and communicate to the worker
     */
 
-
     constructor(config={}){
         this.onReadyCallbacks = []
         this.hooked_renderer = {};
         this.config = config;
-        console.log('book writer')
         this.init()
     }
 

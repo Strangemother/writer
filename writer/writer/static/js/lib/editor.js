@@ -102,6 +102,19 @@ class EditorTextBase {
         }
     }
 
+    editorOptions(){
+        return {
+            // wrap text to view
+            // useWrapMode: true
+            indentedSoftWrap: false
+            , mode: "ace/mode/markdown"
+            , theme: "ace/theme/chrome"
+            , wrap: false
+            , showGutter: true
+            , 'showLineNumbers': true
+        }
+    }
+
     makeEditor(IDhtml) {
 
         let change = (function(p, editor) {
@@ -113,12 +126,13 @@ class EditorTextBase {
         var editor = ace.edit(IDhtml);
         let session = editor.getSession();
 
-        editor.setOption("wrap", true)
-        editor.setTheme("ace/theme/chrome");
-        // editor.setShowPrintMargin(false);
-        editor.renderer.setShowGutter(false)
-        // editor.renderer.setOption('showLineNumbers', false)
-        session.setMode("ace/mode/markdown");
+
+        let options = this.editorOptions();
+        editor.setOptions(options);
+        editor.setTheme(options.theme);
+        session.setMode(options.mode);
+        editor.renderer.setShowGutter(options.showGutter)
+
         editor.$blockScrolling = Infinity
 
         let styles = this.styles();
@@ -127,7 +141,7 @@ class EditorTextBase {
         }
 
         this.addCommands(editor, commands);
-        console.log('adding commands')
+
         this.addCommands(editor, markdownEditorConfig.commands)
         this.addIntelliKeys(editor, intelliKeys);
         this.addIntelliKeys(editor, markdownEditorConfig.intelliKeys);
