@@ -2,7 +2,7 @@
 
 let main = function() {
 
-    console.log('updating commands')
+    //console.log('updating commands')
 
     markdownEditorConfig.commands = commands
     markdownEditorConfig.intelliKeys = intelliKeys

@@ -261,7 +261,7 @@ class WorkerRPC extends ClientRPC {
 
     receive(e){
         /* Receive a message from the worker */
-        console.log('RECEIVE', e.data.name, e.data.id);
+        // console.log('RECEIVE', e.data.name, e.data.id);
         var m = this.getMethods();
         this.log('methods:', m, this.proxy);
 

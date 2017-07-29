@@ -326,7 +326,7 @@ class RenderBase extends CommandEventBase {
             selected = selectedLines.join('\n')
         }
 
-        console.log('editor: Deleted:', selected);
+        // console.log('editor: Deleted:', selected);
     }
 
     _insertToEditor(editor, ev) {

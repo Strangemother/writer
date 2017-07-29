@@ -53,7 +53,7 @@ class Manager {
         let inst = instance == undefined ? this: instance;
         let methods = inst.getMethods ? inst.getMethods() : inst.boundMethods();
 
-        console.log('bind' , instance, methods)
+        //console.log('bind' , instance, methods)
         for(let name in methods) {
             rpc.setMethod(name, methods[name].bind(inst))
         }

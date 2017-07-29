@@ -5,7 +5,7 @@ let linesApp = new Vue({
         lines: []
     }
     , created(){
-        console.log('send log attach')
+        //console.log('send log attach')
 
         bus.$on('data-connection', function(){
             bus.$emit('log-attach', { logUpdate: this.logHandle.bind(this) })

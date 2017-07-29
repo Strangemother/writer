@@ -156,7 +156,7 @@ Vue.component('thread-logger', {
     , created(){
         bus.$on('log', this.logHandle.bind(this))
         bus.$on('log-clear', this.clear.bind(this))
-        console.log('EMIT HANDLE')
+        //console.log('EMIT HANDLE')
         bus.$emit('log-attach', { logUpdate: this.logHandle.bind(this) })
     }
 
