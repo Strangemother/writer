@@ -49,6 +49,7 @@
                 v-bind:class='styles'
                 id="markdown-input"></textarea>
         </div>
+
         <thread-logger></thread-logger>
 
     </section>
@@ -67,10 +68,20 @@
             rendered result.
             Content-editable for no-reason.
             -->
-            <div id='markdown_content' contenteditable="true" spellcheck=true>
+            <div class='render-page'>
                 {% verbatim %}
-                <div class="html-view" v-html='html' v-cloak>
+                <div id="line-view" v-cloak>
+                    <h4><span class="line-count">{{ lines.length }}</span> Line{{ lines.length == 1? '': 's' }}.</h4>
+                    <ul class="collection lines">
+                        <li class="collection-item line" v-for='item in lines'>{{ item }}</li>
+                    </ul>
                 </div>
+
+                <div id="markdown_content" contenteditable="true" spellcheck=true>
+                    <div class="html-view" v-html='html' v-cloak>
+                    </div>
+                </div>
+
                 {% endverbatim %}
             </div>
         </div>

@@ -340,7 +340,16 @@ class WorkerRPC extends ClientRPC {
         };
 
         if(this._methods[e.data.name] != undefined) {
-            this._methods[e.data.name](e.data, e)
+
+            if(IT.g(this._methods[e.data.name]).is('array')) {
+                for (var i = 0; i < this._methods[e.data.name].length; i++) {
+                    this._methods[e.data.name][i](e.data, e)
+                }
+            } else{
+                this._methods[e.data.name](e.data, e)
+
+            }
+
         }
     }
 

@@ -72,7 +72,6 @@ var workerMixin = {
         this._logCallbacks= []
 
         bus.$on('log-attach', function(d){
-
             if(this.rpc != undefined
                 && this.rpc._ready == true) {
                 this.addLogCallback(d)
@@ -92,7 +91,11 @@ var workerMixin = {
 
 
             for(let name in d) {
-                rpc._methods[name] = d[name];
+                if(rpc._methods[name] == undefined) {
+                    rpc._methods[name] = []
+                };
+
+                rpc._methods[name].push(d[name]);
             }
         }
 
@@ -104,8 +107,6 @@ var workerMixin = {
 
             let rpc = new WorkerRPC(p, function(){
                 if(readyCallback){ readyCallback(rpc, p) };
-
-                console.log('RPC Callback')
 
                 for (var i = 0; i < self.onReadyCallbacks.length; i++) {
                     self.onReadyCallbacks[i](self.rpc);
@@ -199,6 +200,7 @@ var dataConnection = new Vue({
     , created(){
         bus.dataConnection = this;
         this.stores = getStores()
+        bus.$emit('data-connection', { item: this })
     }
 
     , methods: {

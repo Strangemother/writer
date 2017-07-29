@@ -1,25 +1,25 @@
-#markdown_content>*:first-child {
+.render-page>*:first-child {
     margin-top: 0;
 }
 
 
 
-#markdown_content code {
+.render-page code {
     color: #a50a0a;
     background: #f3f3f3;
     padding: 0em 0.3em 0.15em 0.3em;
     border-radius: 4px;
 }
 
-#markdown_content ul {
+.render-page ul {
     margin-left: 2em;
 }
 
-#markdown_content ul li {
+.render-page ul li {
     list-style: disc;
 }
 
-div#markdown_content {
+div.render-page {
     font-size: 1.1em;
     width: 100%;
     background: #FFF;
@@ -30,43 +30,43 @@ div#markdown_content {
     color: #333;
 }
 
-#markdown_content h1 {
+.render-page h1 {
     font-size: 3.1em;
     border-bottom: solid 1px #EEE;
     font-weight: 500;
     margin-top: 1.2em;
 }
 
-#markdown_content h2 {
+.render-page h2 {
     font-size: 2.6em;
     border-bottom: solid 1px #EEE;
     margin-top: 1em;
     font-weight: 500;
 }
 
-#markdown_content h4 {
+.render-page h4 {
     margin: 1em 0 .6em;
     font-size: 1.7em;
 }
 
-#markdown_content h3 {
+.render-page h3 {
     font-size: 2.1em;
     margin: 1.1em 0 0.5em;
 }
 
-#markdown_content h5 {
+.render-page h5 {
     margin: 1.2em 0 0.6em;
 }
 
-#markdown_content tbody tr {
+.render-page tbody tr {
     border-bottom: solid 1px #EFEFEF;
 }
 
-#markdown_content th {
+.render-page th {
     padding: 0.7em 5px;
     /* background: #f7f7f7; */
 }
 
-#markdown_content strong {
+.render-page strong {
     color: #000;
 }

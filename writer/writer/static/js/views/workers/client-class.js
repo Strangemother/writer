@@ -18,6 +18,14 @@ class ManagerClientClass {
 
     init(){}
 
+    getRPC(){
+        return this._manager.rpc;
+    }
+
+    methodOnRPC(name, func) {
+        return this.getRPC().setMethod(name, func)
+    }
+
     getMethods(){
         /* returns an object of name:method to implement into the RPC.
         functions of the same name are called in sequence, ordering is

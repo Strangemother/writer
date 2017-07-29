@@ -381,7 +381,7 @@ body.page {
     flex-direction: column;
 }
 
-div#markdown_content {
+div.render-page {
     /* height: 100%; */
 }
 
@@ -514,7 +514,7 @@ nav a.brand-logo {
     /* margin: 4em 0; */
 }
 
-.book-editor div#markdown_content {
+.book-editor .render-page {
     box-shadow: 0 0px 4px 0px rgba(69, 90, 100, 0.57);
     min-height: 100%;
     margin-top: 2px;
@@ -913,7 +913,7 @@ li.loglet.max-clear {
 
 .message-placer {
     display: flex;
-    border-bottom: solid 1px white;
+    /* border-bottom: solid 1px white; */
     align-items: center;
     padding: 0.2em 0;
     font-size: 0.9em;
@@ -937,4 +937,45 @@ ul.messages-header {
 }
 
 .messages li.message {
+}
+
+.thread-undefined {
+    background: rgb(241, 241, 183);
+}
+
+.message-placer.thread-updateBlockText {visibility: hidden;height: 1px;}
+
+.message-placer.thread-spliceBlockText {
+    visibility: hidden;
+    height: 1px;
+}
+
+#line-view ul.collection.lines {
+    margin-left: 0;
+    font-family: monospace;
+    font-size: 0.8em;
+    border: none;
+}
+
+li.collection-item.line {
+    padding: 0em 0em;
+}
+
+#line-view h4 {
+    .render-page
+    margin: 0;
+    margin: 0;
+    font-size: 1.2em;
+}
+
+div#markdown_content {
+    padding: 1em 3em;
+}
+
+div#line-view {
+    border-bottom: solid 1px #b5b5b5;
+    padding: 2rem 3em 0.3rem;
+    /* box-shadow: 0px 4px 3px -3px rgba(69, 90, 100, 0.68); */
+    max-height: 50%;
+    overflow: auto;
 }

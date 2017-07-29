@@ -21,6 +21,42 @@ Vue.component('thread-insertLine', {
     , props: ['message']
 })
 
+Vue.component('thread-updateBlockText', {
+    template: `<div :class="['thread-updateBlockText', message.name]">
+        <span class="row">{{ message.content.blockIndex }}</span>
+        <span class="column">Length: {{ message.content.textLength }}</span>
+    </div>`
+    , props: ['message']
+})
+
+Vue.component('thread-splitBlockAtIndex', {
+    template: `<div :class="['thread-splitBlockAtIndex', message.name]">
+        <span class="row">{{ message.content.blockIndex }}</span>
+        <span class="column">Index: {{ message.content.strIndex }}</span>
+    </div>`
+    , props: ['message']
+})
+
+
+Vue.component('thread-spliceBlockText', {
+    template: `<div :class="['thread-spliceBlockText', message.name]">
+        <span class="row">{{ message.content.blockIndex }}</span>
+        <span class="column">
+            <span class="column">start: {{ message.content.startIndex }}</span>
+            <span class="column">end: {{ message.content.endIndex }}</span>
+        </span>
+    </div>`
+    , props: ['message']
+})
+
+Vue.component('thread-insertBlockAt', {
+    template: `<div :class="['thread-insertBlockAt', message.name]">
+        <span class="row">{{ message.content.blockIndex }}</span>
+        <span class="column">Count: {{ message.content.count }}</span>
+    </div>`
+    , props: ['message']
+})
+
 Vue.component('thread-error', {
     template: `<div :class="['thread-error', message.name]">
         <span class="column">{{ message.content.errStr }}</span>
@@ -84,6 +120,7 @@ Vue.component('thread-logger', {
     , created(){
         bus.$on('log', this.logHandle.bind(this))
         bus.$on('log-clear', this.clear.bind(this))
+        console.log('EMIT HANDLE')
         bus.$emit('log-attach', { logUpdate: this.logHandle.bind(this) })
     }
 

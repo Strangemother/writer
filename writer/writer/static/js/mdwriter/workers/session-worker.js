@@ -1,6 +1,10 @@
 /*
-manage the data session of a page, tracking character entry and page context
- */
+Manage the line alterations of the editor. Each event captured from the
+receiver manipulates the block contents. Each block maps to a line within the
+editor.
+
+Blocks are managed internally from a given start Text.
+*/
 
 class BlockManager extends ManagerComponent {
 
@@ -73,7 +77,7 @@ class BlockManager extends ManagerComponent {
 
     updateBlockText(index, text, meta){
         /* update the block of given index with the new text.*/
-        this.aLog('updateBlockText', {blockIndex:index})
+        this.aLog('updateBlockText', {blockIndex: index, textLength: text.length })
         this.session.blocks[index].text = text;
     }
 
@@ -95,7 +99,8 @@ class BlockManager extends ManagerComponent {
         let index = this.session.blocks.indexOf(block)
         if(index == -1) {
             return false;
-        }
+        };
+
         return this.removeBlockAt(index)
     }
 
@@ -321,6 +326,8 @@ class TextSessionWorker extends RemoveTextBlockManager {
             , lines: []
             , blocks: []
         }
+
+        this.methodOnRPC('getLines', this.getLines.bind(this))
     }
 
     _receiveEvent(e) {
@@ -338,6 +345,10 @@ class TextSessionWorker extends RemoveTextBlockManager {
     setPageEvent(page){
         console.log('TextSessionWorker set page', page)
         this.session.page = page
+    }
+
+    getLines(){
+        return this.session.blocks.map((v)=>v.text)
     }
 
 }
