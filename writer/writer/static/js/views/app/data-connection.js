@@ -217,10 +217,10 @@ var editorLocalSaveMixin = {
 
     , data: {
         // timeout delay before auto-saving.
-        delay: 1000
+        delay: 700
         // If the save timer event cache list exceeds the entropy limit, force
         // save the data.
-        , entropy: 30
+        , entropy: 10
         , conflicts: []
         , saveId: -1
     }
@@ -245,14 +245,25 @@ var editorLocalSaveMixin = {
             this.startOrResetTimer()
         }
 
+        , isLocalSaved(){
+            if(
+                this.eventCache.length == 0
+            ) {
+                return true
+            }
+
+            return false;
+        }
+
         , startOrResetTimer(){
             /* restart the time if required or start if it doesnt exist.*/
             if(this._timer != undefined) {
                 window.clearTimeout(this._timer)
             }
 
+
             if(this.eventCache.length > this.entropy) {
-                this.eventCacheTimer.bind(this)
+                this.eventCacheTimer.bind(this)()
             };
 
             let delay = this.delay || 1000;
@@ -331,8 +342,9 @@ var editorLocalSaveMixin = {
             }
 
             localStorage[storeId] = jsonData
+
+            bus.$emit('local-saved', { id, storeId })
             return true;
-            console.log('local saved.')
         }
 
         , localSaveConflict(storeId, lines) {

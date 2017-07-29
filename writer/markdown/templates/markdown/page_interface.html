@@ -33,7 +33,7 @@
                     v-for='item in tools' v-cloak>
 
                     <a href="javascript:;"
-                        :class='{disabled: item.disabled}'
+                        :class='[item.classes, {disabled: item.disabled}]'
                         @click='actionCommand(item, $event)'>
                         <i class="material-icons">{{ item.icon }}</i>
                     </a>

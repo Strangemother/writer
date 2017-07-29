@@ -53,6 +53,7 @@ class EditorTextBase {
     setText(text, editor) {
         editor = editor == undefined? this.editor: editor;
         editor.setValue(text)
+
         editor.clearSelection()
 
         // if(rpc._ready == false) {
@@ -60,6 +61,7 @@ class EditorTextBase {
         //     this._earlySetText = htmlText
         //     return
         // }
+        //
         bus.$emit('editor-settext', { text, editor, parent: this})
 
         // this.outputNode.innerHTML = this.outputNode.innerHTML;
@@ -353,8 +355,8 @@ class AceRender extends RenderBase {
 
         if(contentName != undefined) {
             this.outputNode = document.getElementById(contentName)
-            let t = this.outputNode.innerHTML;
-            this.setText(t, this.editor);
+            //let t = this.outputNode.innerHTML;
+            //this.setText(t, this.editor);
         }
     }
 

@@ -394,7 +394,10 @@ div.render-page {
 .tools .collection-item a {
     padding: 1rem;
     display: flex;
+    height: 100%;
+    line-height: initial;
     color: inherit;
+    background: initial;
 }
 
 .editor-container .tools {
@@ -995,4 +998,33 @@ div#line-view {
     background: rgba(2, 2, 2, 0.11);
     color: #455a64;
     padding: 1px 0.3em;
+}
+
+.tools .save.collection-item a.pulse {
+    color: #43c2ff;
+    transition: color 0.3s cubic-bezier(0.21, 1.52, 0.47, 1.51);
+    /* background: white; */
+    box-shadow: none;
+    /* padding: 0; */
+    line-height: initial;
+    /* width: initial; */
+    /* height: initial; */
+}
+
+.pulse i.material-icons {
+    color: inherit;
+}
+
+.tools .save a.btn.btn-floating {
+    width: inherit;
+    height: 100%;
+    border-radius: initial;
+    /* padding: 0.6rem; */
+    box-shadow: none;
+    /* color: #333; */
+}
+
+.tools .save .btn-floating i {
+    color: inherit;
+    line-height: 1;
 }

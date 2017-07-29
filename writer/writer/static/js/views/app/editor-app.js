@@ -22,6 +22,7 @@ var editorApp = new Vue({
         , saveButton: {
             icon:'save'
             , name: 'save'
+            , classes: ''
             , disabled: self.synced
             , click($event, command){
                 console.log('save clicked')
@@ -77,6 +78,9 @@ var editorApp = new Vue({
             // From data connection.
             bus.$on('page', this.pageHandle.bind(this))
             bus.$on('focus', this.focusHandle.bind(this))
+            bus.$on('local-saved', this.localSavedHandle.bind(this))
+
+            /* Dispatched from the sub componentr 'editor' editor.js */
             bus.$on('editor-settext', this.editorSetTextHandle.bind(this))
 
             this.tools.push(this.saveButton)
@@ -113,6 +117,19 @@ var editorApp = new Vue({
             this.renderer.onCommand(this.renderer.editor, command)
         }
 
+        , localSavedHandle(){
+            this.saveButton.classes = 'btn btn-floating pulse'
+            let time = 1500
+            if(this._localSaveTimer != undefined) {
+                clearTimeout(this._localSaveTimer)
+                time = 700
+            }
+
+            this._localSaveTimer = window.setTimeout(function(){
+                this.saveButton.classes = 'btn btn-floating'
+            }.bind(this), time)
+        }
+
         , pageHandle(data) {
             /* receive page data from an internal event. */
             console.log('printed block')
@@ -138,6 +155,7 @@ var editorApp = new Vue({
             the data connection
              */
             // this.renderer.setText(e.text)
+
             dataConnection.setText(e.text)
         }
 
