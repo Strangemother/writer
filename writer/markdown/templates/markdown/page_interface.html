@@ -50,7 +50,7 @@
                 id="markdown-input"></textarea>
         </div>
 
-                    <thread-logger></thread-logger>
+        <thread-logger></thread-logger>
 
     </section>
 
@@ -71,7 +71,7 @@
             <div class='render-page'>
                 {% verbatim %}
                 <div id="line-view" v-cloak>
-                    <h4><span class="line-count">{{ lines.length }}</span> Line{{ lines.length == 1? '': 's' }}</h4>
+                    <h4><span class="line-count" v-cloak>{{ lines.length }}</span> Line{{ lines.length == 1? '': 's' }}</h4>
                     <ul class="collection lines">
                         <li class="collection-item line" v-for='(item, key) in lines'>
                             <span class="index">{{ key + 1 }}</span>

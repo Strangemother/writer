@@ -342,6 +342,27 @@ class TextSessionWorker extends RemoveTextBlockManager {
         console.log('TextSessionWorker setTextEvent', data)
     }
 
+    setLinesEvent(event) {
+        /* Automatically hooked to the testText event, capture the meta data for any incoming changes.*/
+        console.log('TextSessionWorker setLinesEvent', event)
+        this.replaceAsLines(event.data);
+    }
+
+    replaceAsLines(linesArray) {
+
+        let blocks = []
+        for (var i = 0; i < linesArray.length; i++) {
+            blocks.push(this.asBlock(linesArray[i]))
+        }
+
+        return this.replaceAsBlocks(blocks)
+    }
+
+    replaceAsBlocks(blocks) {
+        this.aLog('replaceAsBlocks', { count: blocks.length })
+        this.session.blocks = blocks
+    }
+
     setPageEvent(page){
         console.log('TextSessionWorker set page', page)
         this.session.page = page

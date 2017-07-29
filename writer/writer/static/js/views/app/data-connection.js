@@ -154,6 +154,7 @@ var workerMixin = {
             /* Geenerate a new RPC */
             this._clientPaths = clientPaths
             this._workerPath = workerPath;
+
             return this.rpc = this._makeRPC(workerPath, this.workerReady.bind(this))
         }
 
@@ -172,12 +173,25 @@ var textSessionMixin = {
     to the worker manager and emiting events upon complete.*/
     methods: {
 
-        setText(data) {
+        setLines(data) {
             /* Set the full editor text for the current page.*/
             console.log('dataconnection.setText')
-            this.rpc.event({ name: 'setText', data})
+            if(this.rpc != undefined && this.rpc._ready == true) {
+                this._sendLinesRPC(data, this.rpc)
+            }
+
+            this._earlySetText = data;
+            this.onReadyCallbacks.push(function(rpc){
+                this._sendLinesRPC(this._earlySetText, rpc)
+                delete this._earlySetText
+            }.bind(this))
+
         }
 
+        , _sendLinesRPC(data, rpc) {
+            return rpc.event({ name: 'setLines', data})
+
+        }
         , textUpdate(data) {
             /* called by the interactive application (such as page detail)
             an update of the content is requested. This should be saved
@@ -208,6 +222,7 @@ var editorLocalSaveMixin = {
         // save the data.
         , entropy: 30
         , conflicts: []
+        , saveId: -1
     }
 
     , methods: {
@@ -255,13 +270,34 @@ var editorLocalSaveMixin = {
 
 
             // Meh. For now just block save the text. It should be fine.
-            this.localSave()
+            let flag = this.inUpdateState == this.saveId;
+            this.localSave(this.saveId, undefined, overwrite=flag)
         }
 
         , writeEvent(event) {
             /* Write aN event into the lines data.*/
         }
 
+        , getLocalSave(id=-1) {
+            /* returns lines or empty array*/
+            let name = 'editor-local-cache'
+            let storeId = `${name}-${id}`
+            if(localStorage[storeId] != undefined) {
+                return JSON.parse(localStorage[storeId])
+            };
+
+            return []
+        }
+
+        , setFromLocalSave(editor, id=-1) {
+            /* set the editor text to the local save data (if any) and
+            begin state caching for incoming data */
+            this.inUpdateState = id
+            let lines = this.getLocalSave(id)
+            let text = lines.join('\n');
+            editor.setText(text)
+            this.setLines(lines)
+        }
 
         , localSave(id, lines, overwrite=false) {
             if(id == undefined) {
@@ -274,6 +310,11 @@ var editorLocalSaveMixin = {
 
             let name = 'editor-local-cache'
             let storeId = `${name}-${id}`
+
+            if(lines.join() == '') {
+                // no need to save
+                return true;
+            }
 
             let jsonData = JSON.stringify(lines);
 

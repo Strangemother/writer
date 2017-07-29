@@ -69,7 +69,8 @@ var editorApp = new Vue({
             and buttons for additional actions such as window based keyboard events.
             */
             this.renderer = new AceRender('markdown_editor', 'markdown_content')
-            this.renderer.setText(this.getInitValue());
+            // this.renderer.setText(this.getInitValue());
+            dataConnection.setFromLocalSave(this.renderer)
             AceRender.config.renderers[0] = this.renderer
             this.renderer.callbacks.push(this.rendererCallback.bind(this));
 
@@ -86,7 +87,7 @@ var editorApp = new Vue({
             /* Return the initial content from the page data load
             If this is blank, a request for data is made -
             replied to by dataConnection*/
-            return '';
+            return dataConnection.getLocalSave().join('\n')
 
             let text = PAGE.initValue;
             if(text.trim().length == 0) {

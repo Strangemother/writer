@@ -89,6 +89,14 @@ Vue.component('thread-mergeBlockDown', {
     , props: ['message']
 })
 
+Vue.component('thread-replaceAsBlocks', {
+    template: `<div :class="['thread-replaceAsBlocks', message.name]">
+        <span class="label">replaceAsBlocks</span>
+        <span class="row">Count: {{ message.content.count }}</span>
+    </div>`
+    , props: ['message']
+})
+
 
 Vue.component('thread-error', {
     template: `<div :class="['thread-error', message.name]">
@@ -109,7 +117,7 @@ Vue.component('thread-undefinedBlockIndex', {
 })
 
 Vue.component('thread-logger', {
-    template: `<div class="thread-log">
+    template: `<div class="thread-log" v-cloak>
         <div :class="['log-container', { counterMultiplier: counterMultiplier > 1}]" >
             <h4 class="header">Thread Log
                 (<span class="count">{{ counter }}</span>)
