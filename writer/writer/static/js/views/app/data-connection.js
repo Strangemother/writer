@@ -158,7 +158,7 @@ var workerMixin = {
         }
 
         , workerReady(rpc, path) {
-            console.log('worker manager ready')
+            //console.log('worker manager ready')
             for (var i = 0; i < this._clientPaths.length; i++) {
                 rpc.addWorker(this._clientPaths[i])
             }
@@ -182,17 +182,141 @@ var textSessionMixin = {
             /* called by the interactive application (such as page detail)
             an update of the content is requested. This should be saved
             and utilized. */
+
             console.log('dataConnection.update')
-            // onsole.log('data', data)
+            // console.log('data', data)
             this.stores.streamPage(this.pageId, data);
         }
     }
 }
 
 
+var editorLocalSaveMixin = {
+    /* Manage base local storage of the immediate view - independent
+    from the worker and online storage to ensure 0 losses.*/
+    created(){
+        bus.$on('renderer-event', this.renderEvent.bind(this));
+        // not bound.
+        this.eventCache = []
+
+    }
+
+    , data: {
+        // timeout delay before auto-saving.
+        delay: 1000
+        // If the save timer event cache list exceeds the entropy limit, force
+        // save the data.
+        , entropy: 30
+        , conflicts: []
+    }
+
+    , methods: {
+        editorLines(){
+            /* return the lines of the editor - lowest possible denominator. */
+            return editorApp.renderer.editor.session.doc.$lines;
+        }
+
+        , renderEvent(data) {
+            /*
+            { content, callback: cb }
+
+            for every call, the event is pushed into a cache and a timeout
+            merged the result into lines.
+            The result is stored as the current view cache. Without syncing issues
+            this should match the lines in the worker.
+             */
+
+            this.eventCache.push(data)
+            this.startOrResetTimer()
+        }
+
+        , startOrResetTimer(){
+            /* restart the time if required or start if it doesnt exist.*/
+            if(this._timer != undefined) {
+                window.clearTimeout(this._timer)
+            }
+
+            if(this.eventCache.length > this.entropy) {
+                this.eventCacheTimer.bind(this)
+            };
+
+            let delay = this.delay || 1000;
+            this._timer = window.setTimeout(this.eventCacheTimer.bind(this), delay)
+        }
+
+        , eventCacheTimer(){
+            /* Called by the timer to store all event cache data */
+            let eventCache = this.eventCache.slice();
+            // Immediately clear the events.
+            this.eventCache = []
+            // for (var i = 0; i < eventCache.length; i++) {
+            //     this.writeEvent(eventCache[i])
+            // }
+
+
+            // Meh. For now just block save the text. It should be fine.
+            this.localSave()
+        }
+
+        , writeEvent(event) {
+            /* Write aN event into the lines data.*/
+        }
+
+
+        , localSave(id, lines, overwrite=false) {
+            if(id == undefined) {
+                id = this.pageId;
+            };
+
+            if(lines == undefined) {
+                lines =  this.editorLines()
+            };
+
+            let name = 'editor-local-cache'
+            let storeId = `${name}-${id}`
+
+            let jsonData = JSON.stringify(lines);
+
+            if(localStorage[storeId] != undefined) {
+                if(localStorage[storeId] == jsonData) {
+                    // no need to save
+                    return true;
+                }
+
+                // conflict.
+                if(overwrite == false) {
+                    return this.localSaveConflict(id, lines)
+                }
+            }
+
+            localStorage[storeId] = jsonData
+            return true;
+            console.log('local saved.')
+        }
+
+        , localSaveConflict(storeId, lines) {
+            /* data exists at the  storeId when saving the lines. */
+            console.warn('Local save conflict on', storeId)
+            if(storeId == 'conflicts') {
+                console.error('Wooh! Local conflicts on local conflicts?')
+            };
+
+            this.conflicts.push({ storeId, lines })
+            let saved = this.localSave('conflicts', this.conflicts, true)
+            if(saved == false) {
+                // now we're in trouble.
+                console.error('Could not save conflicts.')
+            };
+
+            return saved;
+        }
+
+    }
+}
+
 var dataConnection = new Vue({
 
-    mixins: [pageManageMixin, workerMixin, textSessionMixin]
+    mixins: [pageManageMixin, workerMixin, textSessionMixin, editorLocalSaveMixin]
     , data: {
         pageId: -1
     }

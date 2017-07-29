@@ -86,6 +86,8 @@ var editorApp = new Vue({
             /* Return the initial content from the page data load
             If this is blank, a request for data is made -
             replied to by dataConnection*/
+            return '';
+
             let text = PAGE.initValue;
             if(text.trim().length == 0) {
                 text = $(this.$el).find('.init-markdown').text()
@@ -154,6 +156,7 @@ var editorApp = new Vue({
             Called by the editor with the event for action.
             This should perpetuate the storage and actions.
              */
+
             dataConnection.textUpdate(data)
         }
 
