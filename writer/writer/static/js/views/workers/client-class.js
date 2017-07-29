@@ -78,5 +78,24 @@ class ManagerClientClass {
         /* return an object of name:method for to implement into the RPC.*/
         return {}
     }
+
+
+    aLog(key, data) {
+
+        postMessage({
+            name: 'logUpdate'
+            , type: key
+            , content: data
+            , level: 1
+        })
+    }
+
+    bLog(key, data) {
+        this.aLog(key, Object.assign(data, { level: 2 }))
+    }
+
+    eLog(errStr) {
+        this.aLog('error', Object.assign({ errStr }, { level: 'error' }))
+    }
 }
 

@@ -14,7 +14,16 @@ var pageManageMixin = {
             bus.$emit('loading', { loading: this.loading})
 
             let url = `/page/data/${pageId}/`
-            $.getJSON(url, this.handle(pageId, func))
+            let self = this;
+            $.getJSON(url, function(data){
+                if(func != undefined) {
+                    func(data, pageId)
+                };
+
+                self.pageId = pageId;
+                bus.$emit('page', data)
+                bus.$emit('pageId', { pageId: pageId})
+            })
         }
 
         , newPage(data, callback) {
@@ -31,7 +40,6 @@ var pageManageMixin = {
 
             let name = data.value;
             let parent = data.parentId || data.parent;
-            console.log('new page', name);
 
             let bookId = data.bookId || PAGE.bookId;
             let pId = ''
@@ -49,15 +57,7 @@ var pageManageMixin = {
             Provide a page ID (for reference) and a function to call on
             success
             */
-            return function(data){
-                this.pageId = pageId;
-                data = this.cleanData(data)
-                bus.$emit('page', data)
-                bus.$emit('pageId', { pageId: pageId})
-                if(func != undefined) {
-                    func(data, pageId)
-                }
-            }.bind(this)
+            return
         }
     }
 }
@@ -69,11 +69,34 @@ var workerMixin = {
         this.hooked_renderer = {};
         this.config = {};
         bus.$on('page', this.pageHandle.bind(this))
+        this._logCallbacks= []
+
+        bus.$on('log-attach', function(d){
+
+            if(this.rpc != undefined
+                && this.rpc._ready == true) {
+                this.addLogCallback(d)
+            } else {
+                this._logCallbacks.push(d)
+            }
+        }.bind(this))
+
     }
 
     , methods:{
 
-        _makeRPC(path, readyCallback) {
+        addLogCallback(d, rpc) {
+            if(rpc == undefined) {
+                rpc = this.rpc;
+            };
+
+
+            for(let name in d) {
+                rpc._methods[name] = d[name];
+            }
+        }
+
+        , _makeRPC(path, readyCallback) {
 
             let p = path;
             let self = this;
@@ -109,6 +132,14 @@ var workerMixin = {
                 }
 
             });
+
+            console.log('making rpc, collecting _logCallbacks', this._logCallbacks)
+            for (var i = 0; i < this._logCallbacks.length; i++) {
+                let item = this._logCallbacks[i];
+                this.addLogCallback(item, rpc);
+            };
+
+            this._logCallbacks
 
             return rpc;
         }

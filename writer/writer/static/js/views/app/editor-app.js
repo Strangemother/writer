@@ -112,10 +112,10 @@ var editorApp = new Vue({
 
         , pageHandle(data) {
             /* receive page data from an internal event. */
+            console.log('printed block')
             this.pageId = data.id
             this.contentIds = data.content_ids
             this.contentId = data.content_ids[data.content_ids.length-1]
-            console.log('pageHandle', data)
             //this.localMismatch = this.localStorageMismatch(data.id, data.text);
             // this.mismatchButton.disabled = !this.localMismatch
 
@@ -130,6 +130,11 @@ var editorApp = new Vue({
         }
 
          , editorSetTextHandle(e){
+            /*
+            The child editor dispatched the 'settext' event. Perpetuate this to
+            the data connection
+             */
+            // this.renderer.setText(e.text)
             dataConnection.setText(e.text)
         }
 
