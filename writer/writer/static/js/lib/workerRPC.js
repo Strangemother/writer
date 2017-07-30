@@ -330,7 +330,7 @@ class WorkerRPC extends ClientRPC {
                 this.reply(e.data, v)
             }
         } else if(proxied == false){
-            console.log('Did not find function', e.data.name)
+            // console.log('Did not find function', e.data.name)
 
         }
 
@@ -349,7 +349,8 @@ class WorkerRPC extends ClientRPC {
                 this._methods[e.data.name](e.data, e)
 
             }
-
+        } else {
+            // console.log('nothing for', e.data.name)
         }
     }
 

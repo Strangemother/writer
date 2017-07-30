@@ -118,6 +118,22 @@ class BlockManager extends ManagerComponent {
 
         return removes;
     }
+
+    replaceAsLines(linesArray) {
+
+        let blocks = []
+        for (var i = 0; i < linesArray.length; i++) {
+            blocks.push(this.asBlock(linesArray[i]))
+        }
+
+        return this.replaceAsBlocks(blocks)
+    }
+
+    replaceAsBlocks(blocks) {
+        this.aLog('replaceAsBlocks', { count: blocks.length })
+        this.session.blocks = blocks
+    }
+
 }
 
 
@@ -134,7 +150,6 @@ class InsertTextBlockManager extends BlockManager {
         } else {
             this.insertLines(e)
         }
-
     }
 
     insertLine(e){
@@ -334,6 +349,7 @@ class TextSessionWorker extends RemoveTextBlockManager {
         if( this[`${e.action}ActionEvent`] != undefined) {
             return [true, this[`${e.action}ActionEvent`].call(this, e)]
         };
+
         return super._receiveEvent(e)
     }
 
@@ -344,28 +360,15 @@ class TextSessionWorker extends RemoveTextBlockManager {
 
     setLinesEvent(event) {
         /* Automatically hooked to the testText event, capture the meta data for any incoming changes.*/
-        console.log('TextSessionWorker setLinesEvent', event)
+        // console.log('TextSessionWorker setLinesEvent', event)
         this.replaceAsLines(event.data);
-    }
-
-    replaceAsLines(linesArray) {
-
-        let blocks = []
-        for (var i = 0; i < linesArray.length; i++) {
-            blocks.push(this.asBlock(linesArray[i]))
-        }
-
-        return this.replaceAsBlocks(blocks)
-    }
-
-    replaceAsBlocks(blocks) {
-        this.aLog('replaceAsBlocks', { count: blocks.length })
-        this.session.blocks = blocks
     }
 
     setPageEvent(page){
         console.log('TextSessionWorker set page', page)
-        this.session.page = page
+        // this.session.page = page
+        this.replaceAsLines(page.data.lines);
+
     }
 
     getLines(){
@@ -375,7 +378,7 @@ class TextSessionWorker extends RemoveTextBlockManager {
 }
 
 
-TextSessionWorker.mount()
+TextSessionWorker.mount('changes')
 
 
 

@@ -1,8 +1,29 @@
 var pageManageMixin = {
+    created(){
+        let _set = function(rpc){
+            rpc.setMethod('render', function(d){
+                this.renderHandle(d)
+            }.bind(this));
+        }.bind(this)
 
-    methods: {
+        if(this.rpc != undefined
+            && this.rpc._ready == true) {
+            return _set(this.rpc)
+        }
 
-        getPage(pageId, func){
+        this.onReadyCallbacks.push(function(rpc){
+            _set(rpc);
+        }.bind(this))
+
+    }
+
+    , methods: {
+
+        renderHandle(d) {
+            bus.$emit('render-text', d)
+        }
+
+        , getPage(pageId, func){
             /* Fetch a page through event, result data is given to the
             func.*/
             console.log('dataConnection.getPage')
@@ -19,19 +40,24 @@ var pageManageMixin = {
                 if(func != undefined) {
                     func(data, pageId)
                 };
-
-                self.pageId = pageId;
-                bus.$emit('page', data)
-                bus.$emit('pageId', { pageId: pageId})
+                self.setPage(data, pageId);
             })
         }
 
+        , setPage(data, id) {
+            this.page = data;
+            this.pageId = id;
+            bus.$emit('page', data)
+            bus.$emit('pageId', { pageId: pageId})
+        }
+
         , newPage(data, callback) {
-            /* Send a new page reqest, calling the optional callback on complete.
-                data == {
-                    bookId: optional - default: PAGE.bookId.
-                    , parentId: optional - default from data.parent.object<pk>
-                }
+            /* Send a new page request, calling the optional callback on complete.
+
+                    data == {
+                        bookId: optional - default: PAGE.bookId.
+                        , parentId: optional - default from data.parent.object<pk>
+                    }
 
                 if parentId is not defined, the page will live on the root
                 of the book.
@@ -61,6 +87,7 @@ var pageManageMixin = {
         }
     }
 }
+
 
 var workerMixin = {
     created(){
@@ -167,6 +194,7 @@ var workerMixin = {
 
     }
 }
+
 
 var textSessionMixin = {
     /* Handle inline and session changes to text. Perpetuating those changes
@@ -303,10 +331,14 @@ var editorLocalSaveMixin = {
         , setFromLocalSave(editor, id=-1) {
             /* set the editor text to the local save data (if any) and
             begin state caching for incoming data */
-            this.inUpdateState = id
             let lines = this.getLocalSave(id)
             let text = lines.join('\n');
             editor.setText(text)
+            this.startLocalSession(id, lines)
+        }
+
+        , startLocalSession(id, lines){
+            this.inUpdateState = id
             this.setLines(lines)
         }
 
@@ -367,9 +399,10 @@ var editorLocalSaveMixin = {
     }
 }
 
+
 var dataConnection = new Vue({
 
-    mixins: [pageManageMixin, workerMixin, textSessionMixin, editorLocalSaveMixin]
+    mixins: [workerMixin, pageManageMixin, textSessionMixin, editorLocalSaveMixin]
     , data: {
         pageId: -1
     }
@@ -394,6 +427,24 @@ var dataConnection = new Vue({
             return data;
         }
 
+        , setPage(data, id) {
+
+            let lines = [];
+            for (var i = 0; i < data.content_blocks.length; i++) {
+                let block = data.content_blocks[i];
+                let _lines = block.text.split('\n');
+                lines = lines.concat(_lines)
+            };
+
+            data.lines = lines;
+
+            this.page = data;
+            this.pageId = id;
+            this.saveId = this.pageId;
+            bus.$emit('page', data)
+            bus.$emit('pageId', { pageId: id})
+            this.startLocalSession(id, data.lines)
+        }
     }
 })
 

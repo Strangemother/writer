@@ -22,6 +22,7 @@ var renderApp = new Vue({
     , methods: {
         renderTextHandle(e){
             /* Render the complete text as a full HTML render*/
+            this.html = e.content.render
         }
     }
 })

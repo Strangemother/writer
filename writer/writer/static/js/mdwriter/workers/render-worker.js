@@ -32,8 +32,9 @@ class MarkdownRenderer {
             return function (err, rs) {
                 if (err) throw err;
                 self.rendered(rs,s);
+                return rs;
             }
-       })(data) ) ;
+       })({}) ) ;
     }
 
     rendered(rStr, oStr) {
@@ -49,7 +50,7 @@ class RenderWorker extends ManagerComponent {
 
     init(){
         this.renderer = new MarkdownRenderer();
-        this.invalid
+        this.invalid = false;
     }
 
     mountMethods() {
@@ -68,13 +69,25 @@ class RenderWorker extends ManagerComponent {
     }
 
     insertActionEvent(e) {
-        //console.log('RenderWorker insert action')
+        console.log('RenderWorker insert action')
         this.invalid = true;
         return this.render(e)
     }
 
     render(t) {
-        return 'doggy'
+        let delay = 500;
+
+        if(this._timer != undefined) {
+            clearTimeout(this._timer)
+            delay = 300;
+        };
+
+        this._timer = setTimeout(function(){
+            let text = this._manager.workers.changes.getLines().join('\n')
+            let render = this.renderer.render(text)
+            this.getRPC().send('render', { render: render })
+        }.bind(this), delay);
+
     }
 }
 

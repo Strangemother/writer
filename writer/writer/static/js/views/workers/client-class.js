@@ -76,10 +76,10 @@ class ManagerClientClass {
 
     unmount() {}
 
-    static mount(){
+    static mount(name){
         /* Start the `this` worker, implementing the instance
         into the mounted clients.*/
-        self.manager.mountClient(this)
+        self.manager.mountClient(this, name)
     }
 
     mountMethods() {

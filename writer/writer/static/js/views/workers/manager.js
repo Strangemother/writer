@@ -36,6 +36,7 @@ class Manager {
     constructor(){
         this.clients = []
         this.mounted = []
+        this.workers = {}
         this.init()
     }
 
@@ -61,11 +62,14 @@ class Manager {
         this.rpc = rpc;
     }
 
-    mountClient(cls) {
+    mountClient(cls, name) {
         /* mount an object or instance as a client of the manager
          */
         let instance = new cls(this);
         this.mounted.push(instance)
+        if(name != undefined) {
+            this.workers[name]= instance;
+        }
         instance._mount(this)
     }
 

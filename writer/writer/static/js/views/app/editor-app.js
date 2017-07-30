@@ -131,22 +131,16 @@ var editorApp = new Vue({
         }
 
         , pageHandle(data) {
-            /* receive page data from an internal event. */
-            console.log('printed block')
+            /* receive page data from dataConnectoin or other internal event. */
+            console.log('editor-app loading page handle', data)
+
             this.pageId = data.id
-            this.contentIds = data.content_ids
-            this.contentId = data.content_ids[data.content_ids.length-1]
-            //this.localMismatch = this.localStorageMismatch(data.id, data.text);
-            // this.mismatchButton.disabled = !this.localMismatch
-
-            let t = ''
-            for (var i = 0; i <data.content_blocks.length; i++) {
-               t += data.content_blocks[i].text += '\n'
-            }
-
-            this.renderer.setText(t)
+            // this.contentIds = data.content_ids
+            // this.contentId = data.content_ids[data.content_ids.length-1]
+            this.renderer.setText(data.lines.join('\n'))
+            // this.renderer.setText(t)
             // this.lastOnlineSave = data.text;
-            this.saveButton.disabled = this.synced
+            this.saveButton.disabled = false;// this.synced
         }
 
          , editorSetTextHandle(e){
@@ -155,8 +149,8 @@ var editorApp = new Vue({
             the data connection
              */
             // this.renderer.setText(e.text)
-
-            dataConnection.setText(e.text)
+            console.log('editorSetTextHandle')
+            // dataConnection.setText(e.text)
         }
 
         , focusHandle(){

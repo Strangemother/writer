@@ -1,5 +1,10 @@
 Vue.component('thread-message', {
-    template: `<div :class="['thread-message', message.name]">{{ message }}</div>`
+    template: `<div :class="['thread-message', message.name]">
+        <span class="label">{{ message.type }}</span>
+        <span class="value">
+        {{ message.content }}
+        </span>
+    </div>`
     , props: ['message']
 })
 
