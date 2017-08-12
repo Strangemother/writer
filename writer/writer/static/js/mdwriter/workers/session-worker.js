@@ -6,46 +6,46 @@ editor.
 Blocks are managed internally from a given start Text.
 */
 
-class BlockManager extends ManagerComponent {
+class LineManager extends ManagerComponent {
 
     replaceBlock(blockIndex, newBlock) {
-        this.insertBlockAt(blockIndex+1, newBlock)
+        this.insertLineAt(blockIndex+1, newBlock)
         this.aLog('replaceBlock', {blockIndex , newBlock })
         return this.removeLineAt(blockIndex)
     }
 
-    splitLineAtIndex(blockIndex, strIndex) {
-        /* split the block into two blocks, the second block indexed under the blockIndex*/
-        if(this.session.blocks[blockIndex] == undefined){
+    splitLineAtIndex(lineIndex, strIndex) {
+        /* split the block into two blocks, the second block indexed under the lineIndex*/
+        if(this.session.blocks[lineIndex] == undefined){
             return false;
         }
 
-        let text = this.session.blocks[blockIndex].text;
+        let text = this.session.blocks[lineIndex].text;
         if(text == undefined) return false;
 
-        this.aLog('splitLineAtIndex', {blockIndex, strIndex})
+        this.aLog('splitLineAtIndex', {blockIndex: lineIndex, strIndex})
 
-        this.updateLineText(blockIndex, text.slice(0, strIndex))
-        return this.insertBlockAt(blockIndex + 1, this.asBlock(text.slice(strIndex)))
+        this.updateLineText(lineIndex, text.slice(0, strIndex))
+        return this.insertLineAt(lineIndex + 1, this.asBlock(text.slice(strIndex)))
     }
 
-    spliceBlockText(blockIndex, startIndex, endIndex) {
+    spliceLineText(lineIndex, startIndex, endIndex) {
         /* remove the substring from the block text from startIndex to endIndex */
-        let text = this.getBlockText(blockIndex);
+        let text = this.getLineText(lineIndex);
         let start = text.substr(0, startIndex);
         let end = text.substr(endIndex);
-        this.aLog('spliceBlockText', {blockIndex, startIndex, endIndex})
-        return this.updateLineText(blockIndex, start + end);
+        this.aLog('spliceLineText', {blockIndex: lineIndex, startIndex, endIndex})
+        return this.updateLineText(lineIndex, start + end);
     }
 
-    getBlockText(blockIndex) {
-        if(this.session.blocks[blockIndex] == undefined)  {
+    getLineText(lineIndex) {
+        if(this.session.blocks[lineIndex] == undefined)  {
             return
         };
-        return this.session.blocks[blockIndex].text;
+        return this.session.blocks[lineIndex].text;
     }
 
-    mergeBlockDown(blockIndex) {
+    mergeLineDown(blockIndex) {
         /* Merge the target block index into the next block below.*/
         if(this.session.blocks[blockIndex] == undefined){
             return false;
@@ -54,12 +54,12 @@ class BlockManager extends ManagerComponent {
         let ta = this.session.blocks[blockIndex].text;
         let tb = this.session.blocks[blockIndex + 1].text;
 
-        this.aLog('mergeBlockDown', {blockIndex})
+        this.aLog('mergeLineDown', {blockIndex})
         this.updateLineText(blockIndex, ta + tb)
         return this.removeLineAt(blockIndex+1)
     }
 
-    asBlocks(texts) {
+    asLines(texts) {
         /* givwen an array of strings, return an array of blocks */
         let r = []
         for (var i = 0; i < texts.length; i++) {
@@ -75,23 +75,23 @@ class BlockManager extends ManagerComponent {
         }
     }
 
-    updateLineText(index, text, meta){
+    updateLineText(lineIndex, text, meta){
         /* update the block of given index with the new text.*/
-        this.aLog('updateLineText', {blockIndex: index, textLength: text.length })
-        this.session.blocks[index].text = text;
+        this.aLog('updateLineText', {blockIndex: lineIndex, textLength: text.length })
+        this.session.blocks[lineIndex].text = text;
     }
 
-    insertBlockAt(index, block) {
+    insertLineAt(index, block) {
         /* Push a single block into the given index position */
         return this.insertBlocksAt(index, [block])
     }
 
-    insertBlocksAt(index, blocks) {
+    insertBlocksAt(index, lines) {
         /* insert many blocks into the block list
         returns the new blocks length*/
-        this.aLog('insertBlocksAt', {blockIndex: index, count: blocks.length})
+        this.aLog('insertBlocksAt', {blockIndex: index, count: lines.length})
 
-        this.session.blocks.splice(index, 0, ...blocks)
+        this.session.blocks.splice(index, 0, ...lines)
         return this.session.blocks.length
     }
 
@@ -121,23 +121,23 @@ class BlockManager extends ManagerComponent {
 
     replaceAsLines(linesArray) {
 
-        let blocks = []
+        let lines = []
         for (var i = 0; i < linesArray.length; i++) {
-            blocks.push(this.asBlock(linesArray[i]))
+            lines.push(this.asBlock(linesArray[i]))
         }
 
-        return this.replaceAsBlocks(blocks)
+        return this.replaceAsBlocks(lines)
     }
 
-    replaceAsBlocks(blocks) {
-        this.aLog('replaceAsBlocks', { count: blocks.length })
-        this.session.blocks = blocks
+    replaceAsBlocks(lines) {
+        this.aLog('replaceAsBlocks', { count: lines.length })
+        this.session.blocks = lines
     }
 
 }
 
 
-class InsertTextBlockManager extends BlockManager {
+class InsertTextLineManager extends LineManager {
 
     insertActionEvent(e) {
         /* From here we manage the text session, page updates denote
@@ -164,7 +164,7 @@ class InsertTextBlockManager extends BlockManager {
             , value = e.lines[0]
 
         this.aLog('insertLine', { blockIndex, start: sCol, value })
-        this.injectTextInBlock(blockIndex, sCol, value)
+        this.injectTextInLine(blockIndex, sCol, value)
     }
 
     _firstlineInsert(e) {
@@ -202,7 +202,7 @@ class InsertTextBlockManager extends BlockManager {
         // the first line
         let end = this._firstlineInsert(e);
         // skip first line, inject new lines
-        let midLines = this.asBlocks(e.lines.slice(1, -1));
+        let midLines = this.asLines(e.lines.slice(1, -1));
         // generate the last line
         midLines = midLines.concat(this.asBlock(e.lines[e.lines.length-1] + end))
 
@@ -218,16 +218,16 @@ class InsertTextBlockManager extends BlockManager {
         return this.insertBlocksAt(e.start.row+1, midLines)
     }
 
-    injectTextInBlock(blockIndex, strIndex, value) {
+    injectTextInLine(lineIndex, strIndex, value) {
         /* splice the given value at the strIndex position within the
-        text of block[blockIndex] */
+        text of block[lineIndex] */
 
-        if(this.session.blocks[blockIndex] == undefined) {
-            this.eLog(`Cannot inject value into undefined block: ${blockIndex}`)
-            return this.undefinedBlockIndex(blockIndex, strIndex, value)
+        if(this.session.blocks[lineIndex] == undefined) {
+            this.eLog(`Cannot inject value into undefined block: ${lineIndex}`)
+            return this.undefinedLineIndex(lineIndex, strIndex, value)
         }
 
-        let text = this.session.blocks[blockIndex].text
+        let text = this.session.blocks[lineIndex].text
             // slice the string at the index of of start/end.
             , start = text.slice(0, strIndex)
             , end = text.slice(strIndex-1)
@@ -235,11 +235,11 @@ class InsertTextBlockManager extends BlockManager {
             , newText = text.substr(0, strIndex) + value + text.substr(strIndex)
             ;
 
-        this.updateLineText(blockIndex, newText)
+        this.updateLineText(lineIndex, newText)
     }
 
-    undefinedBlockIndex(blockIndex, strIndex, value) {
-        this.bLog('undefinedBlockIndex', { blockIndex, strIndex, value })
+    undefinedLineIndex(blockIndex, strIndex, value) {
+        this.bLog('undefinedLineIndex', { blockIndex, strIndex, value })
         this.session.blocks[blockIndex] = this.asBlock(value)
     }
 
@@ -272,7 +272,7 @@ class InsertTextBlockManager extends BlockManager {
 }
 
 
-class RemoveTextBlockManager extends InsertTextBlockManager {
+class RemoveTextLineManager extends InsertTextLineManager {
 
     removeActionEvent(e) {
         /* From here we manage the text session, page updates denote
@@ -288,14 +288,14 @@ class RemoveTextBlockManager extends InsertTextBlockManager {
 
     removeLine(e) {
         /* single line remove event has occured such as a char.*/
-        let text = this.getBlockText(e.start.row);
+        let text = this.getLineText(e.start.row);
         let line = e.lines[0];
         this.aLog('removeLine', { blockIndex: e.start.row, start: e.start.column, length:e.start.column + line.length })
 
         if(text != undefined) {
             let delString = text.substr(e.start.column, line.length);
             if(delString != line) { return false };
-            this.spliceBlockText(e.start.row, e.start.column, e.start.column + line.length)
+            this.spliceLineText(e.start.row, e.start.column, e.start.column + line.length)
         }
 
         return true;
@@ -310,11 +310,11 @@ class RemoveTextBlockManager extends InsertTextBlockManager {
         // splice top and bottom; delete middle lines
         let startRow = e.start.row
         let endRow = e.end.row
-        let text = this.getBlockText(startRow);
+        let text = this.getLineText(startRow);
         let endText = '';
 
         if(this.session.blocks[endRow] != undefined)  {
-            endText = this.getBlockText(endRow);
+            endText = this.getLineText(endRow);
         } else {
 
         }
@@ -327,12 +327,12 @@ class RemoveTextBlockManager extends InsertTextBlockManager {
     }
 
     removeReturn(e){
-        this.mergeBlockDown(e.start.row)
+        this.mergeLineDown(e.start.row)
     }
 }
 
 
-class TextSessionWorker extends RemoveTextBlockManager {
+class TextSessionWorker extends RemoveTextLineManager {
 
     init(){
         this.session = {
