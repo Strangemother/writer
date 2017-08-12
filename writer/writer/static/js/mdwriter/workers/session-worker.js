@@ -10,7 +10,7 @@ class LineManager extends ManagerComponent {
 
     replaceBlock(blockIndex, newBlock) {
         this.insertLineAt(blockIndex+1, newBlock)
-        this.aLog('replaceBlock', {blockIndex , newBlock })
+        this.emit('replaceBlock', {blockIndex , newBlock })
         return this.removeLineAt(blockIndex)
     }
 
@@ -23,7 +23,7 @@ class LineManager extends ManagerComponent {
         let text = this.session.blocks[lineIndex].text;
         if(text == undefined) return false;
 
-        this.aLog('splitLineAtIndex', {blockIndex: lineIndex, strIndex})
+        this.emit('splitLineAtIndex', {blockIndex: lineIndex, strIndex})
 
         this.updateLineText(lineIndex, text.slice(0, strIndex))
         return this.insertLineAt(lineIndex + 1, this.asBlock(text.slice(strIndex)))
@@ -34,7 +34,7 @@ class LineManager extends ManagerComponent {
         let text = this.getLineText(lineIndex);
         let start = text.substr(0, startIndex);
         let end = text.substr(endIndex);
-        this.aLog('spliceLineText', {blockIndex: lineIndex, startIndex, endIndex})
+        this.emit('spliceLineText', {blockIndex: lineIndex, startIndex, endIndex})
         return this.updateLineText(lineIndex, start + end);
     }
 
@@ -54,7 +54,7 @@ class LineManager extends ManagerComponent {
         let ta = this.session.blocks[blockIndex].text;
         let tb = this.session.blocks[blockIndex + 1].text;
 
-        this.aLog('mergeLineDown', {blockIndex})
+        this.emit('mergeLineDown', {blockIndex})
         this.updateLineText(blockIndex, ta + tb)
         return this.removeLineAt(blockIndex+1)
     }
@@ -77,7 +77,7 @@ class LineManager extends ManagerComponent {
 
     updateLineText(lineIndex, text, meta){
         /* update the block of given index with the new text.*/
-        this.aLog('updateLineText', {blockIndex: lineIndex, textLength: text.length })
+        this.emit('updateLineText', {blockIndex: lineIndex, textLength: text.length })
         this.session.blocks[lineIndex].text = text;
     }
 
@@ -89,7 +89,7 @@ class LineManager extends ManagerComponent {
     insertBlocksAt(index, lines) {
         /* insert many blocks into the block list
         returns the new blocks length*/
-        this.aLog('insertBlocksAt', {blockIndex: index, count: lines.length})
+        this.emit('insertBlocksAt', {blockIndex: index, count: lines.length})
 
         this.session.blocks.splice(index, 0, ...lines)
         return this.session.blocks.length
@@ -105,7 +105,7 @@ class LineManager extends ManagerComponent {
     }
 
     removeLineAt(index) {
-        this.aLog('removeLineAt', {blockIndex: index})
+        this.emit('removeLineAt', {blockIndex: index})
         return this.session.blocks.splice(index, 1)
     }
 
@@ -130,7 +130,7 @@ class LineManager extends ManagerComponent {
     }
 
     replaceAsBlocks(lines) {
-        this.aLog('replaceAsBlocks', { count: lines.length })
+        this.emit('replaceAsBlocks', { count: lines.length })
         this.session.blocks = lines
     }
 
@@ -163,7 +163,7 @@ class InsertTextLineManager extends LineManager {
             //, eCol = e.end.column
             , value = e.lines[0]
 
-        this.aLog('insertLine', { blockIndex, start: sCol, value })
+        this.emit('insertLine', { blockIndex, start: sCol, value })
         this.injectTextInLine(blockIndex, sCol, value)
     }
 
@@ -290,7 +290,7 @@ class RemoveTextLineManager extends InsertTextLineManager {
         /* single line remove event has occured such as a char.*/
         let text = this.getLineText(e.start.row);
         let line = e.lines[0];
-        this.aLog('removeLine', { blockIndex: e.start.row, start: e.start.column, length:e.start.column + line.length })
+        this.emit('removeLine', { blockIndex: e.start.row, start: e.start.column, length:e.start.column + line.length })
 
         if(text != undefined) {
             let delString = text.substr(e.start.column, line.length);

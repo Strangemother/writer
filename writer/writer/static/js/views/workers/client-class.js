@@ -120,7 +120,6 @@ class ManagerClientClass {
         return {}
     }
 
-
     aLog(key, data) {
 
         postMessage({
@@ -137,6 +136,12 @@ class ManagerClientClass {
 
     eLog(errStr) {
         this.aLog('error', Object.assign({ errStr }, { level: 'error' }))
+    }
+
+    emit(k, d){
+
+        this.aLog(k, d)
+        this._receiveEvent(Object.assign({name: k}, d))
     }
 }
 
