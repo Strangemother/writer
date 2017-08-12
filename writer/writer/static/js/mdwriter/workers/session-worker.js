@@ -25,7 +25,7 @@ class BlockManager extends ManagerComponent {
 
         this.aLog('splitLineAtIndex', {blockIndex, strIndex})
 
-        this.updateBlockText(blockIndex, text.slice(0, strIndex))
+        this.updateLineText(blockIndex, text.slice(0, strIndex))
         return this.insertBlockAt(blockIndex + 1, this.asBlock(text.slice(strIndex)))
     }
 
@@ -35,7 +35,7 @@ class BlockManager extends ManagerComponent {
         let start = text.substr(0, startIndex);
         let end = text.substr(endIndex);
         this.aLog('spliceBlockText', {blockIndex, startIndex, endIndex})
-        return this.updateBlockText(blockIndex, start + end);
+        return this.updateLineText(blockIndex, start + end);
     }
 
     getBlockText(blockIndex) {
@@ -55,7 +55,7 @@ class BlockManager extends ManagerComponent {
         let tb = this.session.blocks[blockIndex + 1].text;
 
         this.aLog('mergeBlockDown', {blockIndex})
-        this.updateBlockText(blockIndex, ta + tb)
+        this.updateLineText(blockIndex, ta + tb)
         return this.removeBlockAt(blockIndex+1)
     }
 
@@ -75,9 +75,9 @@ class BlockManager extends ManagerComponent {
         }
     }
 
-    updateBlockText(index, text, meta){
+    updateLineText(index, text, meta){
         /* update the block of given index with the new text.*/
-        this.aLog('updateBlockText', {blockIndex: index, textLength: text.length })
+        this.aLog('updateLineText', {blockIndex: index, textLength: text.length })
         this.session.blocks[index].text = text;
     }
 
@@ -184,7 +184,7 @@ class InsertTextBlockManager extends BlockManager {
                 , newText = text.substr(0, strIndex) + e.lines[0]
                 ;
             end = text.slice(strIndex)
-            this.updateBlockText(e.start.row, newText)
+            this.updateLineText(e.start.row, newText)
         }
 
         return end;
@@ -235,7 +235,7 @@ class InsertTextBlockManager extends BlockManager {
             , newText = text.substr(0, strIndex) + value + text.substr(strIndex)
             ;
 
-        this.updateBlockText(blockIndex, newText)
+        this.updateLineText(blockIndex, newText)
     }
 
     undefinedBlockIndex(blockIndex, strIndex, value) {
@@ -321,7 +321,7 @@ class RemoveTextBlockManager extends InsertTextBlockManager {
 
         let startLine = text.slice(0, e.start.column);
         let lastLine = endText.slice(e.end.column, endText.length);
-        this.updateBlockText(startRow, startLine + lastLine);
+        this.updateLineText(startRow, startLine + lastLine);
         // remove block for all rows.
         this.removeBlockRange(startRow + 1, endRow + 1)
     }
