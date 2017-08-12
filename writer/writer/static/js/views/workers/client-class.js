@@ -70,6 +70,10 @@ class ManagerClientClass {
         return [false, undefined];
     }
 
+    onEvent(){
+
+    }
+
     mounted(){
         /* class is mounted and ready for use.*/
     }
