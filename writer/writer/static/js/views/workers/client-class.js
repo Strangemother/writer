@@ -141,6 +141,7 @@ class ManagerClientClass {
     emit(k, d){
 
         this.aLog(k, d)
+        this._manager.eventHandle(Object.assign({name: k}, d))
         this._receiveEvent(Object.assign({name: k}, d))
     }
 }

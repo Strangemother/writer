@@ -89,9 +89,9 @@ class Manager {
             }
         }
 
-        if(r.length == 0) {
-            console.log('Manager receive unhandled event', event)
-        }
+        // if(r.length == 0) {
+        //     console.log('Manager receive unhandled event', event)
+        // }
         return r;
     }
 
