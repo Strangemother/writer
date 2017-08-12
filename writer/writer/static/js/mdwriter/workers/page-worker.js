@@ -39,8 +39,8 @@ class PageWorker extends ManagerComponent {
         /* Receive an event from the onEvent handler. Call any function with
         the postfix of the event.name "event_fooName". */
         let name = `event_${event.name}`
-        console.info('!Page', event)
         if(this[name] != undefined){
+            console.info('!Page', event)
             this[name](event)
         } else{
             console.info(event)

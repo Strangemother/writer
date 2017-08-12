@@ -11,9 +11,11 @@ Manage content throughput for the entire application:
 var bookWriteConfig = {
     managerWorker: '/static/js/views/workers/manager.js'
     , managerClients: [
+        // Text typing tracking
         '/static/js/mdwriter/workers/session-worker.js'
         // html renderer
         , '/static/js/mdwriter/workers/render-worker.js'
+        // Text to page blocks conversion
         , '/static/js/mdwriter/workers/page-worker.js'
     ]
 }
