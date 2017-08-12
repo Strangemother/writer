@@ -14,6 +14,7 @@ var bookWriteConfig = {
         '/static/js/mdwriter/workers/session-worker.js'
         // html renderer
         , '/static/js/mdwriter/workers/render-worker.js'
+        , '/static/js/mdwriter/workers/page-worker.js'
     ]
 }
 
