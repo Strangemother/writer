@@ -14,7 +14,7 @@ class BlockManager extends ManagerComponent {
         return this.removeBlockAt(blockIndex)
     }
 
-    splitBlockAtIndex(blockIndex, strIndex) {
+    splitLineAtIndex(blockIndex, strIndex) {
         /* split the block into two blocks, the second block indexed under the blockIndex*/
         if(this.session.blocks[blockIndex] == undefined){
             return false;
@@ -23,7 +23,7 @@ class BlockManager extends ManagerComponent {
         let text = this.session.blocks[blockIndex].text;
         if(text == undefined) return false;
 
-        this.aLog('splitBlockAtIndex', {blockIndex, strIndex})
+        this.aLog('splitLineAtIndex', {blockIndex, strIndex})
 
         this.updateBlockText(blockIndex, text.slice(0, strIndex))
         return this.insertBlockAt(blockIndex + 1, this.asBlock(text.slice(strIndex)))
@@ -267,7 +267,7 @@ class InsertTextBlockManager extends BlockManager {
     insertReturn(e) {
         /* the return carriage is detected. a new line is inserted
         at the position of the event */
-        let c = this.splitBlockAtIndex(e.start.row, e.start.column)
+        let c = this.splitLineAtIndex(e.start.row, e.start.column)
     }
 }
 
