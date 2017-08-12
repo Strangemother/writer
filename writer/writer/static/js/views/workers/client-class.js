@@ -13,6 +13,7 @@ class ManagerClientClass {
     */
     constructor(manager){
         this._manager = manager;
+        this._handlers = {}
         this.init()
     }
 
@@ -58,20 +59,48 @@ class ManagerClientClass {
 
     _receiveEvent(e) {
         let ename = e.name;
+        let result = [false, undefined];
+
         if(ename in this._methodCache) {
-            return [true, this._methodCache[ename](e)]
+            result = [true, this._methodCache[ename](e)]
         }
 
         let name = `${ename}Event`;
+
         if(this[name]) {
-            return [true, this[name](e)]
+            result = [true, this[name](e)]
         }
 
-        return [false, undefined];
+        let handlers = this._handlers['_ANY_'] || []
+        for (var i = 0; i < handlers.length; i++) {
+            handlers[i](e)
+        };
+
+        handlers = this._handlers[name] || []
+
+        for (var i = 0; i < handlers.length; i++) {
+            handlers[i](e)
+        }
+
+        return result;
     }
 
-    onEvent(){
+    onEvent(name, callback) {
+        if(callback == undefined
+            && IT.g(name).is('function') ) {
+            callback = name;
+            name = undefined;
+        };
 
+        if(name == undefined) {
+            name = '_ANY_'
+        }
+
+        if(this._handlers[name] == undefined) {
+            this._handlers[name] = []
+        }
+
+        this._handlers[name].push(callback)
     }
 
     mounted(){
