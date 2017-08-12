@@ -11,7 +11,7 @@ class BlockManager extends ManagerComponent {
     replaceBlock(blockIndex, newBlock) {
         this.insertBlockAt(blockIndex+1, newBlock)
         this.aLog('replaceBlock', {blockIndex , newBlock })
-        return this.removeBlockAt(blockIndex)
+        return this.removeLineAt(blockIndex)
     }
 
     splitLineAtIndex(blockIndex, strIndex) {
@@ -56,7 +56,7 @@ class BlockManager extends ManagerComponent {
 
         this.aLog('mergeBlockDown', {blockIndex})
         this.updateLineText(blockIndex, ta + tb)
-        return this.removeBlockAt(blockIndex+1)
+        return this.removeLineAt(blockIndex+1)
     }
 
     asBlocks(texts) {
@@ -101,15 +101,15 @@ class BlockManager extends ManagerComponent {
             return false;
         };
 
-        return this.removeBlockAt(index)
+        return this.removeLineAt(index)
     }
 
-    removeBlockAt(index) {
-        this.aLog('removeBlockAt', {blockIndex: index})
+    removeLineAt(index) {
+        this.aLog('removeLineAt', {blockIndex: index})
         return this.session.blocks.splice(index, 1)
     }
 
-    removeBlockRange(startRow, endRow) {
+    removeLineRange(startRow, endRow) {
         let removes = this.session.blocks.slice(startRow, endRow);
         //console.log('Remove blocks:', removes.map((x)=>x.text))
         for (var i = 0; i < removes.length; i++) {
@@ -323,7 +323,7 @@ class RemoveTextBlockManager extends InsertTextBlockManager {
         let lastLine = endText.slice(e.end.column, endText.length);
         this.updateLineText(startRow, startLine + lastLine);
         // remove block for all rows.
-        this.removeBlockRange(startRow + 1, endRow + 1)
+        this.removeLineRange(startRow + 1, endRow + 1)
     }
 
     removeReturn(e){
