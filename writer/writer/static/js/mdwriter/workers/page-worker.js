@@ -28,6 +28,7 @@ class BlockManager {
     }
 }
 
+
 class PageWorker extends ManagerComponent {
     init(){
         this.session = {}
@@ -39,11 +40,16 @@ class PageWorker extends ManagerComponent {
         /* Receive an event from the onEvent handler. Call any function with
         the postfix of the event.name "event_fooName". */
         let name = `event_${event.name}`
-        console.info('!Page', event)
+        let ignores = ['removeLineAt'];
+
+        if( ignores.indexOf(event.name) == -1)  {
+            console.info('!Page', event)
+        }
+
         if(this[name] != undefined){
             this[name](event)
         } else{
-            console.info(event)
+            //console.info(event)
         }
     }
 
@@ -76,6 +82,31 @@ class PageWorker extends ManagerComponent {
         this.session[event.data.id] = new BlockManager(event.data);
         this.currentSession = event.data.id;
 
+        let matrix = this.matrixLinesToBlocks(event.data.content_blocks)
+        console.log(matrix);
+    }
+
+    matrixLinesToBlocks(blocks) {
+        debugger
+        let b = {};
+        let total = 0;
+        let order = [];
+
+        for (var i = 0; i < blocks.length; i++) {
+            let text = blocks[i].text;
+            let id = blocks[i].id;
+            let length = text.split('\n').length;
+            let range = [total+1, total + length]
+            b[id] = { count: length, id, range};
+            total += length;
+            order.push(id)
+        }
+
+        return { blocks: b, total, order};
+    }
+
+    event_insertBlocksAt(event) {
+        console.log('add', event.count, 'at line ', event.blockIndex)
     }
 
     event_setLines(event){
@@ -90,11 +121,17 @@ class PageWorker extends ManagerComponent {
         if(!_s.hasSession) {
             _s.addIndex(0, lines)
         }
-    }
 
-    event_splitBlockAtIndex(event) {
-        /* Line block has split*/
+        if(_s.session){
+            let lastBlock = 0
+            let lastLineIndex = 0
 
+            let blocks = _s.session.content_blocks
+            for (var i = 0; i < lines.length; i++) {
+                let line = lines[i];
+                // console.log('line', line)
+            }
+        }
     }
 }
 
