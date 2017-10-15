@@ -320,11 +320,12 @@ nav .nav-wrapper a.btn {
 
 div#markdown_editor {
     width: 100%;
-    border: solid 1px white;
+    border: solid 1px;
     min-width: 20em;
     min-height: 20em;
     height: 100%;
     /* max-width: 500px; */
+    border-color: transparent;
 }
 
 section.editor-container {
@@ -401,7 +402,7 @@ div.render-page {
 }
 
 .editor-container .tools {
-    color: #666;
+    color: #5f5f5f;
     min-height: 3.2em;
     display: flex;
 }
@@ -414,11 +415,11 @@ div.render-page {
 
 .commands .command a:hover {
     color: #455a64;
-    background: #f3f3f3;
+    /* background: #f3f3f3; */
 }
 
 .book-editor .child-list a {
-    background: white;
+    background: inherit;
     border-bottom-color: white;
     font-size: 1.1rem;
     display: inline-block;
@@ -438,7 +439,7 @@ div.render-page {
 .book-page-list .active-child-list a {
     /* background: #EEE; */
     padding: 0.5em 0.2em;
-    color: #333;
+    color: inherit;
     align-self: center;
 }
 
@@ -506,7 +507,7 @@ nav a.brand-logo {
     margin: 0;
     padding: 0;
     border-bottom: none;
-    color: #4783a0;
+    color: inherit;
     font-size: 1.1em;
 }
 
@@ -526,7 +527,7 @@ nav a.brand-logo {
 }
 
 .toolspace {
-    background: white;
+    background: inherit;
     height: 3.5rem;
 }
 
@@ -1027,4 +1028,95 @@ div#line-view {
 .tools .save .btn-floating i {
     color: inherit;
     line-height: 1;
+}
+
+body.dark {
+    color: rgb(147, 181, 143);
+    background: #333;
+}
+
+body.dark section.content.container {
+    background: inherit;
+}
+
+body.dark .ace-chrome {
+    background-color: inherit;
+    color: inherit;
+}
+
+body.dark .render-page {
+    background: #4c4c4c;
+    color: #CCC;
+}
+
+body.dark .collection .collection-item {
+    background: inherit;
+}
+
+body.dark #markdown_app .ace_gutter {
+    background: #353535;
+}
+
+body.dark .thread-log {
+    background: #444;
+}
+
+body.dark ul.messages-header {
+    background: #333;
+}
+
+body.dark .message-placer span.label {
+    color: inherit;
+}
+
+.commands .command a:hover {
+    background: rgba(138, 138, 138, 0.14);
+    color: inherit;
+}
+
+.dark .editor-container .tools {
+    color: #777;
+}
+
+.dark .ace_gutter-cell {
+    background: #2b2b2b;
+    color: #999;
+}
+
+.dark .book-page-list .active-child-list a:hover {
+    background: #222;
+    color: inherit;
+}
+
+.dark .indicator-container:hover {
+    background: #222;
+}
+
+.dark .indicator.input {
+    background: #000;
+}
+
+.dark input.new-page-input::placeholder {
+    color: #555;
+}
+
+
+.dark div#line-view {
+    border-bottom-color: #333;
+}
+
+.dark .ace-chrome .ace_print-margin {
+    background: #555;
+}
+
+.dark .ace-chrome .ace_marker-layer .ace_selection {
+    background: #5f4646;
+}
+
+
+
+.dark .ace-chrome .ace_cursor,
+.dark .ace-solarized-dark .ace_cursor,
+.dark .ace-solarized-dark .ace_string.ace_regexp {
+    color: #848484;
 }

@@ -111,10 +111,22 @@ class EditorTextBase {
             indentedSoftWrap: false
             , mode: "ace/mode/markdown"
             , theme: "ace/theme/chrome"
+            , darkTheme: 'ace/theme/solarized_dark'
             , wrap: false
             , showGutter: true
             , 'showLineNumbers': true
         }
+    }
+
+    darkTheme(v){
+        if(v === false) {
+            return this.removeDarkTheme()
+        }
+        this.editor.setTheme(this.editorOptions().darkTheme)
+    }
+
+    removeDarkTheme(){
+        this.editor.setTheme(this.editorOptions().theme)
     }
 
     makeEditor(IDhtml) {
@@ -131,7 +143,13 @@ class EditorTextBase {
 
         let options = this.editorOptions();
         editor.setOptions(options);
-        editor.setTheme(options.theme);
+
+        let theme = options.theme
+        if(self['getDarkMode']) {
+            theme = getDarkMode() ? options.darkTheme: theme;
+        }
+        editor.setTheme(theme);
+
         session.setMode(options.mode);
         editor.renderer.setShowGutter(options.showGutter)
 

@@ -15,6 +15,11 @@
 
 {% block nav_items %}
 
+    <li id='theme_app'><a href="javascript:;">
+        <a class='waves-effect wave-light btn' @click='invertColor' href="javascript:;">
+            <i class="material-icons">invert_colors</i>
+        </a>
+    </a></li>
     <li><a href="javascript:;">
         <a class='waves-effect wave-light btn' href="{% url 'book-list' %}">Library</a>
     </a></li>
