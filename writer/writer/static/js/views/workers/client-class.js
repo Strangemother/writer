@@ -1,10 +1,3 @@
-/*
-The worker manager is the first to be improted by the rpc requesting app.
-The manager will spawn additional addons to facilitate worker loading
-for a given app request.
-Each extension to the manager becomes an rpc function.
- */
-
 class ManagerClientClass {
     /* API extend point for mounting clients into the manager.
     Call static ManagerClientClass.mount() to append the class to

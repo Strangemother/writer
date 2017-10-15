@@ -5,6 +5,16 @@ All communiunication is requested through the dataConnection, all events
 are captured through the bus.
 */
 
+class MarkdownEditor extends AceRender {
+    insertAceEvent(editor, ev) {
+        bus.$emit('text', ev)
+    }
+
+    removeAceEvent(editor, ev) {
+        bus.$emit('text', ev)
+    }
+}
+
 var editorApp = new Vue({
     el: '#markdown_app'
 
@@ -69,10 +79,10 @@ var editorApp = new Vue({
             Create a markdown editor, attach the render callband and append
             and buttons for additional actions such as window based keyboard events.
             */
-            this.renderer = new AceRender('markdown_editor', 'markdown_content')
+            this.renderer = new MarkdownEditor('markdown_editor', 'markdown_content')
             // this.renderer.setText(this.getInitValue());
             //dataConnection.setFromLocalSave(this.renderer)
-            AceRender.config.renderers[0] = this.renderer
+            MarkdownEditor.config.renderers[0] = this.renderer
             this.renderer.callbacks.push(this.rendererCallback.bind(this));
 
             // From data connection.
@@ -169,8 +179,8 @@ var editorApp = new Vue({
             Called by the editor with the event for action.
             This should perpetuate the storage and actions.
              */
-
-            dataConnection.textUpdate(data)
+             console.log('rendererCallback', data)
+            // dataConnection.textUpdate(data)
         }
 
         , postPageHandle(data) {

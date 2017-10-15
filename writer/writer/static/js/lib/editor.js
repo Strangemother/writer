@@ -322,7 +322,8 @@ class RenderBase extends CommandEventBase {
     }
 
     insertAceEvent(editor, ev) {
-        this._insertToEditor(editor, ev)
+        this._insertToEditor(editor, ev);
+
     }
 
     removeAceEvent(editor, ev) {
@@ -346,6 +347,7 @@ class RenderBase extends CommandEventBase {
             selected = selectedLines.join('\n')
         }
 
+        return selected;
         // console.log('editor: Deleted:', selected);
     }
 

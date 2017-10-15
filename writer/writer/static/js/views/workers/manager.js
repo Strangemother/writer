@@ -13,6 +13,7 @@ importScripts(
     `/static/js/views/workers/client-class.js`
 )
 
+console.log('booting manager')
 
 Object.defineProperty(self, 'ManagerComponent', {
     get() {

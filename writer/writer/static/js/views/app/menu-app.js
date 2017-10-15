@@ -100,13 +100,15 @@ var pageList = new Vue({
 
         , select_page(pageId, event){
             event.preventDefault();
-            dataConnection.getPage(pageId, this.pageDataHandle.bind(this))
+            console.log('Get page', pageId)
+            // dataConnection.getPage(pageId, this.pageDataHandle.bind(this))
         }
 
         , newPage(data, callback) {
             /* Send a new page reqest, calling the optional callback on complete.
              */
-            dataConnection.newPage(data, callback)
+            console.log('New page', data)
+            // dataConnection.newPage(data, callback)
         }
 
         , editItem(item, $event) {
