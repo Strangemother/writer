@@ -745,6 +745,7 @@ body .gravel.gravel-container {
     padding-top: 0.5em;
     border: none;
     transition: top 1s ease;
+    /* background: inherit; */
     /* display: flex; */
     /* flex-direction: column; */
 }
@@ -1119,4 +1120,15 @@ body.dark .message-placer span.label {
 .dark .ace-solarized-dark .ace_cursor,
 .dark .ace-solarized-dark .ace_string.ace_regexp {
     color: #848484;
+}
+
+
+.dark .gravel {
+    background: inherit;
+}
+
+.dark .gravel .gravel-close {background-color: inherit;}
+
+.dark h2, .dark .gravel h2.gravel-title {
+    color: #AAA;
 }
